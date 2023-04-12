@@ -16,11 +16,15 @@
 # later version of the Detekt CLI by modifing the $DETEKT_RELEASE_TAG
 # environment variable.
 name: Scan with Detekt
+run-name: ${{ github.actor }} protecting code quality! 🛡️
 
 on:
   # Triggers the workflow on push or pull request events but only for default and protected branches
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
+      - 'releases/**'
   schedule:
      - cron: '38 17 * * 5'
 
