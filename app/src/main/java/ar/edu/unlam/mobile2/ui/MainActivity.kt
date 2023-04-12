@@ -2,7 +2,6 @@ package ar.edu.unlam.mobile2.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.ComponentActivity
@@ -12,20 +11,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
 import coil.compose.*
@@ -33,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
@@ -47,16 +42,19 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.i("MainActivity", "onCreate")
 
-        mainViewModel.kittyUrl.observe(this, Observer<String> {newKittyUrl -> run {
-            CoroutineScope(Dispatchers.Main).launch {
-                Log.i("MainActivity", "Observer")
-                setContent {
-                    content(name = "Mundo")
+        mainViewModel.kittyUrl.observe(
+            this,
+            Observer<String> { newKittyUrl ->
+                run {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        Log.i("MainActivity", "Observer")
+                        setContent {
+                            content(name = "Mundo")
+                        }
+                    }
                 }
-            }
-        }
-
-        })
+            },
+        )
     }
 
     override fun onStart() {
@@ -64,9 +62,8 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         Log.i("MainActivity", "onStart")
     }
 
-
     @Composable
-    fun content(name: String){
+    fun content(name: String) {
         Log.i("MainActivity", "start content")
         Column() {
             Log.i("MainActivity", "button row")
@@ -75,9 +72,9 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     onClick = {
                         Log.i("Button", "Presiono el boton")
                         mainViewModel.updateKittyUrl()
-                    }){
+                    },
+                ) {
                     Text(text = "Actualizar imagen")
-
                 }
             }
             Log.i("MainActivity", "first row")
@@ -88,20 +85,23 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
             Row() {
                 SubcomposeAsyncImage(
                     model = mainViewModel.getImageRequest(LocalContext.current),
-                    //placeholder = painterResource(R.drawable.placeholder),
+                    // placeholder = painterResource(R.drawable.placeholder),
                     contentDescription = stringResource(R.string.cat_image),
                     contentScale = ContentScale.FillBounds,
-                    loading = { CircularProgressIndicator(
-                        modifier = Modifier.height(50.dp).width(50.dp)
-                    ) },
+                    loading = {
+                        CircularProgressIndicator(
+                            modifier = Modifier.height(50.dp).width(50.dp),
+                        )
+                    },
                     modifier = Modifier.height(300.dp).width(500.dp),
-                    //error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                    onError = {error -> run {
-                        mainViewModel.updateKittyUrl()
-                        Log.e("AsyncImageError", error.result.throwable.message.toString())}
-                              },
-                    onLoading =  {state -> Log.i("AsyncImageLoading", state.toString())}
-
+                    // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
+                    onError = { error ->
+                        run {
+                            mainViewModel.updateKittyUrl()
+                            Log.e("AsyncImageError", error.result.throwable.message.toString())
+                        }
+                    },
+                    onLoading = { state -> Log.i("AsyncImageLoading", state.toString()) },
 
                 )
             }
@@ -109,7 +109,6 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
             Row() {
                 Text(text = "Pie de imagen")
             }
-
         }
     }
 
@@ -134,7 +133,4 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
-
-
-
 }

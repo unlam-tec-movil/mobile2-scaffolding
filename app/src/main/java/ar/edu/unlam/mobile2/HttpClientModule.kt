@@ -1,7 +1,6 @@
 package ar.edu.unlam.mobile2
 
 import android.content.Context
-import androidx.compose.ui.platform.LocalContext
 import coil.ImageLoader
 import dagger.Module
 import dagger.Provides
@@ -9,14 +8,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.Retrofit.Builder
+import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
-import retrofit2.Retrofit.Builder
-import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -24,9 +23,9 @@ class HttpClientModule {
 
     @Provides
     fun retrofitBuilder(): Builder {
-         return Retrofit.Builder()
+        return Retrofit.Builder()
             .client(OkHttpClient.Builder().apply { ignoreAllSSLErrors() }.build())
-            .addConverterFactory(GsonConverterFactory.create());
+            .addConverterFactory(GsonConverterFactory.create())
     }
 
     fun imageLoader(context: Context): ImageLoader {
@@ -34,7 +33,6 @@ class HttpClientModule {
             .okHttpClient(OkHttpClient.Builder().apply { ignoreAllSSLErrors() }.build())
             .build()
     }
-
 
     fun OkHttpClient.Builder.ignoreAllSSLErrors(): OkHttpClient.Builder {
         val naiveTrustManager = object : X509TrustManager {
@@ -52,5 +50,4 @@ class HttpClientModule {
         hostnameVerifier(HostnameVerifier { _, _ -> true })
         return this
     }
-
 }
