@@ -1,6 +1,6 @@
 package ar.edu.unlam.mobile2
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**

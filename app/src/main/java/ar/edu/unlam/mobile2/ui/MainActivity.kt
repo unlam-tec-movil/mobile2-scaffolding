@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -22,9 +22,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
 import androidx.navigation.ui.AppBarConfiguration
+import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import coil.compose.*
+import coil.compose.SubcomposeAsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -101,7 +102,14 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                             Log.e("AsyncImageError", error.result.throwable.message.toString())
                         }
                     },
-                    onLoading = { state -> Log.i("AsyncImageLoading", state.toString()) },
+                    onLoading = { state ->
+                        if (BuildConfig.DEBUG) {
+                            Log.i(
+                                "AsyncImageLoading",
+                                state.toString(),
+                            )
+                        }
+                    },
 
                 )
             }
