@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id "org.jetbrains.kotlin.kapt"
     id 'com.google.dagger.hilt.android'
+    id 'org.jetbrains.kotlinx.kover'
 }
 
 android {
@@ -32,11 +33,14 @@ android {
         //kotlinCompilerExtensionVersion = "1.4.2"
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose = true
         viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.5"
     }
 }
 
@@ -48,7 +52,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

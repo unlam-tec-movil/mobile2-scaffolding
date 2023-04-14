@@ -45,7 +45,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
         mainViewModel.kittyUrl.observe(
             this,
-            Observer<String> { newKittyUrl ->
+            Observer<String> { _ ->
                 run {
                     CoroutineScope(Dispatchers.Main).launch {
                         Log.i("MainActivity", "Observer")
