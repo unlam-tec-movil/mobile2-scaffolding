@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile2.data
 
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 

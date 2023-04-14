@@ -2,7 +2,6 @@ package ar.edu.unlam.mobile2.ui
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,11 +9,9 @@ import ar.edu.unlam.mobile2.HttpClientModule
 import ar.edu.unlam.mobile2.domain.GetNewKitty
 import coil.ImageLoader
 import coil.request.ImageRequest
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
-import okhttp3.internal.notifyAll
 import java.security.cert.X509Certificate
 import javax.inject.Inject
 import javax.net.ssl.SSLContext
@@ -22,7 +19,7 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 @HiltViewModel
-class MainViewModel @Inject constructor(val service: GetNewKitty): ViewModel() {
+class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() {
 
     final var DEFAULT: String = "https://icons.iconarchive.com/icons/iconsmind/outline/512/Cat-icon.png"
 
@@ -37,19 +34,19 @@ class MainViewModel @Inject constructor(val service: GetNewKitty): ViewModel() {
         updateKittyUrl()
     }
 
-    fun updateKittyUrl(){
+    fun updateKittyUrl() {
         viewModelScope.launch {
             Log.i("MainViewModel", "updateKittyUrl")
-            kittyUrl.value = service.getKitty();
+            kittyUrl.value = service.getKitty()
             Log.i("MainViewModel", "updatedKittyUrl:" + kittyUrl.value)
         }
     }
 
-    fun getImageRequest(context: Context): ImageRequest{
+    fun getImageRequest(context: Context): ImageRequest {
         Log.i("MainViewModel", "obteniendo  ImageRequest:" + kittyUrl.value)
-        val imageLoader:ImageLoader = initUntrustImageLoader(context)
+        val imageLoader: ImageLoader = initUntrustImageLoader(context)
 
-        //updateKittyUrl()
+        // updateKittyUrl()
 
         val request = ImageRequest.Builder(context)
             .data(kittyUrl.value)
@@ -86,7 +83,6 @@ class MainViewModel @Inject constructor(val service: GetNewKitty): ViewModel() {
             .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
             .hostnameVerifier { _, _ -> true }.build()
 
-
         var module = HttpClientModule()
 
         /*return ImageLoader.Builder(context)
@@ -94,5 +90,4 @@ class MainViewModel @Inject constructor(val service: GetNewKitty): ViewModel() {
             .build()*/
         return module.imageLoader(context)
     }
-
 }

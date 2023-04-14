@@ -12,8 +12,7 @@ class GetNewKitty {
         this.repo = repo
     }
 
-    suspend fun getKitty() : String {
-        return repo.getNewKitty();
+    suspend fun getKitty(): String {
+        return repo.getNewKitty()
     }
-
 }
