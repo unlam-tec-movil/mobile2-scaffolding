@@ -91,10 +91,14 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     contentScale = ContentScale.FillBounds,
                     loading = {
                         CircularProgressIndicator(
-                            modifier = Modifier.height(50.dp).width(50.dp),
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp),
                         )
                     },
-                    modifier = Modifier.height(300.dp).width(500.dp),
+                    modifier = Modifier
+                        .height(300.dp)
+                        .width(500.dp),
                     // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
                     onError = { error ->
                         run {
@@ -111,7 +115,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         }
                     },
 
-                )
+                    )
             }
             Log.i("MainActivity", "third row")
             Row() {
