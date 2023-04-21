@@ -75,7 +75,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         mainViewModel.updateKittyUrl()
                     },
                 ) {
-                    Text(text = "Actualizar imagen")
+                    Text(text = "Cambiar Imagen")
                 }
             }
             Log.i("MainActivity", "first row")
