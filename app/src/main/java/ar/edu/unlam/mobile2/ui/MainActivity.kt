@@ -145,4 +145,5 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
+
 }
