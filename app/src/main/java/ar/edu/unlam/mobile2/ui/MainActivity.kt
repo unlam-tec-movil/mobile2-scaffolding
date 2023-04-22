@@ -51,6 +51,19 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         Log.i("MainActivity", "Observer")
                         setContent {
                             content(name = "Mundo")
+
+                            Row {
+                                Button(onClick = { /*TODO*/ }) {
+                                    Text("Jugar")
+                                }
+                                Button(onClick = { /*TODO*/ }) {
+                                    Text("Dificultad")
+                                }
+                                Button(onClick = { /*TODO*/ }) {
+                                    Text("Historial")
+                                }
+                            }
+
                         }
                     }
                 }
