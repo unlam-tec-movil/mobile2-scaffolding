@@ -11,4 +11,8 @@
     <string name="hello_second_fragment">Saludo segundo fragment. Arg: %1$s</string>
 
     <string name="cat_image">Imagen Gatito</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="usuario_uno">Usuario1</string>
+    <string name="usuario_dos">usuario2</string>
+    <string name="usuario_tres">usuario3</string>
 </resources>
