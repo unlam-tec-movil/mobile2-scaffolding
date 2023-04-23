@@ -1,12 +1,17 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.graphics.Paint.Align
+import android.icu.text.ListFormatter.Width
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,11 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
+import ar.edu.unlam.mobile2.ui.ui.theme.DarkViolet
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.Violet
 import coil.compose.SubcomposeAsyncImage
@@ -44,22 +53,36 @@ class JuegoActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Violet
                 ) {
+                    Row(
+                        modifier = Modifier.background(DarkViolet)
+                    ) {
+                        Image(painter = painterResource(id = R.drawable.baseline_favorite_24), contentDescription = "", modifier = Modifier.border(width = 1.dp, color = Color.Black))
+                        Image(painter = painterResource(id = R.drawable.baseline_favorite_24), contentDescription = "", modifier = Modifier.border(width = 1.dp, color = Color.Black))
+                        Image(painter = painterResource(id = R.drawable.baseline_favorite_24), contentDescription = "", modifier = Modifier.border(width = 1.dp, color = Color.Black))
+                        Image(painter = painterResource(id = R.drawable.baseline_close_24), contentDescription = "", alignment = Alignment.CenterEnd)
+                    }
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.SpaceAround,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         texto("Pregunta")
-                        SubcomposeAsyncImage(
+                        /*SubcomposeAsyncImage(
                             model = mainViewModel.getImageRequest(LocalContext.current),
                             contentDescription = stringResource(R.string.anime_image1)
-                        )
+                        )*/
                         Text("VS", color = Color.Red)
-                        SubcomposeAsyncImage(
+                        /*SubcomposeAsyncImage(
                             model = mainViewModel.getImageRequest(LocalContext.current),
                             contentDescription = stringResource(R.string.anime_image2)
-                        )
-                        Text(puntaje.toString(), Modifier.background(Color.Red, RectangleShape).padding(10.dp), Color.White)
+                        )*/
+                        Row {
+                            Text(text = puntaje.toString(),  modifier =
+                            Modifier
+                                .background(Color.Red, RectangleShape)
+                                .padding(10.dp), Color.White, textAlign = TextAlign.Center)
+                            Image(painter = painterResource(id = R.drawable.baseline_replay_24), contentDescription = "")
+                        }
                     }
                 }
             }
