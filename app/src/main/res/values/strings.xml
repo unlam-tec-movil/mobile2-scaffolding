@@ -12,4 +12,7 @@
 
     <string name="cat_image">Imagen Gatito</string>
     <string name="title_activity_juego">JuegoActivity</string>
+
+    <string name="anime_image1">Primer Anime</string>
+    <string name="anime_image2">Segundo Anime</string>
 </resources>

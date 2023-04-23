@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,24 +8,32 @@ import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
 import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
+import ar.edu.unlam.mobile2.ui.ui.theme.Violet
 import coil.compose.SubcomposeAsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -51,24 +60,33 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         Log.i("MainActivity", "Observer")
                         setContent {
                             content(name = "Mundo")
-
-                            Row {
-                                Button(onClick = { /*TODO*/ }) {
-                                    Text("Jugar")
-                                }
-                                Button(onClick = { /*TODO*/ }) {
-                                    Text("Dificultad")
-                                }
-                                Button(onClick = { /*TODO*/ }) {
-                                    Text("Historial")
-                                }
-                            }
-
                         }
                     }
                 }
             },
         )
+
+        setContent {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = Violet
+            ) {
+                Column (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                        Button(onClick = { irAJuego() }) {
+                            texto("Jugar")
+                        }
+                        Button(onClick = { /*TODO*/ }) {
+                            texto("Dificultad")
+                        }
+                        Button(onClick = { /*TODO*/ }) {
+                            texto("Historial")
+                        }
+                }
+            }
+        }
     }
 
     override fun onStart() {
@@ -159,4 +177,13 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                 || super.onSupportNavigateUp()
     }*/
 
+    private fun irAJuego() {
+        val intent = Intent(this, JuegoActivity::class.java)
+        startActivity(intent)
+    }
+
+    @Composable
+    fun texto(texto: String) {
+        Text(texto, color = Color.White)
+    }
 }
