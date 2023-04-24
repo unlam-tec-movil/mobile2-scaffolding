@@ -1,149 +1,131 @@
 package ar.edu.unlam.mobile2.domain
 
+
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Observer
-import androidx.navigation.ui.AppBarConfiguration
-import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import ar.edu.unlam.mobile2.ui.MainViewModel
-import coil.compose.SubcomposeAsyncImage
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import ar.edu.unlam.mobile2.data.Articulo
 
-@AndroidEntryPoint
-class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
+private val articulos: List<Articulo> = listOf(
+    Articulo(
+        1,
+        R.drawable.ic_launcher_background,
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Autor",
+        "Politica"
+    ),
+    Articulo(2, R.drawable.ic_launcher_background, "Titulo 2", "Autor", "Musica"),
+    Articulo(3, R.drawable.ic_launcher_background, "Titulo 3", "Autor", "Economia"),
+    Articulo(4, R.drawable.ic_launcher_background, "Titulo 4", "Autor", "Deporte"),
+    Articulo(5, R.drawable.ic_launcher_background, "Titulo 5", "Autor", "Politica"),
+    Articulo(6, R.drawable.ic_launcher_background, "Titulo 6", "Autor", "Deporte"),
+    Articulo(7, R.drawable.ic_launcher_background, "Titulo 7", "Autor", "Musica"),
+    Articulo(8, R.drawable.ic_launcher_background, "Titulo 8", "Autor", "Politica"),
+    Articulo(9, R.drawable.ic_launcher_background, "Titulo 9", "Autor", "Economia"),
+    Articulo(10, R.drawable.ic_launcher_background, "Titulo 10", "Autor", "Politica"),
+)
 
-    private val mainViewModel: MainViewModel by viewModels()
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MainActivity", "onCreate")
-
-        mainViewModel.kittyUrl.observe(
-            this,
-            Observer<String> { _ ->
-                run {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        Log.i("MainActivity", "Observer")
-                        setContent {
-                            content(name = "Mundo")
-                        }
-                    }
-                }
-            },
-        )
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("MainActivity", "onStart")
-    }
-
-    @Composable
-    fun content(name: String) {
-        Log.i("MainActivity", "start content")
-        Column() {
-            Log.i("MainActivity", "button row")
-            Row() {
-                Button(
-                    onClick = {
-                        Log.i("Button", "Presiono el boton")
-                        mainViewModel.updateKittyUrl()
-                    },
-                ) {
-                    Text(text = "Actualizar imagen")
-                }
-            }
-            Log.i("MainActivity", "first row")
-            Row() {
-                Text(text = "Imagen de los gatitos")
-            }
-            Log.i("MainActivity", "second row")
-            Row() {
-                SubcomposeAsyncImage(
-                    model = mainViewModel.getImageRequest(LocalContext.current),
-                    // placeholder = painterResource(R.drawable.placeholder),
-                    contentDescription = stringResource(R.string.cat_image),
-                    contentScale = ContentScale.FillBounds,
-                    loading = {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp),
-                        )
-                    },
-                    modifier = Modifier
-                        .height(300.dp)
-                        .width(500.dp),
-                    // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                    onError = { error ->
-                        run {
-                            mainViewModel.updateKittyUrl()
-                            Log.e("AsyncImageError", error.result.throwable.message.toString())
-                        }
-                    },
-                    onLoading = { state ->
-                        if (BuildConfig.DEBUG) {
-                            Log.i(
-                                "AsyncImageLoading",
-                                state.toString(),
-                            )
-                        }
-                    },
-
-                    )
-            }
-            Log.i("MainActivity", "third row")
-            Row() {
-                Text(text = "Pie de imagen")
-            }
+        setContent {
+            AppContainer(articulos)
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    /*override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }*/
 }
+
+
+@Preview
+@Composable
+fun MyFilterList() {
+
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun MyApp() {
+    AppContainer(articulos)
+}
+
+@Composable
+fun AppContainer(articulos: List<Articulo>) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        items(articulos) { articulo ->
+            Cards(articulo)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyToolBar() {
+    TopAppBar(
+        title = { MyText(text = R.string.app_name.toString()) }
+    )
+}
+
+@Composable
+fun Cards(articulo: Articulo) {
+    Card(
+        modifier = Modifier
+            .height(200.dp)
+            .padding(10.dp)
+    ) {
+        ItemsNews(articulo)
+    }
+}
+
+@Composable
+fun MyText(text: String) {
+    Text(text = text)
+}
+
+@Composable
+fun ItemsNews(articulo: Articulo) {
+    Column(modifier = Modifier.padding(10.dp)) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "NewsBackground",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp)
+        )
+        MyText(text = articulo.topic)
+        MyText(text = articulo.titulo)
+    }
+
+
+}
+/*override fun onSupportNavigateUp(): Boolean {
+    val navController = findNavController(R.id.nav_host_fragment_content_main)
+    return navController.navigateUp(appBarConfiguration)
+            || super.onSupportNavigateUp()
+}*/
