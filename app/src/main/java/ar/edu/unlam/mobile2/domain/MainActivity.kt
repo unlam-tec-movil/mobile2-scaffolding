@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2.domain
 
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +25,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
+import ar.edu.unlam.mobile2.ui.MainViewModel
 import coil.compose.SubcomposeAsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
