@@ -50,14 +50,14 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         Log.i("MainActivity", "Observer")
                         setContent {
-                            content(name = "Mundo")
+                           pantallaJuego()
                         }
                     }
                 }
             },
         )
     }
-
+/*
     override fun onStart() {
         super.onStart()
         Log.i("MainActivity", "onStart")
@@ -106,14 +106,14 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                             Log.e("AsyncImageError", error.result.throwable.message.toString())
                         }
                     },
-                    onLoading = { state ->
+              /*      onLoading = { state ->
                         if (BuildConfig.DEBUG) {
                             Log.i(
                                 "AsyncImageLoading",
                                 state.toString(),
                             )
                         }
-                    },
+                    }, */
 
                     )
             }
@@ -145,4 +145,8 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
+
+
+ */
+
 }
