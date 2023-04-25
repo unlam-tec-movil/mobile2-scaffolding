@@ -6,55 +6,50 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material3.Card
+import androidx.compose.material.TabRowDefaults
+
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+
+import androidx.compose.material.TabRow
+import androidx.compose.material3.LeadingIconTab
+
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberTopAppBarState
+
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.data.Articulo
+import ar.edu.unlam.mobile2.data.ArticuloRepository
+import ar.edu.unlam.mobile2.data.Tabs_item
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 
-private val articulos: List<Articulo> = listOf(
-    Articulo(
-        1,
-        R.drawable.ic_launcher_background,
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "Autor",
-        "Politica"
-    ),
-    Articulo(2, R.drawable.ic_launcher_background, "Titulo 2", "Autor", "Musica"),
-    Articulo(3, R.drawable.ic_launcher_background, "Titulo 3", "Autor", "Economia"),
-    Articulo(4, R.drawable.ic_launcher_background, "Titulo 4", "Autor", "Deporte"),
-    Articulo(5, R.drawable.ic_launcher_background, "Titulo 5", "Autor", "Politica"),
-    Articulo(6, R.drawable.ic_launcher_background, "Titulo 6", "Autor", "Deporte"),
-    Articulo(7, R.drawable.ic_launcher_background, "Titulo 7", "Autor", "Musica"),
-    Articulo(8, R.drawable.ic_launcher_background, "Titulo 8", "Autor", "Politica"),
-    Articulo(9, R.drawable.ic_launcher_background, "Titulo 9", "Autor", "Economia"),
-    Articulo(10, R.drawable.ic_launcher_background, "Titulo 10", "Autor", "Politica"),
-)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppContainer(articulos)
+            Tabs_Principal()
+            //AppContainer(ArticuloRepository.articulos)
         }
     }
 }
@@ -69,7 +64,7 @@ fun MyFilterList() {
 @Preview(showSystemUi = true)
 @Composable
 fun MyApp() {
-    AppContainer(articulos)
+    AppContainer(ArticuloRepository.articulos)
 }
 
 @Composable
@@ -78,19 +73,14 @@ fun AppContainer(articulos: List<Articulo>) {
         modifier = Modifier
             .fillMaxWidth()
     ) {
+
         items(articulos) { articulo ->
             Cards(articulo)
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyToolBar() {
-    TopAppBar(
-        title = { MyText(text = R.string.app_name.toString()) }
-    )
-}
+
 
 @Composable
 fun Cards(articulo: Articulo) {
@@ -123,6 +113,54 @@ fun ItemsNews(articulo: Articulo) {
     }
 
 
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun Tabs_Principal() {
+    val tabs = listOf(
+        Tabs_item.item_general,
+        Tabs_item.item_politica,
+        Tabs_item.item_muscia
+    )
+    val pagerState = rememberPagerState()
+    Column() {
+        Tabs(tabs, pagerState)
+        Tabs_content(tabs, pagerState)
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun Tabs(tabs: List<Tabs_item>, pagerState: PagerState) {
+    val scope = rememberCoroutineScope()
+    TabRow(
+        selectedTabIndex = pagerState.currentPage,
+        indicator = { tabPositions ->
+            TabRowDefaults.Indicator(
+                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+            )
+        }
+    ) {
+        tabs.forEachIndexed { index, tabsItem ->
+            LeadingIconTab(
+                selected = pagerState.currentPage == index,
+                onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
+                icon = {
+                    Icon(painter = painterResource(id = tabsItem.icon), contentDescription ="")
+                },
+                text = { Text(tabsItem.title) })
+
+            }
+        }
+    }
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun Tabs_content(tabs: List<Tabs_item>, pagerState: PagerState){
+    HorizontalPager(state = pagerState, count = tabs.size ) {
+        page -> tabs[page].screen()
+    }
 }
 /*override fun onSupportNavigateUp(): Boolean {
     val navController = findNavController(R.id.nav_host_fragment_content_main)

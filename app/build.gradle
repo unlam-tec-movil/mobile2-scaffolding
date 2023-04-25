@@ -79,6 +79,10 @@ dependencies {
 
     // Async Images
     implementation("io.coil-kt:coil-compose:2.3.0")
+
+    //Tabs
+    implementation("com.google.accompanist:accompanist-pager:0.20.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.20.0")
 }
 
 // Allow references to generated code
