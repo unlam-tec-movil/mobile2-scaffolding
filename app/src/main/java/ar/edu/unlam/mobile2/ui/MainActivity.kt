@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -37,12 +38,19 @@ import kotlinx.coroutines.launch
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
     private val mainViewModel: CountriesViewModel by viewModels()
-
+    /*
+    private val mainViewModel: MainViewModel by viewModels()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startActivity(Intent(this@MainActivity,PantallaPrincipal::class.java))
+        finish()
+    }
+}
+
+    /*
         Log.i("MainActivity", "onCreate")
 
         lanzarPaises()
@@ -151,3 +159,4 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
  */
 
 }
+*/
