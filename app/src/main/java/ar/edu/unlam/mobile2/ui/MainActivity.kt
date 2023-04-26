@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.AppBarConfiguration
-import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
 import ar.edu.unlam.mobile2.model.CountryModel
