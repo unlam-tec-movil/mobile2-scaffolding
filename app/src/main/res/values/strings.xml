@@ -15,4 +15,6 @@
 
     <string name="anime_image1">Primer Anime</string>
     <string name="anime_image2">Segundo Anime</string>
+    <string name="title_activity_historial">HistorialActivity</string>
+    <string name="title_activity_configuracion">ConfiguracionActivity</string>
 </resources>
