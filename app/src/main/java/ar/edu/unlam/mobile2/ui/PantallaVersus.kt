@@ -28,6 +28,7 @@ class PantallaVersus : ComponentActivity() {
 
         }
     }
+
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     @Preview
     @Composable

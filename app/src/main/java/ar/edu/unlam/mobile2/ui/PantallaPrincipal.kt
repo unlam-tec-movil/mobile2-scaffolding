@@ -147,7 +147,10 @@ pantallaInicio()
             shape = RoundedCornerShape(50),
             colors = ButtonDefaults.buttonColors(  Color(0xFF396AE9)),
 
-            onClick = { /*aca cambiaria a la pantalla del juego solitario*/ }) {
+            onClick = {
+                startActivity(Intent(this@PantallaPrincipal, PantallaJuego::class.java))
+                finish()
+            }) {
             Text(text = "Solitario")
 
         }

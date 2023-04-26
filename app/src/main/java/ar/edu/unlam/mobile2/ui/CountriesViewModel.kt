@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.app.Application
 import android.content.Context
 import android.net.Uri
 import android.util.Log
@@ -10,6 +11,7 @@ import ar.edu.unlam.mobile2.HttpClientModule
 import ar.edu.unlam.mobile2.domain.CountriesService
 import coil.ImageLoader
 import coil.request.ImageRequest
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -21,7 +23,8 @@ import javax.net.ssl.X509TrustManager
 import kotlin.random.Random
 
 @HiltViewModel
-class CountriesViewModel @Inject constructor(val service: CountriesService) : ViewModel() {
+class CountriesViewModel @Inject constructor(private val service: CountriesService) : ViewModel() {
+
 
     //A partir de la lista de países, agarro dos, uno correcto y uno incorrecto
     val incorrectCountryNameInGame = MutableLiveData<String>()

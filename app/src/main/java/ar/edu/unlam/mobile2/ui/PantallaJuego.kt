@@ -1,5 +1,11 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,26 +34,50 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import coil.compose.AsyncImage
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
+class PantallaJuego : ComponentActivity() {
 
+    private val countriesViewModel: CountriesViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lanzarPaises()
+    }
+
+    private fun lanzarPaises() {
+        lifecycleScope.launch {
+            countriesViewModel.startGame()
+            CoroutineScope(Dispatchers.Main).launch {
+                setContent{
+                    gameScreen(countries = countriesViewModel)
+                }
+            }
+        }
+    }
+
+@SuppressLint("NotConstructor")
 @Composable
-fun PantallaJuego(countries : CountriesViewModel) {
+fun gameScreen(countries : CountriesViewModel) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black),
+	        .fillMaxSize()
+	        .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp, start = 5.dp, end = 7.dp)
-                .clip(CircleShape)
-                .background(colorResource(id = ar.edu.unlam.mobile2.R.color.perfil))
+	            .fillMaxWidth()
+	            .padding(top = 10.dp, start = 5.dp, end = 7.dp)
+	            .clip(CircleShape)
+	            .background(colorResource(id = ar.edu.unlam.mobile2.R.color.perfil))
         )
         {
             Image(
@@ -55,9 +85,9 @@ fun PantallaJuego(countries : CountriesViewModel) {
                 contentDescription = "Foto de perfil del usuario",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(start = 14.dp, top = 5.dp, bottom = 5.dp)
-                    .size(57.dp)
-                    .clip(CircleShape)
+	                .padding(start = 14.dp, top = 5.dp, bottom = 5.dp)
+	                .size(57.dp)
+	                .clip(CircleShape)
             )
             //-------------------------------------------------------------------------------------------------------------------------------------------
             Column(
@@ -158,7 +188,9 @@ fun PantallaJuego(countries : CountriesViewModel) {
             Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
         }
         Button(
-            onClick = {/*TODO*/ },
+            onClick = {
+                startActivity(Intent(this@PantallaJuego, MainActivity::class.java))
+                finish()},
             modifier = Modifier
                 .padding(top = 60.dp, end = 220.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFF6200EE))
@@ -168,4 +200,5 @@ fun PantallaJuego(countries : CountriesViewModel) {
         }
     }
 
+    }
 }
