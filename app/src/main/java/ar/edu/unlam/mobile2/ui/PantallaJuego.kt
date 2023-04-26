@@ -35,8 +35,7 @@ import coil.compose.AsyncImage
 
 
 @Composable
-@Preview
-fun pantallaJuego() {
+fun PantallaJuego(countries : CountriesViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -80,12 +79,12 @@ fun pantallaJuego() {
         }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
         AsyncImage(
-            model = "https://flagcdn.com/w320/ws.png",
-            contentDescription = "Bandera",
-            modifier = Modifier
-                .size(300.dp, 170.dp)
-                .padding(start = 17.dp, end = 17.dp, top = 10.dp)
-                .fillMaxWidth()
+          model = countries.correctCountryFlagInGame.value,
+          contentDescription = "Bandera",
+          modifier = Modifier
+              .size(300.dp, 170.dp)
+              .padding(start = 17.dp, end = 17.dp, top = 10.dp)
+              .fillMaxWidth()
         )
         Divider(
             color = Color.DarkGray,
@@ -110,19 +109,20 @@ fun pantallaJuego() {
                 .padding(top = 110.dp)
                 .align(Alignment.CenterHorizontally)
         ) {
-            Text(
-                text = "Opcion 1",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier
-                    .width(140.dp),
-                fontSize = 23.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
+            countries.correctCountryNameInGame.value?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier
+                        .width(140.dp),
+                    fontSize = 23.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
 
-                )
-
+                    )
+            }
             Divider(
                 Modifier
                     .width(120.dp)
@@ -134,17 +134,19 @@ fun pantallaJuego() {
                 thickness = 1.dp,
             )
 
-            Text(
-                text = "Opcion 2",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier
-                    .width(155.dp),
-                fontSize = 23.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
+            countries.incorrectCountryNameInGame.value?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier
+                        .width(155.dp),
+                    fontSize = 23.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
 
         }
         //--------------------------------------------------------------------------------------------------------------------------------------------------
