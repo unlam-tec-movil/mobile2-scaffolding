@@ -114,7 +114,7 @@ pantallaInicio()
                             .background(color = Color(0xFF335ABD)),
                         )
                     {
-                        DropdownMenuItem(onClick = { finish() },
+                        DropdownMenuItem(onClick = {  },
                             text = {Text(text = "Perfil",
                                 color = Color(0xFF070707)) },
 

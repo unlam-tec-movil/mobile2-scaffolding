@@ -28,6 +28,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.ImageBitmap
@@ -88,6 +92,7 @@ class PantallaQR : ComponentActivity() {
 
 
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     @Composable
     fun pantallaInicio() {
@@ -117,7 +122,7 @@ class PantallaQR : ComponentActivity() {
     @Composable
     fun imagenLogo() {
         Image(
-            painter = painterResource(id = R.drawable.fondonuevo),
+            painter = painterResource(id = R.drawable.mundo),
             contentDescription = "imagen logo",
             modifier = Modifier
                 .fillMaxWidth()
@@ -135,7 +140,7 @@ class PantallaQR : ComponentActivity() {
             backgroundColor = Color.Black,
             actions = {
                 IconButton(onClick = {   startActivity(Intent(this@PantallaQR,
-                    MainActivity::class.java))
+                    PantallaVersus::class.java))
                     finish()}) {
                     Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                         contentDescription = "icono menu")
