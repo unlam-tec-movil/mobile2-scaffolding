@@ -4,6 +4,7 @@ package ar.edu.unlam.mobile2.domain
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 
@@ -13,17 +14,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.TabRowDefaults
 
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ExperimentalMaterial3Api
 
 import androidx.compose.material.TabRow
-import androidx.compose.material3.LeadingIconTab
+import androidx.compose.material.LeadingIconTab
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -42,7 +44,6 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +82,6 @@ fun AppContainer(articulos: List<Articulo>) {
 }
 
 
-
 @Composable
 fun Cards(articulo: Articulo) {
     Card(
@@ -111,11 +111,9 @@ fun ItemsNews(articulo: Articulo) {
         MyText(text = articulo.topic)
         MyText(text = articulo.titulo)
     }
-
-
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun Tabs_Principal() {
     val tabs = listOf(
@@ -143,23 +141,26 @@ fun Tabs(tabs: List<Tabs_item>, pagerState: PagerState) {
         }
     ) {
         tabs.forEachIndexed { index, tabsItem ->
-            LeadingIconTab(
+            androidx.compose.material3.LeadingIconTab(
                 selected = pagerState.currentPage == index,
                 onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
                 icon = {
-                    Icon(painter = painterResource(id = tabsItem.icon), contentDescription ="")
+                    androidx.compose.material.Icon(
+                        painter = painterResource(id = tabsItem.icon),
+                        contentDescription = ""
+                    )
                 },
                 text = { Text(tabsItem.title) })
 
-            }
         }
     }
+}
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
-fun Tabs_content(tabs: List<Tabs_item>, pagerState: PagerState){
-    HorizontalPager(state = pagerState, count = tabs.size ) {
-        page -> tabs[page].screen()
+fun Tabs_content(tabs: List<Tabs_item>, pagerState: PagerState) {
+    HorizontalPager(state = pagerState, count = tabs.size) { page ->
+        tabs[page].screen()
     }
 }
 /*override fun onSupportNavigateUp(): Boolean {
