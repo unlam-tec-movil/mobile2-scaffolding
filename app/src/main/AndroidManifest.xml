@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Mobile2_Scaffolding"
         tools:targetApi="31">
         <activity
-            android:name=".ConfiguracionActivity"
+            android:name=".ui.ConfiguracionActivity"
             android:exported="false"
             android:label="@string/title_activity_configuracion"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
@@ -37,7 +37,6 @@
             android:theme="@style/Theme.Mobile2_Scaffolding.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

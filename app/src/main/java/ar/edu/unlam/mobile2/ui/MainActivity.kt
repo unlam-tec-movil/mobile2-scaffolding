@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import ar.edu.unlam.mobile2.ui.ui.theme.Violet
+import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +40,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = Violet
+                color = OrangeLight
             ) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
