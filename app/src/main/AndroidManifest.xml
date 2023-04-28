@@ -21,12 +21,12 @@
             android:label="@string/title_activity_configuracion"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
-            android:name=".ui.HistorialActivity"
+            android:name=".ui.RecordActivity"
             android:exported="false"
             android:label="@string/title_activity_historial"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
-            android:name=".ui.JuegoActivity"
+            android:name=".ui.GameActivity"
             android:exported="false"
             android:label="@string/title_activity_juego"
             android:theme="@style/Theme.Mobile2_Scaffolding" />

@@ -29,7 +29,8 @@ import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.VioletDark
 import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
 
-class JuegoActivity : ComponentActivity() {
+class GameActivity : ComponentActivity() {
+
     private val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var appBarConfiguration: AppBarConfiguration

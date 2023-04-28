@@ -98,7 +98,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     }*/
 
     private fun irAJuego() {
-        val intent = Intent(this, JuegoActivity::class.java)
+        val intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
     }
 
@@ -108,7 +108,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     }
 
     private fun irAHistorial() {
-        val intent = Intent(this, HistorialActivity::class.java)
+        val intent = Intent(this, RecordActivity::class.java)
         startActivity(intent)
     }
 
