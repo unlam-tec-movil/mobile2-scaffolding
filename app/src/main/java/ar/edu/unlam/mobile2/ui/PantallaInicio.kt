@@ -19,7 +19,7 @@ fun PantallaDeInicio(navigationController: NavHostController) {
     Image(
         painter = painterResource(id = R.drawable.pantalla_principal),
         contentDescription = "Pantalla principal",
-        contentScale = ContentScale.FillHeight,
+        contentScale = ContentScale.FillWidth,
         modifier = Modifier.fillMaxSize()
     )
     Column() {
