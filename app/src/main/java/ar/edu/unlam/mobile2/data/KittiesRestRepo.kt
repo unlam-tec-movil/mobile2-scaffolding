@@ -7,6 +7,7 @@ import javax.inject.Inject
 class KittiesRestRepo @Inject constructor(builder: Builder) : KittiesRepo {
     var retrofit: Retrofit = builder
         .baseUrl("https://api.thecatapi.com")
+        //.baseUrl("https://dog.ceo")
         .build()
 
     override suspend fun getNewKitty(): String {

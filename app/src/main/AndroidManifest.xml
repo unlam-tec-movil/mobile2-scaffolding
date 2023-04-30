@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".HiltApplication"
         android:allowBackup="true"
@@ -12,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mobile2_Scaffolding"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.ActivityColeccionable"
+            android:exported="false"
+            android:label="@string/title_activity_coleccionable"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.ActivityPantallaJuego"
+            android:exported="false"
+            android:label="@string/title_activity_pantalla_juego"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
@@ -24,8 +37,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
