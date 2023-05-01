@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -65,17 +66,25 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
     @Composable
     fun content(name: String) {
+        val context = LocalContext.current
+
         Log.i("MainActivity", "start content")
         Column() {
             Log.i("MainActivity", "button row")
             Row() {
                 Button(
                     onClick = {
+
+                        /*
                         Log.i("Button", "Presiono el boton")
                         mainViewModel.updateKittyUrl()
+
+                         */
+
+                        context.startActivity(Intent(context, ColeccionablesActivity::class.java))
                     },
                 ) {
-                    Text(text = "Actualizar imagen")
+                    Text(text = "Ir a coleccionables")
                 }
             }
             Log.i("MainActivity", "first row")
