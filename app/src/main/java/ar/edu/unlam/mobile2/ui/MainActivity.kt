@@ -2,30 +2,36 @@ package ar.edu.unlam.mobile2.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Observer
 import androidx.navigation.ui.AppBarConfiguration
-import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import coil.compose.SubcomposeAsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +56,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         Log.i("MainActivity", "Observer")
                         setContent {
-                            content(name = "Mundo")
+                            bienvenida()
                         }
                     }
                 }
@@ -64,85 +70,117 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     }
 
     @Composable
-    fun content(name: String) {
-        Log.i("MainActivity", "start content")
-        Column() {
-            Log.i("MainActivity", "button row")
-            Row() {
-                Button(
-                    onClick = {
-                        Log.i("Button", "Presiono el boton")
-                        mainViewModel.updateKittyUrl()
-                    },
-                ) {
-                    Text(text = "Actualizar imagen")
-                }
-            }
-            Log.i("MainActivity", "first row")
-            Row() {
-                Text(text = "Imagen de los gatitos")
-            }
-            Log.i("MainActivity", "second row")
-            Row() {
-                SubcomposeAsyncImage(
-                    model = mainViewModel.getImageRequest(LocalContext.current),
-                    // placeholder = painterResource(R.drawable.placeholder),
-                    contentDescription = stringResource(R.string.cat_image),
-                    contentScale = ContentScale.FillBounds,
-                    loading = {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp),
-                        )
-                    },
-                    modifier = Modifier
-                        .height(300.dp)
-                        .width(500.dp),
-                    // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                    onError = { error ->
-                        run {
-                            mainViewModel.updateKittyUrl()
-                            Log.e("AsyncImageError", error.result.throwable.message.toString())
-                        }
-                    },
-                    onLoading = { state ->
-                        if (BuildConfig.DEBUG) {
-                            Log.i(
-                                "AsyncImageLoading",
-                                state.toString(),
-                            )
-                        }
-                    },
+    fun bienvenida() {
 
+        Column {
+
+            Text(
+                text = "Nefly",
+                fontFamily = FontFamily.Serif,
+                fontWeight = FontWeight.Black,
+                fontSize = 40.sp,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .width(2000.dp),
+                textAlign = TextAlign.Center,
+                maxLines = 5,
+                lineHeight = 50.sp
+            )
+
+            Text(
+                text = "Seleccione Usuario",
+                fontFamily = FontFamily.Monospace,
+                fontWeight = FontWeight.Thin,
+                color = Color.Green,
+                fontSize = 40.sp,
+                modifier = Modifier
+                    .padding(40.dp)
+                    .width(2000.dp),
+                textAlign = TextAlign.Center,
+                maxLines = 5,
+                lineHeight = 50.sp
+            )
+
+            val borderWidth = 4.dp
+            Image(
+                painter = painterResource(id = R.drawable.usuario1),
+                contentDescription = stringResource(id = R.string.usuario_uno),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(120.dp)
+                    .padding(10.dp)
+                    .align(alignment = CenterHorizontally)
+                    .border(
+                        BorderStroke(borderWidth, Color.Yellow),
+                        CircleShape
                     )
-            }
-            Log.i("MainActivity", "third row")
-            Row() {
-                Text(text = "Pie de imagen")
-            }
+
+                    .padding(borderWidth)
+                    .clip(CircleShape)
+
+            )
+            Text(
+                text = "Usuario1",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.usuario2),
+                contentDescription = stringResource(id = R.string.usuario_dos),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(120.dp)
+                    .padding(10.dp)
+                    .align(alignment = CenterHorizontally)
+                    .border(
+                        BorderStroke(borderWidth, Color.Yellow),
+                        CircleShape
+                    )
+
+                    .padding(borderWidth)
+                    .clip(CircleShape)
+
+
+            )
+            Text(
+                text = "Usuario2",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.usuario3),
+                contentDescription = stringResource(id = R.string.usuario_tres),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(120.dp)
+                    .padding(10.dp)
+                    .align(alignment = CenterHorizontally)
+                    .border(
+                        BorderStroke(borderWidth, Color.Yellow),
+                        CircleShape
+                    )
+
+                    .padding(borderWidth)
+                    .clip(CircleShape)
+
+
+            )
+            Text(
+                text = "Usuario3",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+
         }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    /*override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }*/
 }
