@@ -12,4 +12,5 @@
 
     <string name="cat_image">Imagen Gatito</string>
     <string name="title_activity_coleccionables">ColeccionablesActivity</string>
+    <string name="title_activity_hero_details">HeroDetailsActivity</string>
 </resources>

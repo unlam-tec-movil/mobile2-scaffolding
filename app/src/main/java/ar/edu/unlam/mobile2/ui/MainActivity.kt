@@ -86,6 +86,9 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                 ) {
                     Text(text = "Ir a coleccionables")
                 }
+                Button(onClick = { context.startActivity(Intent(context, HeroDetailsActivity::class.java)) }) {
+                    Text(text = "ir a pantalla de detalles")
+                }
             }
             Log.i("MainActivity", "first row")
             Row() {
