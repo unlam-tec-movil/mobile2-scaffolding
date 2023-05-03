@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,7 +21,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.ui.AppBarConfiguration
@@ -35,15 +39,15 @@ class GameActivity : ComponentActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    var puntaje = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        var puntaje = 0
 
         setContent {
-                content()
-            }
+            content()
         }
+    }
     @Preview
     @Composable
     private fun content() {
@@ -57,6 +61,7 @@ class GameActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize())
                 {
                     TopBar()
+                    Game()
                 }//Column
 
             }//Surface
@@ -93,6 +98,33 @@ class GameActivity : ComponentActivity() {
                 contentDescription = "",
                 //alignment = Alignment.
             )
+        }
+    }
+
+    @Composable
+    fun Game() {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Texto("Pregunta")
+            Image(
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp),
+                contentDescription = ""
+            )
+            Text("VS", color = Color.Red)
+            Image(
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp),
+                contentDescription = ""
+            )
+            Row {
+                Text(text = puntaje.toString(),  modifier =
+                Modifier
+                    .background(Color.Red, RectangleShape)
+                    .padding(10.dp), Color.White, textAlign = TextAlign.Center)
+                Image(painter = painterResource(id = R.drawable.baseline_replay_24), contentDescription = "")
+            }
         }
     }
 
