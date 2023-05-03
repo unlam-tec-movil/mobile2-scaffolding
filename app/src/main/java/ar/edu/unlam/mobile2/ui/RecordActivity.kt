@@ -48,8 +48,9 @@ class RecordActivity : ComponentActivity() {
                 )
                 {
                     Ranking()
+                    Spacer(Modifier.size(30.dp))
+                    BotonVolver()
                 }
-
             }
         }
     }
@@ -63,9 +64,9 @@ class RecordActivity : ComponentActivity() {
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text = "Puesto", color = Color.White)
-            Text(text = "Jugador", color = Color.White)
-            Text(text = "Puntaje", color = Color.White)
+            Text(text = "Puesto", color = Color.White, fontSize = 30.sp)
+            Text(text = "Jugador", color = Color.White, fontSize = 30.sp)
+            Text(text = "Puntaje", color = Color.White, fontSize = 30.sp)
         }
         Spacer(Modifier.size(10.dp))
         Row (
@@ -164,7 +165,7 @@ class RecordActivity : ComponentActivity() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Button(onClick = { finish()}, contentPadding = PaddingValues(10.dp)) {
-                Text(text = "Volver")
+                Text(text = "VOLVER", fontSize = 30.sp)
             }
         }
     }
