@@ -78,7 +78,6 @@ class GameActivity : ComponentActivity() {
                 .wrapContentHeight()
         ) {
             Image(
-
                 painter = painterResource(id = R.drawable.baseline_favorite_24),
                 contentDescription = "",
                 modifier = Modifier.padding(2.dp,0.dp),
@@ -110,12 +109,12 @@ class GameActivity : ComponentActivity() {
         ) {
             Texto("Pregunta")
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp),
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp).height(100.dp),
                 contentDescription = ""
             )
             Text("VS", color = Color.Red)
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp),
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp).height(100.dp),
                 contentDescription = ""
             )
             Row {
@@ -133,89 +132,3 @@ class GameActivity : ComponentActivity() {
         Text(texto, color = Color.White)
     }
 }
-
-        /*Mobile2_ScaffoldingTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Violet
-                ) {
-                    TopBar()
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.SpaceAround,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Texto("Pregunta")
-                        SubcomposeAsyncImage(
-                            model = mainViewModel.getImageRequest(LocalContext.current),
-                            // placeholder = painterResource(R.drawable.placeholder),
-                            contentDescription = stringResource(R.string.cat_image),
-                            contentScale = ContentScale.FillBounds,
-                            loading = {
-                                CircularProgressIndicator(
-                                    modifier = Modifier
-                                        .height(50.dp)
-                                        .width(50.dp),
-                                )
-                            },
-                            modifier = Modifier
-                                .height(300.dp)
-                                .width(500.dp),
-                            // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                            onError = { error ->
-                                run {
-                                    mainViewModel.updateKittyUrl()
-                                    Log.e("AsyncImageError", error.result.throwable.message.toString())
-                                }
-                            },
-                            onLoading = { state ->
-                                if (BuildConfig.DEBUG) {
-                                    Log.i(
-                                        "AsyncImageLoading",
-                                        state.toString(),
-                                    )
-                                }
-                            },
-                        )
-                        Text("VS", color = Color.Red)
-                        SubcomposeAsyncImage(
-                            model = mainViewModel.getImageRequest(LocalContext.current),
-                            // placeholder = painterResource(R.drawable.placeholder),
-                            contentDescription = stringResource(R.string.cat_image),
-                            contentScale = ContentScale.FillBounds,
-                            loading = {
-                                CircularProgressIndicator(
-                                    modifier = Modifier
-                                        .height(50.dp)
-                                        .width(50.dp),
-                                )
-                            },
-                            modifier = Modifier
-                                .height(300.dp)
-                                .width(500.dp),
-                            // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                            onError = { error ->
-                                run {
-                                    mainViewModel.updateKittyUrl()
-                                    Log.e("AsyncImageError", error.result.throwable.message.toString())
-                                }
-                            },
-                            onLoading = { state ->
-                                if (BuildConfig.DEBUG) {
-                                    Log.i(
-                                        "AsyncImageLoading",
-                                        state.toString(),
-                                    )
-                                }
-                            },
-                        )
-                        Row {
-                            Text(text = puntaje.toString(),  modifier =
-                            Modifier
-                                .background(Color.Red, RectangleShape)
-                                .padding(10.dp), Color.White, textAlign = TextAlign.Center)
-                            Image(painter = painterResource(id = R.drawable.baseline_replay_24), contentDescription = "")
-                        }
-                    }
-                }*/
