@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile2.ui
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 
-class ColeccionablesActivity : ComponentActivity() {
+class CollectionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -42,6 +42,7 @@ class ColeccionablesActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    PantallaPruebaCollection()
                     Galeria()
                 }
             }
@@ -50,6 +51,15 @@ class ColeccionablesActivity : ComponentActivity() {
 }
 
 
+@Composable
+fun PantallaPruebaCollection() {
+    Image(
+        painter = painterResource(id = R.drawable.fondo_coleccion),
+        contentDescription = "Pantalla Coleccion",
+        contentScale = ContentScale.FillHeight,
+        modifier = Modifier.fillMaxSize()
+    )
+}
 
 @Preview
 @Composable
@@ -112,3 +122,21 @@ fun GaleriaItem(idHeroe: Int = 9999,
     }
 }
 
+
+
+/*
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    Mobile2_ScaffoldingTheme {
+        Greeting("Android")
+    }
+}*/

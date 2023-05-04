@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,8 +8,10 @@ import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -18,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
@@ -50,6 +54,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         Log.i("MainActivity", "Observer")
                         setContent {
+                            PantallaPrincipal()
                             content(name = "Mundo")
                         }
                     }
@@ -64,7 +69,19 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     }
 
     @Composable
+    fun PantallaPrincipal() {
+        Image(
+            painter = painterResource(id = R.drawable.pantalla_principal),
+            contentDescription = "Pantalla Coleccion",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+
+
+    @Composable
     fun content(name: String) {
+        val context = LocalContext.current;
         Log.i("MainActivity", "start content")
         Column() {
             Log.i("MainActivity", "button row")
@@ -77,15 +94,31 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                 ) {
                     Text(text = "Actualizar imagen")
                 }
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(context, CollectionActivity::class.java))
+                    },
+                ) {
+                    Text(text = "ir pantalla Collection")
+                }
+
             }
+
             Log.i("MainActivity", "first row")
             Row() {
                 Text(text = "Imagen de los gatitos")
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(context, HeroDetailActivity::class.java))
+                    },
+                ) {
+                    Text(text = "ir pantalla heroDetail")
+                }
             }
             Log.i("MainActivity", "second row")
             Row() {
                 SubcomposeAsyncImage(
-                    model = mainViewModel.getImageRequest(LocalContext.current),
+                    model = mainViewModel.getImageRequest(context),
                     // placeholder = painterResource(R.drawable.placeholder),
                     contentDescription = stringResource(R.string.cat_image),
                     contentScale = ContentScale.FillBounds,
