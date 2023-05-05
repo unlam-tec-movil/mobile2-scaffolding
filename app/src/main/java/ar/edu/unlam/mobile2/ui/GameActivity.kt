@@ -1,11 +1,13 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -94,8 +96,7 @@ class GameActivity : ComponentActivity() {
             )
             Image(
                 painter = painterResource(id = R.drawable.baseline_close_24),
-                contentDescription = "",
-                //alignment = Alignment.
+                contentDescription = ""
             )
         }
     }
@@ -109,12 +110,16 @@ class GameActivity : ComponentActivity() {
         ) {
             Texto("Pregunta")
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp).height(100.dp),
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp),
                 contentDescription = ""
             )
             Text("VS", color = Color.Red)
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier.width(100.dp).height(100.dp),
+                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp),
                 contentDescription = ""
             )
             Row {

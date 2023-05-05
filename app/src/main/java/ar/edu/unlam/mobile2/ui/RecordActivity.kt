@@ -6,13 +6,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -64,12 +69,12 @@ class RecordActivity : ComponentActivity() {
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text = "Puesto", color = Color.White, fontSize = 30.sp)
             Text(text = "Jugador", color = Color.White, fontSize = 30.sp)
             Text(text = "Puntaje", color = Color.White, fontSize = 30.sp)
         }
         Spacer(Modifier.size(10.dp))
-        Row (
+        MostrarRanking(ListaDeJuegosPrueba.juegos)
+        /*Row (
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
@@ -149,7 +154,7 @@ class RecordActivity : ComponentActivity() {
             Texto(texto = "10")
             Texto(texto = "Jugador")
             Texto(texto = "100")
-        }
+        }*/
     }
 
     @Composable
@@ -157,7 +162,39 @@ class RecordActivity : ComponentActivity() {
         Text(texto, color = Color.Black, fontSize = 30.sp)
     }
 
-    @Composable()
+    @Composable
+    private fun MostrarRanking(datos: MutableList<JuegoPrueba>) {
+        LazyColumn (
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            items(datos) { item -> ListItemRow(item) }
+        }
+    }
+
+    @Composable
+    private fun ListItemRow(item: JuegoPrueba) {
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+        ){
+            Texto(item.jugador)
+            Texto(item.puntaje.toString())
+        }
+
+        /*Row (modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row {
+                Text(item.jugador)
+                Text(item.puntaje.toString())
+            }
+
+        }*/
+    }
+
+    @Composable
     private fun BotonVolver() {
         Row (
             modifier = Modifier.fillMaxWidth(),
@@ -168,5 +205,29 @@ class RecordActivity : ComponentActivity() {
                 Text(text = "VOLVER", fontSize = 30.sp)
             }
         }
+    }
+}
+
+class JuegoPrueba(
+    val jugador: String,
+    val puntaje: Int
+)
+
+object ListaDeJuegosPrueba {
+    val juegos = mutableListOf<JuegoPrueba>()
+
+    init {
+        agregar(JuegoPrueba("Jugador 1", 100))
+        agregar(JuegoPrueba("Jugador 2", 50))
+        agregar(JuegoPrueba("Jugador 3", 70))
+        agregar(JuegoPrueba("Jugador 4", 25))
+        agregar(JuegoPrueba("Jugador 5", 30))
+    }
+    fun agregar(juego: JuegoPrueba) {
+        juegos.add(juego)
+    }
+
+    fun ordenar() {
+        juegos.sortedByDescending { it.puntaje }
     }
 }
