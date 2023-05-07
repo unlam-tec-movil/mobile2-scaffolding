@@ -9,5 +9,6 @@ data class DataHero(
     val name: String = "",
     val powerstats: Powerstats = Powerstats(),
     val response: String = "",
-    val work: Work = Work()
+    val work: Work = Work(),
+    val isFavorite: Boolean = false
 )

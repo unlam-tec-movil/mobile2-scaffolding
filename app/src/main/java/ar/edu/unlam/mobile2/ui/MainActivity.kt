@@ -81,7 +81,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
     @Composable
     fun content(name: String) {
-        val context = LocalContext.current;
+        val context = LocalContext.current
         Log.i("MainActivity", "start content")
         Column() {
             Log.i("MainActivity", "button row")
