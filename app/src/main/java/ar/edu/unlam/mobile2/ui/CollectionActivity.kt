@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,23 +14,32 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
+import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 
 class CollectionActivity : ComponentActivity() {
@@ -43,7 +53,6 @@ class CollectionActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     PantallaPruebaCollection()
-                    Galeria()
                 }
             }
         }
@@ -51,92 +60,110 @@ class CollectionActivity : ComponentActivity() {
 }
 
 
+@Preview
 @Composable
 fun PantallaPruebaCollection() {
-    Image(
-        painter = painterResource(id = R.drawable.fondo_coleccion),
-        contentDescription = "Pantalla Coleccion",
-        contentScale = ContentScale.FillHeight,
-        modifier = Modifier.fillMaxSize()
-    )
+    Box{
+        Image(
+            painter = painterResource(id = R.drawable.fondo_coleccion),
+            contentDescription = "Pantalla Coleccion",
+            contentScale = ContentScale.FillHeight,
+            modifier = Modifier.fillMaxSize()
+        )
+        Galeria(heroList = dataHeroTestList())
+    }
+    
+}
+
+fun dataHeroTestList(): List<DataHero> {
+    val dataHeroTestList = mutableListOf<DataHero>()
+    for(i in 0..9999) {
+        dataHeroTestList.add(
+            DataHero(name = "Test $i", id = "$i", isFavorite = i%3 == 0)
+        )
+    }
+    return dataHeroTestList
 }
 
 @Preview
 @Composable
-fun Galeria(tamanioItem: Dp = 100.dp, cant: Int = 100) {
+fun GaleriaPreview() {
+    Galeria(heroList = dataHeroTestList())
+}
+
+@Composable
+fun Galeria(
+            modifier: Modifier = Modifier,
+            heroList: List<DataHero>,
+            itemSize: Dp = 100.dp
+) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(tamanioItem),
+        columns = GridCells.Adaptive(itemSize),
         content = {
-            items(cant) {i ->
+            items(heroList.size) {i ->
                 GaleriaItem(
-                    idHeroe = i,
-                    nombreHeroe = "test $i"
+                    modifier = modifier,
+                    dataHero = heroList[i],
                 )
             }
         })
 }
 
+
+
 @Preview
 @Composable
-fun GaleriaItem(idHeroe: Int = 9999,
-                nombreHeroe: String = "test",
-                esFavorito: Boolean = false,
-                painterResourceId: Int = R.drawable.default_imagen_heroe) {
-    Box(
-        modifier = Modifier
-            .padding(8.dp)
-            .clip(RoundedCornerShape(5.dp))
-            .background(Color.Red)
-            .wrapContentHeight()
+fun GaleriaItem(modifier: Modifier = Modifier,
+                dataHero: DataHero = DataHero(),
+                painterDefaultResourceId: Int = R.drawable.default_imagen_heroe
+) {
+    val context = LocalContext.current
+    val myIntent = Intent(context, HeroDetailActivity::class.java)
+    myIntent.putExtra("id",dataHero.id)
+    TextButton(
+        shape = RectangleShape,
+        onClick = {
+        context.startActivity(myIntent) }
     ) {
-
-        Column {
-            Image(
-                painter = painterResource(id = painterResourceId),
-                contentDescription = "Imagen heroe",
-                modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
-            )
-            Text(nombreHeroe,
-                modifier = Modifier
-                    .padding(bottom = 8.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-        }
-        Text(idHeroe.toString(), modifier = Modifier.padding(8.dp))
-        Row(
-            horizontalArrangement = Arrangement.End,
-            modifier = Modifier
-                .fillMaxSize(1f)
-                .padding(8.dp)
+        Box(
+            modifier = modifier
+                .background(brush = SolidColor(Color.Black), alpha = 0.25f)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.icon_favorite_not),
-                contentDescription = "icono no favorito",
-                modifier = Modifier
+            Column {
+                Image(
+                    painter = painterResource(id = painterDefaultResourceId),
+                    contentDescription = "Imagen heroe",
+                    modifier = modifier
+                        .fillMaxWidth(1f)
+                        .align(Alignment.CenterHorizontally)
+                        .padding(8.dp)
+                )
+                Text(dataHero.name,
+                    modifier = modifier
+                        .padding(bottom = 8.dp)
+                        .align(Alignment.CenterHorizontally),
+                    color = Color.Black
+                )
+            }
+            Text(
+                text = dataHero.id,
+                modifier = modifier.padding(8.dp),
+                color = Color.Black
             )
+            Row(
+                horizontalArrangement = Arrangement.End,
+                modifier = modifier
+                    .fillMaxWidth(1f)
+                    .padding(8.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = if(dataHero.isFavorite)
+                        R.drawable.icon_favorite else R.drawable.icon_favorite_not
+                    ),
+                    contentDescription = if(dataHero.isFavorite) "icono favorito" else "icono no favorito",
+                    modifier = modifier
+                )
+            }
         }
-
     }
 }
-
-
-
-/*
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mobile2_ScaffoldingTheme {
-        Greeting("Android")
-    }
-}*/

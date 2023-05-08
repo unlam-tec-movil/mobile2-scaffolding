@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,6 +39,8 @@ import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 class HeroDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val myIntent: Intent = intent
+        val idString : String? = myIntent.getStringExtra("id")
         setContent {
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme
@@ -46,7 +49,7 @@ class HeroDetailActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     HeroDetailFondo()
-                    HeroStats( Powerstats(), modifier = Modifier.fillMaxSize())
+                    HeroDetails(dataHero = DataHero(id = idString!!, name = "Test $idString"))
                 }
             }
         }
@@ -63,8 +66,12 @@ fun HeroDetailFondo() {
     )
 }
 
+@Preview
 @Composable
-fun HeroDetails(dataHero: DataHero, modifier: Modifier = Modifier) {
+fun HeroDetails(
+    modifier: Modifier = Modifier,
+    dataHero: DataHero = DataHero(id = "9999", name = "Test 99999")
+) {
     var isStatsVisible by rememberSaveable { mutableStateOf(true) }
     var isBiographyVisible by rememberSaveable {mutableStateOf(true)}
     var isAppearanceVisible by rememberSaveable {mutableStateOf(true)}
@@ -86,6 +93,11 @@ fun HeroDetails(dataHero: DataHero, modifier: Modifier = Modifier) {
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
         )
+        Row(
+            modifier = modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = "${dataHero.id} ${dataHero.name}")
+        }
         Button(
             onClick = { isStatsVisible = !isStatsVisible },
             modifier = modifier
