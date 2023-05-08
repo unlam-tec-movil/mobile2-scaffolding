@@ -11,4 +11,10 @@
     <string name="hello_second_fragment">Saludo segundo fragment. Arg: %1$s</string>
 
     <string name="cat_image">Imagen Gatito</string>
+    <string name="title_activity_juego">JuegoActivity</string>
+
+    <string name="anime_image1">Primer Anime</string>
+    <string name="anime_image2">Segundo Anime</string>
+    <string name="title_activity_historial">HistorialActivity</string>
+    <string name="title_activity_configuracion">ConfiguracionActivity</string>
 </resources>
