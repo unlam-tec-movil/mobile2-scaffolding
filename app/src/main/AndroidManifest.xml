@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".HiltApplication"
         android:allowBackup="true"
@@ -13,19 +16,30 @@
         android:theme="@style/Theme.Mobile2_Scaffolding"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ConfiguracionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_configuracion"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.RecordActivity"
+            android:exported="false"
+            android:label="@string/title_activity_historial"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.GameActivity"
+            android:exported="false"
+            android:label="@string/title_activity_juego"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Mobile2_Scaffolding.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
