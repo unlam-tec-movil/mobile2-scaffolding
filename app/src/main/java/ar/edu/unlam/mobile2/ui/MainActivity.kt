@@ -34,6 +34,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 @AndroidEntryPoint
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
@@ -106,13 +109,24 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
             Log.i("MainActivity", "first row")
             Row() {
-                Text(text = "Imagen de los gatitos")
                 Button(
                     onClick = {
-                        context.startActivity(Intent(context, HeroDetailActivity::class.java))
+                        context.startActivity(
+                            Intent(
+                                context,
+                                HeroDetailActivity::class.java
+                            )
+                        )
                     },
                 ) {
                     Text(text = "ir pantalla heroDetail")
+                }
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(context, Quiz::class.java))
+                    },
+                ) {
+                    Text(text = "Pregunta diaria")
                 }
             }
             Log.i("MainActivity", "second row")
