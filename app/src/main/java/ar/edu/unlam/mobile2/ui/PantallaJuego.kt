@@ -5,6 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +31,10 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -67,8 +76,8 @@ class PantallaJuego : ComponentActivity() {
     }
 
     @Composable
-    fun PrincipalScreen(countries: CountriesViewModel){
-        Column(Modifier.fillMaxSize()){
+    fun PrincipalScreen(countries: CountriesViewModel) {
+        Column(Modifier.fillMaxSize()) {
             TopBarQR()
             TopBlock(countries)
             BottomBlock(countries)
@@ -86,7 +95,7 @@ class PantallaJuego : ComponentActivity() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp, start = 5.dp, end = 7.dp)
+                    .padding(top = 10.dp, start = 20.dp, end =20.dp)
                     .clip(CircleShape)
                     .background(color = Color(0xFF335ABD))
             )
@@ -102,7 +111,7 @@ class PantallaJuego : ComponentActivity() {
                 )
                 //-------------------------------------------------------------------------------------------------------------------------------------------
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
                     modifier = Modifier.padding(start = 20.dp, top = 7.dp)
                 ) {
                     Text(text = "Nombre", color = Color.White, fontSize = 17.sp)
@@ -110,7 +119,7 @@ class PantallaJuego : ComponentActivity() {
                 }
                 //----------------------------------------------------------------------------------------------------------------------------------------------
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
                     modifier = Modifier.padding(start = 60.dp, top = 7.dp)
                 ) {
                     Text(text = "Puntos : 0", color = Color.White, fontSize = 17.sp)
@@ -127,36 +136,51 @@ class PantallaJuego : ComponentActivity() {
                     .padding(start = 17.dp, end = 17.dp, top = 10.dp)
                     .fillMaxWidth()
             )
-            Spacer(modifier = Modifier.padding(10.dp))
-            Divider(
-                color = Color.DarkGray,
-                thickness = 2.dp,
-                modifier = Modifier.padding(vertical = 2.dp)
-            )
-
-            Text(
-                text = "Capital", fontSize = 14.sp,
-                color = Color.White
-            )
-            Divider(
-                color = Color.DarkGray,
-                thickness = 2.dp,
-                modifier = Modifier.padding(vertical = 2.dp)
-            )
         }
     }
 
+    @OptIn(ExperimentalAnimationApi::class)
     @Composable
     fun BottomBlock(countries: CountriesViewModel) {
-        when (Random.nextInt(from = 1, until = 3)) {
-            1 -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Black),
-                    horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-                ) {
+            Spacer(modifier = Modifier.padding(10.dp))
+
+            Divider(
+                color = Color.DarkGray,
+                thickness = 2.dp,
+                modifier = Modifier.padding(vertical = 2.dp)
+            )
+
+            var capitalvisibility by remember {
+                mutableStateOf(false)
+            }
+            AnimatedVisibility(
+                capitalvisibility,
+                enter = scaleIn(
+                    initialScale = 0.3f,
+                    animationSpec = TweenSpec(durationMillis = 500)
+                )
+            ) {
+                countries.correctCountryRegionInGame.value?.let {
+                    Text(
+                        text = it, fontSize = 16.sp,
+                        color = Color.White
+                    )
+                }
+            }
+            Divider(
+                color = Color.DarkGray,
+                thickness = 2.dp,
+                modifier = Modifier.padding(vertical = 2.dp)
+            )
+            when (Random.nextInt(from = 1, until = 3)) {
+                1 -> {
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
@@ -202,78 +226,70 @@ class PantallaJuego : ComponentActivity() {
                         }
                     }
                     //--------------------------------------------------------------------------------------------------------------------------------------------------
-                    Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.padding(top = 80.dp/*, start = 260.dp*/),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
-                        // colors = ButtonDefaults.buttonColors(Color.Blue)
+
+                }
+
+                2 -> {
+
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 110.dp)
                     ) {
-                        Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
+                        countries.incorrectCountryNameInGame.value?.let {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.headlineMedium,
+                                modifier = Modifier
+                                    .width(140.dp),
+                                fontSize = 23.sp,
+                                color = Color.White,
+                                textAlign = TextAlign.Center,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                        }
+                        Divider(
+                            Modifier
+                                .width(120.dp)
+                                .size(height = 50.dp, width = 1.dp)
+                                .rotate(90f)
+                                .padding(vertical = 6.dp)
+                                .clip(RoundedCornerShape(6.dp)),
+                            color = Color.Gray,
+                            thickness = 1.dp,
+                        )
+
+                        countries.correctCountryNameInGame.value?.let {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.headlineMedium,
+                                modifier = Modifier
+                                    .width(155.dp),
+                                fontSize = 23.sp,
+                                color = Color.White,
+                                textAlign = TextAlign.Center,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
                     }
                 }
             }
-
-            2 -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Black),
-                    horizontalAlignment = Alignment.CenterHorizontally
-
+            var isVisible by remember { mutableStateOf(true) }
+            AnimatedVisibility(
+                isVisible, exit = scaleOut(
+                    targetScale = 0.4f,
+                    animationSpec = TweenSpec(durationMillis = 700)
+                )
+            ) {
+                Button(
+                    onClick = { capitalvisibility = true; isVisible = false },
+                    modifier = Modifier.padding(top = 150.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
                 ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 110.dp)
-                    ) {
-                        countries.incorrectCountryNameInGame.value?.let {
-                            Text(
-                                text = it,
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(140.dp),
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                        Divider(
-                            Modifier
-                                .width(120.dp)
-                                .size(height = 50.dp, width = 1.dp)
-                                .rotate(90f)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(6.dp)),
-                            color = Color.Gray,
-                            thickness = 1.dp,
-                        )
-
-                        countries.correctCountryNameInGame.value?.let {
-                            Text(
-                                text = it,
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(155.dp),
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    }
-                    //--------------------------------------------------------------------------------------------------------------------------------------------------
-                    Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.padding(top = 80.dp/*, start = 260.dp*/),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
-                        // colors = ButtonDefaults.buttonColors(Color.Blue)
-                    ) {
-                        Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
-                    }
+                    Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
                 }
             }
         }
