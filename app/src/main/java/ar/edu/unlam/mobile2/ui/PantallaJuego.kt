@@ -77,10 +77,17 @@ class PantallaJuego : ComponentActivity() {
 
     @Composable
     fun PrincipalScreen(countries: CountriesViewModel) {
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().background(Color.Black)) {
             TopBarQR()
             TopBlock(countries)
+            Divider(
+                color = Color.DarkGray,
+                thickness = 5.5.dp,
+                modifier = Modifier.padding(top = 25.dp)
+            )
             BottomBlock(countries)
+            Spacer(modifier = Modifier.padding(65.dp))
+            showCapital(countries)
         }
     }
 
@@ -95,7 +102,7 @@ class PantallaJuego : ComponentActivity() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp, start = 20.dp, end =20.dp)
+                    .padding(top = 5.dp, start = 20.dp, end = 20.dp)
                     .clip(CircleShape)
                     .background(color = Color(0xFF335ABD))
             )
@@ -133,7 +140,7 @@ class PantallaJuego : ComponentActivity() {
                 contentDescription = "Bandera",
                 modifier = Modifier
                     .size(300.dp, 170.dp)
-                    .padding(start = 17.dp, end = 17.dp, top = 10.dp)
+                    .padding(start = 17.dp, end = 17.dp, top = 20.dp)
                     .fillMaxWidth()
             )
         }
@@ -144,41 +151,10 @@ class PantallaJuego : ComponentActivity() {
     fun BottomBlock(countries: CountriesViewModel) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .background(Color.Black),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            Divider(
-                color = Color.DarkGray,
-                thickness = 2.dp,
-                modifier = Modifier.padding(vertical = 2.dp)
-            )
-
-            var capitalvisibility by remember {
-                mutableStateOf(false)
-            }
-            AnimatedVisibility(
-                capitalvisibility,
-                enter = scaleIn(
-                    initialScale = 0.3f,
-                    animationSpec = TweenSpec(durationMillis = 500)
-                )
-            ) {
-                countries.correctCountryRegionInGame.value?.let {
-                    Text(
-                        text = it, fontSize = 16.sp,
-                        color = Color.White
-                    )
-                }
-            }
-            Divider(
-                color = Color.DarkGray,
-                thickness = 2.dp,
-                modifier = Modifier.padding(vertical = 2.dp)
-            )
             when (Random.nextInt(from = 1, until = 3)) {
                 1 -> {
                     Row(
@@ -202,8 +178,8 @@ class PantallaJuego : ComponentActivity() {
                         }
                         Divider(
                             Modifier
-                                .width(120.dp)
-                                .size(height = 50.dp, width = 1.dp)
+                                .width(110.dp)
+                                .size(height = 45.dp, width = 1.dp)
                                 .rotate(90f)
                                 .padding(vertical = 6.dp)
                                 .clip(RoundedCornerShape(6.dp)),
@@ -225,12 +201,8 @@ class PantallaJuego : ComponentActivity() {
                             )
                         }
                     }
-                    //--------------------------------------------------------------------------------------------------------------------------------------------------
-
                 }
-
                 2 -> {
-
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
@@ -242,7 +214,7 @@ class PantallaJuego : ComponentActivity() {
                                 text = it,
                                 style = MaterialTheme.typography.headlineMedium,
                                 modifier = Modifier
-                                    .width(140.dp),
+                                    .width(150.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
@@ -252,8 +224,8 @@ class PantallaJuego : ComponentActivity() {
                         }
                         Divider(
                             Modifier
-                                .width(120.dp)
-                                .size(height = 50.dp, width = 1.dp)
+                                .width(110.dp)
+                                .size(height = 45.dp, width = 1.dp)
                                 .rotate(90f)
                                 .padding(vertical = 6.dp)
                                 .clip(RoundedCornerShape(6.dp)),
@@ -266,7 +238,7 @@ class PantallaJuego : ComponentActivity() {
                                 text = it,
                                 style = MaterialTheme.typography.headlineMedium,
                                 modifier = Modifier
-                                    .width(155.dp),
+                                    .width(150.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
@@ -277,16 +249,49 @@ class PantallaJuego : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+
+    @OptIn(ExperimentalAnimationApi::class)
+    @Composable
+    fun showCapital(countries: CountriesViewModel) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            var capitalvisibility by remember {
+                mutableStateOf(false)
+            }
+            AnimatedVisibility(
+                capitalvisibility,
+                enter = scaleIn(
+                    initialScale = 0.3f,
+                    animationSpec = TweenSpec(durationMillis = 500)
+                )
+            ) {
+                countries.correctCountryRegionInGame.value?.let {
+                    Text(
+                        text = it, fontSize = 22.sp,
+                        style = MaterialTheme.typography.labelLarge,
+                        modifier=Modifier.padding(top=10.dp),
+                        color = Color.White
+                    )
+                }
+            }
             var isVisible by remember { mutableStateOf(true) }
             AnimatedVisibility(
                 isVisible, exit = scaleOut(
                     targetScale = 0.4f,
-                    animationSpec = TweenSpec(durationMillis = 700)
+                    animationSpec = TweenSpec(durationMillis = 600)
                 )
             ) {
                 Button(
                     onClick = { capitalvisibility = true; isVisible = false },
-                    modifier = Modifier.padding(top = 150.dp),
+                    modifier = Modifier.padding(top = 80.dp),
                     colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
                 ) {
                     Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
@@ -294,6 +299,7 @@ class PantallaJuego : ComponentActivity() {
             }
         }
     }
+
 
     @Composable
     fun TopBarQR() {
@@ -319,3 +325,4 @@ class PantallaJuego : ComponentActivity() {
         )
     }
 }
+//}
