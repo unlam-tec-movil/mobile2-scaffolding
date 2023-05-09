@@ -50,6 +50,7 @@ class HeroDetailActivity : ComponentActivity() {
                 ) {
                     HeroDetailFondo()
                     HeroDetails(dataHero = DataHero(id = idString!!, name = "Test $idString"))
+                    //HeroDetails(dataHero = DataHero(id = "idString!!", name = "Test idString"))
                 }
             }
         }
@@ -59,7 +60,7 @@ class HeroDetailActivity : ComponentActivity() {
 @Composable
 fun HeroDetailFondo() {
     Image(
-        painter = painterResource(id = R.drawable.fondo_pantalla_pelea),
+        painter = painterResource(id = R.drawable.fondo_coleccion),
         contentDescription = "Pantalla Coleccion",
         contentScale = ContentScale.FillHeight,
         modifier = Modifier.fillMaxSize()
