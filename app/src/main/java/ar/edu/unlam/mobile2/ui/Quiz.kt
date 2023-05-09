@@ -163,7 +163,7 @@ fun QuizItem(
                     colors = ButtonDefaults.buttonColors(Color.Red)
                 ) {
                     Text(
-                        "Personaje 1", fontSize = 20.sp,
+                        "Personaje 1", fontSize = 18.sp,
                         color = Color.White,
                         fontFamily = shaka_pow
                     )
@@ -177,7 +177,7 @@ fun QuizItem(
                     colors = ButtonDefaults.buttonColors(Color.Red)
                 ) {
                     Text(
-                        "Personaje 2", fontSize = 20.sp,
+                        "Personaje 2", fontSize = 18.sp,
                         color = Color.White,
                         fontFamily = shaka_pow
                     )
@@ -198,7 +198,7 @@ fun QuizItem(
                     colors = ButtonDefaults.buttonColors(Color.Red)
                 ) {
                     Text(
-                        "Personaje 3", fontSize = 20.sp,
+                        "Personaje 3", fontSize = 18.sp,
                         color = Color.White,
                         fontFamily = shaka_pow
                     )
@@ -212,7 +212,7 @@ fun QuizItem(
                     colors = ButtonDefaults.buttonColors(Color.Red)
                 ) {
                     Text(
-                        "Personaje 4", fontSize = 20.sp,
+                        "Personaje 4", fontSize = 18.sp,
                         color = Color.White,
                         fontFamily = shaka_pow
                     )
