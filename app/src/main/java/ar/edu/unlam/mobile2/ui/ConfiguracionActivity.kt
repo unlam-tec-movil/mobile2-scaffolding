@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.ui
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,10 +31,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import ar.edu.unlam.mobile2.R
 
 class ConfiguracionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        private var tapSound:MediaPlayer? = null
+        fun playEffects () {
+            tapSound = MediaPlayer.create(this, R.raw.TapButtonSound)
+            tapSound?.setOnPreparedListener{
+                
+            }
+        }
+
         setContent {
 
             Row{
