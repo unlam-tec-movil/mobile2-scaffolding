@@ -31,6 +31,7 @@ class CountriesViewModel @Inject constructor(private val service: CountriesServi
     //A partir de la lista de países, agarro dos, uno correcto y uno incorrecto
     val incorrectCountryNameInGame = MutableLiveData<String>()
     val correctCountryFlagInGame = MutableLiveData<String>()
+    val correctCountryRegionInGame = MutableLiveData<String>()
     val correctCountryNameInGame = MutableLiveData<String>()
 
     suspend fun startGame(){
@@ -39,6 +40,7 @@ class CountriesViewModel @Inject constructor(private val service: CountriesServi
         val correctCountry = countriesList?.get(Random.nextInt(0,250))
         correctCountryNameInGame.value = correctCountry?.translations?.spa?.common
         correctCountryFlagInGame.value = correctCountry?.flags?.png
+        correctCountryRegionInGame.value = correctCountry?.capital?.get(0)
         val incorrectCountry = countriesList?.get(Random.nextInt(0,250))
         if (!incorrectCountry?.equals(correctCountry)!!){
             incorrectCountryNameInGame.value = incorrectCountry.translations.spa.common
