@@ -15,11 +15,15 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -81,7 +85,10 @@ class PantallaJuego : ComponentActivity() {
 
     @Composable
     fun PrincipalScreen(countries: CountriesViewModel) {
-        Column(Modifier.fillMaxSize().background(Color.Black)) {
+        Column(
+	        Modifier
+		        .fillMaxSize()
+		        .background(Color.Black)) {
             TopBarQR()
             TopBlock(countries)
             Divider(
@@ -99,16 +106,16 @@ class PantallaJuego : ComponentActivity() {
     fun TopBlock(countries: CountriesViewModel) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black),
+	            .fillMaxWidth()
+	            .background(Color.Black),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 5.dp, start = 20.dp, end = 20.dp)
-                    .clip(CircleShape)
-                    .background(color = Color(0xFF335ABD))
+	                .fillMaxWidth()
+	                .padding(top = 5.dp, start = 20.dp, end = 20.dp)
+	                .clip(CircleShape)
+	                .background(color = Color(0xFF335ABD))
             )
             {
                 Image(
@@ -116,9 +123,9 @@ class PantallaJuego : ComponentActivity() {
                     contentDescription = "Foto de perfil del usuario",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .padding(start = 14.dp, top = 5.dp, bottom = 5.dp)
-                        .size(57.dp)
-                        .clip(CircleShape)
+	                    .padding(start = 14.dp, top = 5.dp, bottom = 5.dp)
+	                    .size(57.dp)
+	                    .clip(CircleShape)
                 )
                 //-------------------------------------------------------------------------------------------------------------------------------------------
                 Column(
@@ -143,193 +150,177 @@ class PantallaJuego : ComponentActivity() {
                 model = countries.correctCountryFlagInGame.value,
                 contentDescription = "Bandera",
                 modifier = Modifier
-                    .size(300.dp, 170.dp)
-                    .padding(start = 17.dp, end = 17.dp, top = 20.dp)
-                    .fillMaxWidth()
+	                .size(300.dp, 170.dp)
+	                .padding(start = 17.dp, end = 17.dp, top = 20.dp)
+	                .fillMaxWidth()
             )
         }
     }
-
-    @OptIn(ExperimentalAnimationApi::class)
-    @Composable
-    fun BottomBlock(countries: CountriesViewModel) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            when (Random.nextInt(from = 1, until = 3)) {
-                1 -> {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 110.dp)
-                    ) {
-                        // Boton para el país correcto
-                        Button(
-                            onClick = {
-                                Toast.makeText(
-                                    this@PantallaJuego,
-                                    "¡Correcto!",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                                launchCountries()
-                            },
-                            modifier = Modifier.padding(top = 80.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Text(
-                                text = countries.correctCountryNameInGame.value
-                                    ?: "",
-                                style = MaterialTheme.typography.headlineMedium,
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                        Divider(
-                            Modifier
-                                .width(110.dp)
-                                .size(height = 45.dp, width = 1.dp)
-                                .rotate(90f)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(6.dp)),
-                            color = Color.Gray,
-                            thickness = 1.dp,
-                        )
-
-                        // Boton para el país incorrecto
-                        Button(
-                            onClick = {
-                                Toast.makeText(
-                                    this@PantallaJuego,
-                                    "Incorrecto :(",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                launchCountries()
-                            },
-                            modifier = Modifier.padding(top = 80.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Text(
-                                text = countries.incorrectCountryNameInGame.value
-                                    ?: "",
-                                style = MaterialTheme.typography.headlineMedium,
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                    }
-
-                    Button(
-                        onClick = { /* TODO */ },
-                        modifier = Modifier.padding(top = 80.dp),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD)),
-                        shape = RoundedCornerShape(6.dp),
-                    ) {
-                        Text(
-                            text = "Ayuda",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                }
-
-
-                2 -> {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 110.dp)
-                    ) {
-                        // Boton para el país correcto
-                        Button(
-                            onClick = {
-                                Toast.makeText(
-                                    this@PantallaJuego,
-                                    "¡Correcto!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                launchCountries()
-                            },
-                            modifier = Modifier.padding(top = 80.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Text(
-                                text = countries.correctCountryNameInGame.value
-                                    ?: "",
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(150.dp),
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                        Divider(
-                            Modifier
-                                .width(110.dp)
-                                .size(height = 45.dp, width = 1.dp)
-                                .rotate(90f)
-                                .clip(RoundedCornerShape(6.dp))
-                                .padding(vertical = 6.dp),
-                            color = Color.Gray,
-                            thickness = 1.dp,
-                        )
-                        // Boton para el país incorrecto
-                        Button(
-                            onClick = {
-                                Toast.makeText(
-                                    this@PantallaJuego,
-                                    "Incorrecto :(",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                                launchCountries()
-                            },
-                            modifier = Modifier.padding(top = 80.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Text(
-                                text = countries.incorrectCountryNameInGame.value
-                                    ?: "",
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(150.dp),
-                                fontSize = 23.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                    }
-
-                    Button(
-                        onClick = { /* TODO */ },
-                        modifier = Modifier.padding(top = 80.dp),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD)),
-                        shape = RoundedCornerShape(6.dp),
-                    ) {
-                        Text(
-                            text = "Ayuda",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                }
-            }
-        }
-    }
+	
+	@OptIn(ExperimentalAnimationApi::class)
+	@Composable
+	fun BottomBlock(countries: CountriesViewModel) {
+			when (2) {
+				1 -> {
+					Box(
+						modifier = Modifier
+							.fillMaxWidth()
+							.heightIn(max = 300.dp)
+					){
+						Row(
+							horizontalArrangement = Arrangement.Center,
+							modifier = Modifier
+								.fillMaxWidth()
+								.padding(top = 110.dp)
+						) {
+							Column(Modifier.width(150.dp), horizontalAlignment = Alignment.CenterHorizontally){
+								// Boton para el país incorrecto
+								Button(
+									onClick = {
+										Toast.makeText(
+											this@PantallaJuego,
+											"¡Correcto!",
+											Toast.LENGTH_SHORT
+										).show()
+										launchCountries()
+									},
+									colors = ButtonDefaults.buttonColors(Color.Transparent)
+								){
+									countries.correctCountryNameInGame.value?.let {
+										Text(
+											text = it,
+											style = MaterialTheme.typography.headlineMedium,
+											modifier = Modifier.fillMaxWidth(),
+											fontSize = 23.sp,
+											color = Color.White,
+											textAlign = TextAlign.Center,
+											maxLines = 2,
+											overflow = TextOverflow.Ellipsis,
+										)
+									}
+								}
+							}
+							Divider(
+								Modifier
+									.width(110.dp)
+									.size(height = 45.dp, width = 1.dp)
+									.rotate(90f)
+									.padding(vertical = 6.dp)
+									.clip(RoundedCornerShape(6.dp)),
+								color = Color.Gray,
+								thickness = 1.dp,
+							)
+							Column(Modifier.width(150.dp), horizontalAlignment = Alignment.CenterHorizontally){
+								// Boton para el país correcto
+								Button(
+									onClick = {
+										Toast.makeText(
+											this@PantallaJuego,
+											"Incorrecto :(",
+											Toast.LENGTH_SHORT
+										).show()
+										launchCountries()
+									},
+									colors = ButtonDefaults.buttonColors(Color.Transparent)
+								){
+									countries.incorrectCountryNameInGame.value?.let {
+										Text(
+											text = it,
+											style = MaterialTheme.typography.headlineMedium,
+											modifier = Modifier.fillMaxWidth(),
+											fontSize = 23.sp,
+											color = Color.White,
+											textAlign = TextAlign.Center,
+											maxLines = 2,
+											overflow = TextOverflow.Ellipsis,
+										)
+									}
+								}
+							}
+						}
+					}
+				}
+				2 -> {
+					Box(
+						modifier = Modifier
+							.fillMaxWidth()
+							.heightIn(max = 300.dp)
+					){
+					Row(
+						horizontalArrangement = Arrangement.Center,
+						modifier = Modifier
+							.fillMaxWidth()
+							.padding(top = 110.dp)
+					) {
+						Column(Modifier.width(150.dp), horizontalAlignment = Alignment.CenterHorizontally){
+							// Boton para el país incorrecto
+							Button(
+								onClick = {
+									Toast.makeText(
+										this@PantallaJuego,
+										"Incorrecto :(",
+										Toast.LENGTH_SHORT
+									).show()
+									launchCountries()
+								},
+								colors = ButtonDefaults.buttonColors(Color.Transparent)
+							){
+								countries.incorrectCountryNameInGame.value?.let {
+								Text(
+									text = it,
+									style = MaterialTheme.typography.headlineMedium,
+									modifier = Modifier.fillMaxWidth(),
+									fontSize = 23.sp,
+									color = Color.White,
+									textAlign = TextAlign.Center,
+									maxLines = 2,
+									overflow = TextOverflow.Ellipsis,
+								)
+								}
+							}
+						}
+						Divider(
+							Modifier
+								.width(110.dp)
+								.size(height = 45.dp, width = 1.dp)
+								.rotate(90f)
+								.padding(vertical = 6.dp)
+								.clip(RoundedCornerShape(6.dp)),
+							color = Color.Gray,
+							thickness = 1.dp,
+						)
+						Column(Modifier.width(150.dp), horizontalAlignment = Alignment.CenterHorizontally){
+							// Boton para el país correcto
+							Button(
+								onClick = {
+									Toast.makeText(
+										this@PantallaJuego,
+										"¡Correcto!",
+										Toast.LENGTH_SHORT
+									).show()
+									launchCountries()
+								},
+								colors = ButtonDefaults.buttonColors(Color.Transparent)
+							){
+								countries.correctCountryNameInGame.value?.let {
+								Text(
+									text = it,
+									style = MaterialTheme.typography.headlineMedium,
+									modifier = Modifier.fillMaxWidth(),
+									fontSize = 23.sp,
+									color = Color.White,
+									textAlign = TextAlign.Center,
+									maxLines = 2,
+									overflow = TextOverflow.Ellipsis,
+								)
+								}
+							}
+						}
+					}
+				}
+				}
+			}
+	}
 
 
     @OptIn(ExperimentalAnimationApi::class)
@@ -338,8 +329,8 @@ class PantallaJuego : ComponentActivity() {
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black),
+	            .fillMaxSize()
+	            .background(Color.Black),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             var capitalvisibility by remember {
