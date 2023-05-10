@@ -1,7 +1,9 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,12 +21,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
-import androidx.compose.material.TopAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +37,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
@@ -66,6 +69,7 @@ class PantallaJuego : ComponentActivity() {
         }
     }
 
+
     @Composable
     fun PrincipalScreen(countries: CountriesViewModel){
         Column(Modifier.fillMaxSize()){
@@ -92,7 +96,7 @@ class PantallaJuego : ComponentActivity() {
             )
             {
                 Image(
-                    painter = painterResource(id = ar.edu.unlam.mobile2.R.drawable.avatar),
+                    painter = painterResource(id = R.drawable.avatar),
                     contentDescription = "Foto de perfil del usuario",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -146,6 +150,7 @@ class PantallaJuego : ComponentActivity() {
         }
     }
 
+
     @Composable
     fun BottomBlock(countries: CountriesViewModel) {
         when (Random.nextInt(from = 1, until = 3)) {
@@ -155,7 +160,6 @@ class PantallaJuego : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.Black),
                     horizontalAlignment = Alignment.CenterHorizontally
-
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -163,12 +167,18 @@ class PantallaJuego : ComponentActivity() {
                             .fillMaxWidth()
                             .padding(top = 110.dp)
                     ) {
-                        countries.correctCountryNameInGame.value?.let {
+                        // Boton para el país correcto
+                        Button(
+                            onClick = {
+                                Toast.makeText(this@PantallaJuego, "¡Correcto!", Toast.LENGTH_SHORT).show()
+                                launchCountries()
+                            },
+                            modifier = Modifier.padding(top = 80.dp),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
                             Text(
-                                text = it,
+                                text = countries.correctCountryNameInGame.value ?: "",
                                 style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(140.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
@@ -187,26 +197,32 @@ class PantallaJuego : ComponentActivity() {
                             thickness = 1.dp,
                         )
 
-                        countries.incorrectCountryNameInGame.value?.let {
+                        // Boton para el país incorrecto
+                        Button(
+                            onClick = {
+                                Toast.makeText(this@PantallaJuego, "Incorrecto :(", Toast.LENGTH_SHORT).show()
+                                launchCountries()
+                            },
+                            modifier = Modifier.padding(top = 80.dp),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
                             Text(
-                                text = it,
+                                text = countries.incorrectCountryNameInGame.value ?: "",
                                 style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(155.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
                                 maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
+                                overflow = TextOverflow.Ellipsis,
                             )
                         }
                     }
-                    //--------------------------------------------------------------------------------------------------------------------------------------------------
+
                     Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.padding(top = 80.dp/*, start = 260.dp*/),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
-                        // colors = ButtonDefaults.buttonColors(Color.Blue)
+                        onClick = { /* TODO */ },
+                        modifier = Modifier.padding(top = 80.dp),
+                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD)),
+                        shape = RoundedCornerShape(6.dp),
                     ) {
                         Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
                     }
@@ -219,7 +235,6 @@ class PantallaJuego : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.Black),
                     horizontalAlignment = Alignment.CenterHorizontally
-
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -227,12 +242,18 @@ class PantallaJuego : ComponentActivity() {
                             .fillMaxWidth()
                             .padding(top = 110.dp)
                     ) {
-                        countries.incorrectCountryNameInGame.value?.let {
+                        // Boton para el país correcto
+                        Button(
+                            onClick = {
+                                Toast.makeText(this@PantallaJuego, "¡Correcto!", Toast.LENGTH_SHORT).show()
+                                launchCountries()
+                            },
+                            modifier = Modifier.padding(top = 80.dp),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
                             Text(
-                                text = it,
+                                text = countries.correctCountryNameInGame.value ?: "",
                                 style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(140.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
@@ -250,27 +271,32 @@ class PantallaJuego : ComponentActivity() {
                             color = Color.Gray,
                             thickness = 1.dp,
                         )
-
-                        countries.correctCountryNameInGame.value?.let {
+                        // Boton para el país incorrecto
+                        Button(
+                            onClick = {
+                                Toast.makeText(this@PantallaJuego, "Incorrecto :(", Toast.LENGTH_SHORT).show()
+                                launchCountries()
+                            },
+                            modifier = Modifier.padding(top = 80.dp),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
                             Text(
-                                text = it,
+                                text = countries.incorrectCountryNameInGame.value ?: "",
                                 style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier
-                                    .width(155.dp),
                                 fontSize = 23.sp,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
                                 maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
+                                overflow = TextOverflow.Ellipsis,
                             )
                         }
                     }
-                    //--------------------------------------------------------------------------------------------------------------------------------------------------
+
                     Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.padding(top = 80.dp/*, start = 260.dp*/),
-                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD))
-                        // colors = ButtonDefaults.buttonColors(Color.Blue)
+                        onClick = { /* TODO */ },
+                        modifier = Modifier.padding(top = 80.dp),
+                        colors = ButtonDefaults.buttonColors(Color(0xFF335ABD)),
+                        shape = RoundedCornerShape(6.dp),
                     ) {
                         Text(text = "Ayuda", style = MaterialTheme.typography.bodyMedium)
                     }
@@ -278,6 +304,7 @@ class PantallaJuego : ComponentActivity() {
             }
         }
     }
+
 
     @Composable
     fun TopBarQR() {
@@ -302,4 +329,7 @@ class PantallaJuego : ComponentActivity() {
             }
         )
     }
+
+
+
 }
