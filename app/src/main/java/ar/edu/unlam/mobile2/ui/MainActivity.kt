@@ -1,7 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -9,16 +8,14 @@ import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,15 +27,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
+import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
+import ar.edu.unlam.mobile2.ui.ui.theme.ButtonColor
+import ar.edu.unlam.mobile2.ui.ui.theme.TextColor
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.wait
 
 @AndroidEntryPoint
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
@@ -55,42 +55,48 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = OrangeLight
+                color = BackgroundColor
             ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.SpaceAround,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    nameEditText()
-
-
-                    Button(onClick = {
-                        irAJuego()
-                        onStop()
-                    }) {
-                        Texto("Jugar")
-                    }
-                    Button(onClick = {
-                        irAConfiguracion()
-                        onStop()
-                    }) {
-                        Texto("Dificultad")
-                    }
-                    Button(onClick = {
-                        irAHistorial()
-                        onStop()
-                    }) {
-                        Texto("Historial")
-                    }
-
-
-                }
+                content()
             }
         }
     }
 
-
+    @Preview
+    @Composable
+    private fun content() {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            nameEditText()
+            buttonCustom(text = "Jugar",
+                onClick = {
+                    irAJuego()
+                    onStop()
+                })
+            buttonCustom(text = "Ajustes",
+                onClick = {
+                    irAConfiguracion()
+                    onStop()
+                })
+            buttonCustom(text = "Historial",
+                onClick = {
+                    irAHistorial()
+                    onStop()
+                })
+        }
+    }
+    @Composable
+    fun buttonCustom(text: String, onClick: () -> Unit) {
+        Button(
+            onClick = onClick,
+            colors = ButtonDefaults.buttonColors(containerColor = ButtonColor),
+        ) {
+            Text(text)
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -120,6 +126,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                 || super.onSupportNavigateUp()
     }*/
 
+
     private fun irAJuego() {
         val intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
@@ -142,25 +149,25 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun nameEditText(){
-
+    fun nameEditText() {
         var text by remember { mutableStateOf(TextFieldValue("")) }
-
         OutlinedTextField(
             value = text,
-            onValueChange = {text = it},
-            label = { Text(text = "Nombre")},
-            placeholder = {Text(text = "Nombre")},
+            onValueChange = { text = it },
+            label = { Text(text = "Nombre") },
+            placeholder = { Text(text = "Ingresa tu nombre...") },
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = Color.Red
+                textColor = Color.White,
+                unfocusedBorderColor = TextColor,
+                unfocusedLabelColor = TextColor,
+                focusedBorderColor = ButtonColor,
+                focusedLabelColor = ButtonColor,
+                cursorColor = ButtonColor
+
             ),
             singleLine = true,
-            modifier = Modifier
-                .padding(top = 20.dp)
-
+            modifier = Modifier.padding(top = 20.dp)
         )
-
     }
-
-
 }
+

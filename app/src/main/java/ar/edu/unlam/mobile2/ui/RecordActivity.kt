@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
-import ar.edu.unlam.mobile2.ui.ui.theme.VioletDark
+import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
+import ar.edu.unlam.mobile2.ui.ui.theme.TopBarColor
 
 class RecordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class RecordActivity : ComponentActivity() {
         Mobile2_ScaffoldingTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = OrangeLight
+                color = BackgroundColor
             ) {
                 Column(
                     modifier = Modifier.fillMaxSize()
@@ -66,7 +66,7 @@ class RecordActivity : ComponentActivity() {
     private fun TopBar() {
         Row(
             modifier = Modifier
-                .background(VioletDark)
+                .background(TopBarColor)
                 .fillMaxWidth()
                 .height(36.dp)
                 .wrapContentHeight()
@@ -87,7 +87,7 @@ class RecordActivity : ComponentActivity() {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .background(VioletDark),
+                .background(TopBarColor),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
         ) {

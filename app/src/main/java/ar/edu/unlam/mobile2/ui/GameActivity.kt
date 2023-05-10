@@ -32,8 +32,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.ui.theme.VioletDark
-import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
+import ar.edu.unlam.mobile2.ui.ui.theme.TopBarColor
+import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
 
 class GameActivity : ComponentActivity() {
 
@@ -57,7 +57,7 @@ class GameActivity : ComponentActivity() {
             // A surface container using the 'background' color from the theme
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = OrangeLight
+                color = BackgroundColor
             ) {
                 Column(
                     modifier = Modifier.fillMaxSize())
@@ -69,12 +69,11 @@ class GameActivity : ComponentActivity() {
             }//Surface
     }
 }
-    @Preview(showBackground = true, name = "Top Bar")
     @Composable
     private fun TopBar() {
         Row(
             modifier = Modifier
-                .background(VioletDark)
+                .background(TopBarColor)
                 .fillMaxWidth()
                 .height(36.dp)
                 .wrapContentHeight()
