@@ -227,8 +227,8 @@ class PantallaJuego : ComponentActivity() {
                                 .width(110.dp)
                                 .size(height = 45.dp, width = 1.dp)
                                 .rotate(90f)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(6.dp)),
+                                .clip(RoundedCornerShape(6.dp))
+                                .padding(vertical = 6.dp),
                             color = Color.Gray,
                             thickness = 1.dp,
                         )
