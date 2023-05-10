@@ -34,16 +34,16 @@ import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 
 class ConfiguracionActivity : ComponentActivity() {
+
+    private var sonidoDeFondo:MediaPlayer? = null
+    private var musicPlaying: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        private var tapSound:MediaPlayer? = null
-        fun playEffects () {
-            tapSound = MediaPlayer.create(this, R.raw.TapButtonSound)
-            tapSound?.setOnPreparedListener{
-                
-            }
-        }
+
+
+
 
         setContent {
 
@@ -59,7 +59,7 @@ class ConfiguracionActivity : ComponentActivity() {
 
                 ) {
                     expandedCoso()
-                    nameEditText()
+
                     soundBar()
                     musicBar()
                     Row(modifier = Modifier
@@ -162,21 +162,7 @@ class ConfiguracionActivity : ComponentActivity() {
 
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun nameEditText(){
 
-        var text by remember { mutableStateOf(TextFieldValue(""))}
-
-        OutlinedTextField(
-            value = text,
-            onValueChange = {text = it},
-            label = { Text(text = "Name")},
-            singleLine = true,
-            modifier = Modifier.padding(top = 20.dp)
-        )
-
-    }
 
     @Composable
     fun soundBar(){
@@ -224,7 +210,21 @@ class ConfiguracionActivity : ComponentActivity() {
     }
 
 
+    fun playSound () {
+        sonidoDeFondo = MediaPlayer.create(this, R.raw.maintheme)
+        sonidoDeFondo?.setOnPreparedListener{
+            sonidoDeFondo?.start()
+            musicPlaying = true
+        }
+    }
 
+    fun pauseSound() {
+        sonidoDeFondo!!.stop()
+    }
+
+    fun resumeSound() {
+        sonidoDeFondo!!.start()
+    }
 
 
 
