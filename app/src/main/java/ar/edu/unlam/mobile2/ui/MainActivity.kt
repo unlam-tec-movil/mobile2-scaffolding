@@ -1,5 +1,7 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,29 +9,36 @@ import android.view.MenuItem
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Observer
 import androidx.navigation.ui.AppBarConfiguration
-import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import coil.compose.SubcomposeAsyncImage
+import ar.edu.unlam.mobile2.ui.ui.theme.OrangeLight
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
@@ -43,85 +52,50 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.i("MainActivity", "onCreate")
 
-        mainViewModel.kittyUrl.observe(
-            this,
-            Observer<String> { _ ->
-                run {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        Log.i("MainActivity", "Observer")
-                        setContent {
-                            content(name = "Mundo")
-                        }
+        setContent {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = OrangeLight
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    nameEditText()
+
+
+                    Button(onClick = {
+                        irAJuego()
+                        onStop()
+                    }) {
+                        Texto("Jugar")
                     }
+                    Button(onClick = {
+                        irAConfiguracion()
+                        onStop()
+                    }) {
+                        Texto("Dificultad")
+                    }
+                    Button(onClick = {
+                        irAHistorial()
+                        onStop()
+                    }) {
+                        Texto("Historial")
+                    }
+
+
                 }
-            },
-        )
+            }
+        }
     }
+
+
 
     override fun onStart() {
         super.onStart()
         Log.i("MainActivity", "onStart")
-    }
 
-    @Composable
-    fun content(name: String) {
-        Log.i("MainActivity", "start content")
-        Column() {
-            Log.i("MainActivity", "button row")
-            Row() {
-                Button(
-                    onClick = {
-                        Log.i("Button", "Presiono el boton")
-                        mainViewModel.updateKittyUrl()
-                    },
-                ) {
-                    Text(text = "Actualizar imagen")
-                }
-            }
-            Log.i("MainActivity", "first row")
-            Row() {
-                Text(text = "Imagen de los gatitos")
-            }
-            Log.i("MainActivity", "second row")
-            Row() {
-                SubcomposeAsyncImage(
-                    model = mainViewModel.getImageRequest(LocalContext.current),
-                    // placeholder = painterResource(R.drawable.placeholder),
-                    contentDescription = stringResource(R.string.cat_image),
-                    contentScale = ContentScale.FillBounds,
-                    loading = {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp),
-                        )
-                    },
-                    modifier = Modifier
-                        .height(300.dp)
-                        .width(500.dp),
-                    // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-                    onError = { error ->
-                        run {
-                            mainViewModel.updateKittyUrl()
-                            Log.e("AsyncImageError", error.result.throwable.message.toString())
-                        }
-                    },
-                    onLoading = { state ->
-                        if (BuildConfig.DEBUG) {
-                            Log.i(
-                                "AsyncImageLoading",
-                                state.toString(),
-                            )
-                        }
-                    },
-
-                    )
-            }
-            Log.i("MainActivity", "third row")
-            Row() {
-                Text(text = "Pie de imagen")
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -145,4 +119,48 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
+
+    private fun irAJuego() {
+        val intent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun irAConfiguracion() {
+        val intent = Intent(this, ConfiguracionActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun irAHistorial() {
+        val intent = Intent(this, RecordActivity::class.java)
+        startActivity(intent)
+    }
+
+    @Composable
+    fun Texto(texto: String) {
+        Text(texto, color = Color.White)
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun nameEditText(){
+
+        var text by remember { mutableStateOf(TextFieldValue("")) }
+
+        OutlinedTextField(
+            value = text,
+            onValueChange = {text = it},
+            label = { Text(text = "Nombre")},
+            placeholder = {Text(text = "Nombre")},
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                cursorColor = Color.Red
+            ),
+            singleLine = true,
+            modifier = Modifier
+                .padding(top = 20.dp)
+
+        )
+
+    }
+
+
 }
