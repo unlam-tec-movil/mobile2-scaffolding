@@ -10,8 +10,9 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val BackgroundColor = Color(0xFF5155A6)
-val TopBarColor = Color(0xFF5393BD)
-val ButtonColor = Color(0xFF23B29B)
-val TextColor = Color(0xFFF8F8F8)
+//My Colors
+val VioletLight = Color(0xFF5155A6)
+val VioletDark = Color(0xFF35278C)
+val CyanLight = Color(0xFF89D9D1)
+val WhiteBone = Color(0xFFF8F8F8)
 val HeartColor = Color(0xFFF0163E)

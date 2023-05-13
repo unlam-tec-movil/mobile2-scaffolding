@@ -33,10 +33,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
-import ar.edu.unlam.mobile2.ui.ui.theme.ButtonColor
+import ar.edu.unlam.mobile2.ui.ui.theme.VioletLight
+import ar.edu.unlam.mobile2.ui.ui.theme.CyanLight
+import ar.edu.unlam.mobile2.ui.ui.theme.TriviAnime_Theme
+import ar.edu.unlam.mobile2.ui.ui.theme.WhiteBone
 
-class ConfiguracionActivity : ComponentActivity() {
+class ConfigActivity : ComponentActivity() {
 
     private var sonidoDeFondo: MediaPlayer? = null
     private var musicPlaying: Boolean = false
@@ -46,7 +48,7 @@ class ConfiguracionActivity : ComponentActivity() {
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = BackgroundColor
+                color = VioletLight
             ) {
                 content()
             }
@@ -56,42 +58,52 @@ class ConfiguracionActivity : ComponentActivity() {
     @Preview
     @Composable
     private fun content() {
-        Row {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 50.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-
+        TriviAnime_Theme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = VioletLight
             ) {
-                difficultySelector()
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 80.dp, start = 40.dp, end = 40.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    soundBar()
-                    musicBar()
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 80.dp, start = 40.dp, end = 40.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                )
-                {
-                    buttonCustom(text = "Guardar", onClick = { buttonSaveOnClick() })
-                    buttonCustom(text = "Cancelar", onClick = { buttonCancelOnClick() })
+                Row {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 50.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+
+                    ) {
+                        difficultySelector()
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 80.dp, start = 40.dp, end = 40.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            soundBar()
+                            musicBar()
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 80.dp, start = 40.dp, end = 40.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        )
+                        {
+                            buttonCustom(text = "Guardar", onClick = { buttonSaveOnClick() })
+                            buttonCustom(text = "Cancelar", onClick = { buttonCancelOnClick() })
+                        }
+                    }
                 }
             }
-        }
+        }//Theme
     }
 
     @Composable
     fun buttonCustom(text: String, onClick: () -> Unit) {
-        Button(onClick = onClick, colors = ButtonDefaults.buttonColors(containerColor = ButtonColor),) {
+        Button(
+            onClick = onClick,
+            colors = ButtonDefaults.buttonColors(containerColor = CyanLight),
+        ) {
             Text(text)
         }
     }
@@ -115,10 +127,10 @@ class ConfiguracionActivity : ComponentActivity() {
             mutableStateOf(false)
         }
         var difficulty by remember {
-            mutableStateOf("")
+            mutableStateOf("Normal")
         }
 
-        ExposedDropdownMenuBox(expanded = isExpanded, onExpandedChange = { isExpanded = it } )
+        ExposedDropdownMenuBox(expanded = isExpanded, onExpandedChange = { isExpanded = it })
         {
             TextField(
                 value = difficulty,
@@ -127,11 +139,15 @@ class ConfiguracionActivity : ComponentActivity() {
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
                 },
-                colors = ExposedDropdownMenuDefaults.textFieldColors(),
+                colors = ExposedDropdownMenuDefaults.textFieldColors(containerColor = WhiteBone),
                 modifier = Modifier.menuAnchor(),
-                label = { Text(text = "Difficulty") }
+                label = { Text(text = "Difficulty") },
+
+                )
+            ExposedDropdownMenu(
+                expanded = isExpanded,
+                onDismissRequest = { isExpanded = false }
             )
-            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false })
             {
                 DropdownMenuItem(
                     text = { Text("Normal") },

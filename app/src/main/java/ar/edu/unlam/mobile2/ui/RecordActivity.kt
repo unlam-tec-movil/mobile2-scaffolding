@@ -29,9 +29,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
-import ar.edu.unlam.mobile2.ui.ui.theme.TopBarColor
+import ar.edu.unlam.mobile2.ui.ui.theme.TriviAnime_Theme
+import ar.edu.unlam.mobile2.ui.ui.theme.VioletLight
+import ar.edu.unlam.mobile2.ui.ui.theme.VioletDark
 
 class RecordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +44,10 @@ class RecordActivity : ComponentActivity() {
     @Preview
     @Composable
     private fun content() {
-        Mobile2_ScaffoldingTheme {
+        TriviAnime_Theme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = BackgroundColor
+                color = VioletLight
             ) {
                 Column(
                     modifier = Modifier.fillMaxSize()
@@ -66,7 +66,7 @@ class RecordActivity : ComponentActivity() {
     private fun TopBar() {
         Row(
             modifier = Modifier
-                .background(TopBarColor)
+                .background(VioletDark)
                 .fillMaxWidth()
                 .height(36.dp)
                 .wrapContentHeight()
@@ -87,7 +87,7 @@ class RecordActivity : ComponentActivity() {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .background(TopBarColor),
+                .background(VioletDark),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
         ) {

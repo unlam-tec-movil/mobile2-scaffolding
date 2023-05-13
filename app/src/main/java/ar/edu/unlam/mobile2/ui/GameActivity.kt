@@ -11,6 +11,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,9 +33,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.ui.theme.TopBarColor
-import ar.edu.unlam.mobile2.ui.ui.theme.BackgroundColor
+import ar.edu.unlam.mobile2.ui.ui.theme.TriviAnime_Theme
+import ar.edu.unlam.mobile2.ui.ui.theme.VioletDark
+import ar.edu.unlam.mobile2.ui.ui.theme.VioletLight
 
 class GameActivity : ComponentActivity() {
 
@@ -41,7 +43,7 @@ class GameActivity : ComponentActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    var puntaje = 0
+    var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -50,94 +52,107 @@ class GameActivity : ComponentActivity() {
             content()
         }
     }
+
     @Preview
     @Composable
     private fun content() {
-        Mobile2_ScaffoldingTheme {
-            // A surface container using the 'background' color from the theme
+        TriviAnime_Theme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = BackgroundColor
+                color = VioletLight
             ) {
                 Column(
-                    modifier = Modifier.fillMaxSize())
+                    modifier = Modifier.fillMaxSize()
+                )
                 {
-                    TopBar()
-                    Game()
+                    topBar()
+                    game()
                 }//Column
 
             }//Surface
+        }//Theme
     }
-}
+
     @Composable
-    private fun TopBar() {
+    private fun topBar() {
         Row(
             modifier = Modifier
-                .background(TopBarColor)
+                .background(VioletDark)
                 .fillMaxWidth()
                 .height(36.dp)
                 .wrapContentHeight()
+                .padding(6.dp, 0.dp),
+            verticalAlignment = Alignment.CenterVertically
+
         ) {
             Image(
                 painter = painterResource(id = R.drawable.baseline_favorite_24),
-                contentDescription = "",
-                modifier = Modifier.padding(2.dp,0.dp),
-                alignment = Alignment.TopStart
-            )
-            Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24),
-                contentDescription = "",
-                //Modifier.border(width = 1.dp, color = Color.Black, shape = CircleShape)
+                contentDescription = ""
             )
             Image(
                 painter = painterResource(id = R.drawable.baseline_favorite_24),
                 contentDescription = ""
             )
             Image(
+                painter = painterResource(id = R.drawable.baseline_favorite_24),
+                contentDescription = ""
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Image(
                 painter = painterResource(id = R.drawable.baseline_close_24),
                 contentDescription = "",
-                modifier = Modifier.clickable(enabled = true, onClick = {
-                    irAInicio()
-                    onStop()
-                })
+                modifier = Modifier
+                    .clickable(enabled = true, onClick = {
+                        irAInicio()
+                        onStop()
+                    })
+                    .fillMaxHeight()
             )
         }
     }
 
     @Composable
-    fun Game() {
+    fun game() {
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Texto("Pregunta")
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+            textCustom("Pregunta", Color.White)
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier
+                painter = painterResource(id = R.drawable.baseline_favorite_24),
+                modifier = Modifier
                     .width(100.dp)
                     .height(100.dp),
                 contentDescription = ""
             )
-            Text("VS", color = Color.Red)
+            textCustom("VS", Color.Red)
             Image(
-                painter = painterResource(id = R.drawable.baseline_favorite_24), modifier = Modifier
+                painter = painterResource(id = R.drawable.baseline_favorite_24),
+                modifier = Modifier
                     .width(100.dp)
                     .height(100.dp),
                 contentDescription = ""
             )
             Row {
-                Text(text = puntaje.toString(),  modifier =
-                Modifier
-                    .background(Color.Red, RectangleShape)
-                    .padding(10.dp), Color.White, textAlign = TextAlign.Center)
-                Image(painter = painterResource(id = R.drawable.baseline_replay_24), contentDescription = "")
+                Text(
+                    text = score.toString(),
+                    modifier = Modifier
+                        .background(Color.Red, RectangleShape)
+                        .padding(10.dp), Color.White, textAlign = TextAlign.Center
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_replay_24),
+                    contentDescription = ""
+                )
             }
         }
     }
 
     @Composable
-    fun Texto(texto: String) {
-        Text(texto, color = Color.White)
+    fun textCustom(texto: String, color: Color) {
+        Text(texto, color = color)
     }
 
     private fun irAInicio() {
