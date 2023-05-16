@@ -7,14 +7,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ar.edu.unlam.mobile2.news.NewViewModel
-import ar.edu.unlam.mobile2.ui.NewsList
-import ar.edu.unlam.mobile2.mediastackapi.ui.MockScreen
-import ar.edu.unlam.mobile2.mediastackapi.viewmodel.MockViewModel
+import ar.edu.unlam.mobile2.mediastackapi.ui.NewsList
+import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -23,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel by viewModels<MockViewModel>()
+    private val viewModel by viewModels<NewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +26,14 @@ class MainActivity : ComponentActivity() {
             application, "719d2c40-5de1-44d8-980d-aded581ac26d",
             Analytics::class.java, Crashes::class.java
         )
-
-        val newViewModel by viewModels<NewViewModel>()
-
         setContent {
-            NewsList(newViewModel)
-
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MockScreen(viewModel)
+                    NewsList(viewModel)
                 }
             }
         }
@@ -51,10 +41,3 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mobile2_ScaffoldingTheme {
-    }
-}

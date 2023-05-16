@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.news.ExampleNew
+import ar.edu.unlam.mobile2.mediastackapi.data.Data
 
 @Preview(showBackground = true)
 @Composable
@@ -20,18 +20,27 @@ fun ArticleCard() {
 }
 
 @Composable
-fun CardContainer(new: ExampleNew) {
+fun CardContainer(new: Data) {
     Column(
         modifier = Modifier.padding(horizontal = 4.dp)
     ) {
-        Text(text = new.topic)
+        Text(text = new.category)
         Text(
             text = new.title,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = new.date)
+        //me tira null pointer
+        Text(text = noInfo(new.publishedAt))
         Divider()
+    }
+}
+
+fun noInfo(x: String): String{
+    return if(x == null){
+        "No hay Información"
+    }else {
+        x
     }
 }
