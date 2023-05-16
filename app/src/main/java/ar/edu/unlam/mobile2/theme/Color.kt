@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.domain.ui.theme
+package ar.edu.unlam.mobile2.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.domain
+package ar.edu.unlam.mobile2
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,15 +11,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ar.edu.unlam.mobile2.domain.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.news.NewViewModel
 import ar.edu.unlam.mobile2.ui.NewsList
+import ar.edu.unlam.mobile2.mediastackapi.ui.MockScreen
+import ar.edu.unlam.mobile2.mediastackapi.viewmodel.MockViewModel
+import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val viewModel by viewModels<MockViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCenter.start(
@@ -31,6 +36,16 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NewsList(newViewModel)
+
+            Mobile2_ScaffoldingTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MockScreen(viewModel)
+                }
+            }
         }
     }
 }
