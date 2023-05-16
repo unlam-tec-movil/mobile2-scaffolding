@@ -8,12 +8,11 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.news.New
+import ar.edu.unlam.mobile2.news.ExampleNew
 
 @Preview(showBackground = true)
 @Composable
@@ -21,7 +20,7 @@ fun ArticleCard() {
 }
 
 @Composable
-fun CardContainer(new: New) {
+fun CardContainer(new: ExampleNew) {
     Column(
         modifier = Modifier.padding(horizontal = 4.dp)
     ) {
