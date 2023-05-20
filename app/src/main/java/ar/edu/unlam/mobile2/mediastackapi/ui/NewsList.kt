@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.mediastackapi.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,6 @@ fun NewsList(viewModel: NewsViewModel){
             }
         }
     }else{
-        Text(text = "No hay nada compañero")
+        Log.d("Error en lista", "No hay datos para mostrar")
     }
 }

@@ -22,7 +22,7 @@ fun ArticleCard() {
 @Composable
 fun CardContainer(new: Data) {
     Column(
-        modifier = Modifier.padding(horizontal = 4.dp)
+        modifier = Modifier.padding(horizontal = 8.dp).padding(top = 5.dp)
     ) {
         Text(text = new.category)
         Text(
@@ -31,16 +31,7 @@ fun CardContainer(new: Data) {
             fontSize = 18.sp
         )
         Spacer(modifier = Modifier.height(5.dp))
-        //me tira null pointer
-        Text(text = noInfo(new.publishedAt))
         Divider()
     }
 }
 
-fun noInfo(text: String): String{
-    return if(text == null){
-        "No hay Información"
-    }else {
-        text
-    }
-}

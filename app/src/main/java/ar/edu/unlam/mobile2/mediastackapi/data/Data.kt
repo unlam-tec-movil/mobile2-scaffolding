@@ -18,7 +18,7 @@ data class Data(
     @Query("language")
     val language: String,
     @Query("published_at")
-    val publishedAt: String,
+    val publishedAt: String = "01/01/0001",
     @Query("source")
     val source: String,
     @Query("title")
