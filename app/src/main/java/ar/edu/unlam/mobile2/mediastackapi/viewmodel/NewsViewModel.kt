@@ -17,6 +17,7 @@ class NewsViewModel @Inject constructor(
 
     var state by mutableStateOf(NewState())
         private set
+
     init {
         viewModelScope.launch {
             repository.getNews().onSuccess {

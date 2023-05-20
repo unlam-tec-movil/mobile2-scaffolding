@@ -37,10 +37,10 @@ fun CardContainer(new: Data) {
     }
 }
 
-fun noInfo(x: String): String{
-    return if(x == null){
+fun noInfo(text: String): String{
+    return if(text == null){
         "No hay Información"
     }else {
-        x
+        text
     }
 }
