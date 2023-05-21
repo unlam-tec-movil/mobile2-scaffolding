@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.weatherApi.data
+package ar.edu.unlam.mobile2
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,9 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ar.edu.unlam.mobile2.weatherApi.data.theme.Mobile2_ScaffoldingTheme
-import com.example.apinoticias.PruebaBasica.WeatherScreen
-import com.example.apinoticias.PruebaBasica.WeatherViewModel
+import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.weather.ui.WeatherScreen
+import ar.edu.unlam.mobile2.weather.ui.WeatherViewModel
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes

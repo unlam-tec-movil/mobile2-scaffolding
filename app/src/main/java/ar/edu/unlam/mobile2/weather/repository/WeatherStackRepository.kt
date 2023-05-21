@@ -1,8 +1,6 @@
-package com.example.apinoticias.PruebaBasica
+package ar.edu.unlam.mobile2.weather.repository
 
-import com.example.apinoticias.data.WeatherResponse
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import ar.edu.unlam.mobile2.weather.data.WeatherResponse
 import javax.inject.Inject
 
 class WeatherStackRepository @Inject constructor(val api : WeatherApiService){

@@ -1,8 +1,9 @@
-package com.example.apinoticias.PruebaBasica
+package ar.edu.unlam.mobile2.weather.ui
 
 
 import androidx.lifecycle.ViewModel
-import com.example.apinoticias.data.WeatherResponse
+import ar.edu.unlam.mobile2.weather.repository.WeatherStackRepository
+import ar.edu.unlam.mobile2.weather.data.WeatherResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.apinoticias.PruebaBasica
+package ar.edu.unlam.mobile2.weather.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.apinoticias.data.WeatherResponse
+import ar.edu.unlam.mobile2.weather.data.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

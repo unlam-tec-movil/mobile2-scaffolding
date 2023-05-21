@@ -1,4 +1,4 @@
-package com.example.apinoticias.PruebaBasica
+package ar.edu.unlam.mobile2.weather.repository
 
 import dagger.Module
 import dagger.Provides
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 object Modulo {
     @Provides
     @Singleton
-    fun inyectarApi ():WeatherApiService{
+    fun inyectarApi (): WeatherApiService {
         return Retrofit.Builder()
             .baseUrl("http://api.weatherstack.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -25,7 +25,7 @@ object Modulo {
     }
     @Provides
     @Singleton
-    fun provideRepository (api:WeatherApiService):WeatherStackRepository{
+    fun provideRepository (api: WeatherApiService): WeatherStackRepository {
         return WeatherStackRepository(api)
     }
 }

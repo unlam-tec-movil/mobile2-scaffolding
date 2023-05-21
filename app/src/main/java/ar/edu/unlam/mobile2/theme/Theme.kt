@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.weatherApi.data.theme
+package ar.edu.unlam.mobile2.theme
 
 import android.app.Activity
 import android.os.Build
@@ -68,3 +68,4 @@ fun Mobile2_ScaffoldingTheme(
         content = content
     )
 }
+
