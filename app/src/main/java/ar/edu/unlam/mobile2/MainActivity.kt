@@ -8,17 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.weather.ui.WeatherScreen
-import ar.edu.unlam.mobile2.weather.ui.WeatherViewModel
-
-import ar.edu.unlam.mobile2.mediastackapi.ui.MockScreen
-import ar.edu.unlam.mobile2.mediastackapi.viewmodel.MockViewModel
-import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
+import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
+import ar.edu.unlam.mobile2.mediastackapi.ui.NewsList
+import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -28,9 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
     private val weatherViewModel by viewModels<WeatherViewModel>()
-    private val viewModel by viewModels<MockViewModel>()
+
+    private val viewModel by viewModels<NewsViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,29 +41,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     Column() {
                         WeatherScreen(weatherViewModel)
-                        MockScreen(viewModel)
+                        NewsList(viewModel)
                     }
-
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mobile2_ScaffoldingTheme {
-        Greeting("Android")
-    }
-}
