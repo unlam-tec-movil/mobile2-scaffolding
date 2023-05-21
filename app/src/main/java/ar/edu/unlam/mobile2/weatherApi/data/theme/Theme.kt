@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.domain.ui.theme
+package ar.edu.unlam.mobile2.weatherApi.data.theme
 
 import android.app.Activity
 import android.os.Build
