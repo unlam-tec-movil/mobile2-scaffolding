@@ -68,3 +68,4 @@ fun Mobile2_ScaffoldingTheme(
         content = content
     )
 }
+
