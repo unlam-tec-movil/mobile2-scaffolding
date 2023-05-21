@@ -14,14 +14,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weather.ui.WeatherScreen
 import ar.edu.unlam.mobile2.weather.ui.WeatherViewModel
+
+import ar.edu.unlam.mobile2.mediastackapi.ui.MockScreen
+import ar.edu.unlam.mobile2.mediastackapi.viewmodel.MockViewModel
+import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
+
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+
     private val weatherViewModel by viewModels<WeatherViewModel>()
+    private val viewModel by viewModels<MockViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +45,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     WeatherScreen(weatherViewModel)
+                    MockScreen(viewModel)
                 }
             }
         }
