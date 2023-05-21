@@ -1,6 +1,6 @@
-package ar.edu.unlam.mobile2.weather.repository
+package ar.edu.unlam.mobile2.weatherapi.repository
 
-import ar.edu.unlam.mobile2.weather.data.WeatherResponse
+import ar.edu.unlam.mobile2.weatherapi.data.WeatherResponse
 
 import retrofit2.http.GET
 import retrofit2.http.Query

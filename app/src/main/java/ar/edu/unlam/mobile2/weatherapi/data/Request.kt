@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.weather.data
+package ar.edu.unlam.mobile2.weatherapi.data
 
 
 import com.google.gson.annotations.SerializedName
