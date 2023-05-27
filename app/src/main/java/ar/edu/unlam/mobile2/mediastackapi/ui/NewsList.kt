@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.ui.CardContainer
+import ar.edu.unlam.mobile2.ui.CardNoticia
 
 @Composable
 fun NewsList(viewModel: NewsViewModel){
@@ -21,7 +22,7 @@ fun NewsList(viewModel: NewsViewModel){
     if (state.news.isNotEmpty()){
         LazyColumn(modifier = Modifier.fillMaxWidth()){
             items(state.news){
-                CardContainer(it)
+                CardNoticia(it)
             }
         }
     }else{

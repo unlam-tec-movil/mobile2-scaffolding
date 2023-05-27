@@ -24,9 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val weatherViewModel by viewModels<WeatherViewModel>()
-
     private val viewModel by viewModels<NewsViewModel>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +39,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
                     Column() {
                         WeatherScreen(weatherViewModel)
                         NewsList(viewModel)
