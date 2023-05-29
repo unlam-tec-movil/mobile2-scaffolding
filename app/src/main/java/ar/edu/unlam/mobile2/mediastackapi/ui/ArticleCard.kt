@@ -51,8 +51,6 @@ fun ArticleCard() {
 
 }
 
-
-
 @Composable
 fun CardNoticia(
     new: Data,
@@ -116,9 +114,6 @@ fun CardNoticia(
     }
 }
 
-fun onButtonClicked(){
-
-}
 
 
 
