@@ -12,4 +12,5 @@
 
     <string name="cat_image">Imagen Gatito</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_lista_marcadores">ListaMarcadores</string>
 </resources>

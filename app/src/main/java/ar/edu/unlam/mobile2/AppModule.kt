@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile2
 
-import ar.edu.unlam.mobile2.mediastackapi.MediastackApi
-import ar.edu.unlam.mobile2.mediastackapi.NewsRepository
+import ar.edu.unlam.mobile2.mediastackapi.repository.MediastackApi
+import ar.edu.unlam.mobile2.mediastackapi.repository.NewsRepository
 import ar.edu.unlam.mobile2.weatherapi.repository.WeatherApiService
 import ar.edu.unlam.mobile2.weatherapi.repository.WeatherStackRepository
 import dagger.Module
