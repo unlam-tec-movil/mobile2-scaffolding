@@ -3,7 +3,6 @@ package ar.edu.unlam.mobile2.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -52,7 +51,10 @@ val tekoFamily = FontFamily(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun textFieldCustom(label: String, placeholder: String) {
+fun TextFieldCustom(
+    label: String,
+    placeholder: String
+) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
     OutlinedTextField(
         value = text,
@@ -91,7 +93,12 @@ fun textFieldCustom(label: String, placeholder: String) {
 }
 
 @Composable
-fun buttonCustom(text: String, onClick: () -> Unit, width: Dp = 180.dp, height: Dp = 64.dp) {
+fun ButtonCustom(
+    text: String,
+    onClick: () -> Unit,
+    width: Dp = 180.dp,
+    height: Dp = 64.dp
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.elevatedButtonColors(containerColor = CyanLight),
@@ -113,16 +120,65 @@ fun buttonCustom(text: String, onClick: () -> Unit, width: Dp = 180.dp, height: 
 }
 
 @Composable
-fun textCustom(
-    modifier: Modifier,
+fun TextWithBorder() {
+
+}
+
+@Composable
+fun TextCustom(
+    modifier: Modifier = Modifier,
     text: String,
     color: Color = WhiteBone,
     fontSize: TextUnit = 32.sp,
     fontFamily: FontFamily = latoFamily,
     fontWeight: FontWeight = FontWeight.Normal,
-    dropShadow: Boolean = false
+    dropShadow: Boolean = false,
+
+    border: Boolean = false,
 ) {
     Box() {
+        if (border) {
+            Text(
+                modifier = modifier
+                    .offset(x = 1.dp, y = 0.dp),
+                color = Color.Black,
+                fontSize = fontSize,
+                text = text,
+                fontFamily = fontFamily,
+                fontWeight = fontWeight,
+                //maxLines = maxLines
+            )
+            Text(
+                modifier = modifier
+                    .offset(x = 0.dp, y = 1.dp),
+                color = Color.Black,
+                fontSize = fontSize,
+                text = text,
+                fontFamily = fontFamily,
+                fontWeight = fontWeight,
+                //maxLines = maxLines
+            )
+            Text(
+                modifier = modifier
+                    .offset(x = -1.dp, y = 0.dp),
+                color = Color.Black,
+                fontSize = fontSize,
+                text = text,
+                fontFamily = fontFamily,
+                fontWeight = fontWeight,
+                //maxLines = maxLines
+            )
+            Text(
+                modifier = modifier
+                    .offset(x = 0.dp, y = -1.dp),
+                color = Color.Black,
+                fontSize = fontSize,
+                text = text,
+                fontFamily = fontFamily,
+                fontWeight = fontWeight,
+                //maxLines = maxLines
+            )
+        }
         if (dropShadow) {
             Text(
                 modifier = modifier
@@ -132,8 +188,9 @@ fun textCustom(
                 color = Color.Black,
                 fontSize = fontSize,
                 text = text,
-                fontFamily = tekoFamily,
-                fontWeight = FontWeight.Bold,
+                fontFamily = fontFamily,
+                fontWeight = fontWeight,
+                //maxLines = maxLines
             )
         }
         Text(
@@ -143,34 +200,7 @@ fun textCustom(
             fontSize = fontSize,
             fontFamily = fontFamily,
             fontWeight = fontWeight,
+            //maxLines = maxLines
         )
     }
-}
-
-@Composable
-fun dropShadowText(
-    modifier: Modifier = Modifier,
-    text: String,
-    fontSize: TextUnit = 64.sp
-) {
-
-    Text(
-        modifier = modifier
-            .alpha(alpha = 0.25f)
-            .offset(x = 1.dp, y = 1.dp)
-            .blur(radius = 2.dp),
-        color = Color.Black,
-        fontSize = fontSize,
-        text = text,
-        fontFamily = tekoFamily,
-        fontWeight = FontWeight.Bold,
-    )
-    Text(
-        modifier = modifier,
-        color = WhiteBone,
-        fontSize = fontSize,
-        text = text,
-        fontFamily = tekoFamily,
-        fontWeight = FontWeight.Bold,
-    )
 }

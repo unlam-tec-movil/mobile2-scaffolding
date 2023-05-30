@@ -40,13 +40,10 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("MainActivity", "onCreate")
-
         setContent {
             content()
         }
-
     }
-
     @Preview
     @Composable
     private fun content() {
@@ -61,8 +58,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    textCustom(
-                        modifier = Modifier,
+                    TextCustom(
                         text = "TriviAnime",
                         color = WhiteBone,
                         fontSize = 64.sp,
@@ -70,23 +66,23 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         fontWeight = FontWeight.Bold,
                         dropShadow = true
                     )
-                    textFieldCustom("Nombre", "Ingresa tu nombre")
+                    TextFieldCustom("Nombre", "Ingresa tu nombre")
                     Spacer(modifier = Modifier.height(36.dp))
-                    buttonCustom(
+                    ButtonCustom(
                         text = "Jugar",
                         onClick = {
                             irAJuego()
                             onStop()
                         })
                     Spacer(modifier = Modifier.height(36.dp))
-                    buttonCustom(
+                    ButtonCustom(
                         text = "Ajustes",
                         onClick = {
                             irAConfiguracion()
                             onStop()
                         })
                     Spacer(modifier = Modifier.height(36.dp))
-                    buttonCustom(
+                    ButtonCustom(
                         text = "Historial",
                         onClick = {
                             irAHistorial()
@@ -96,19 +92,16 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
             }
         }
     }
-
     override fun onStart() {
         super.onStart()
         Log.i("MainActivity", "onStart")
 
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -118,23 +111,19 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
     /*override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }*/
-
     private fun irAJuego() {
         val intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
     }
-
     private fun irAConfiguracion() {
         val intent = Intent(this, ConfigActivity::class.java)
         startActivity(intent)
     }
-
     private fun irAHistorial() {
         val intent = Intent(this, RecordActivity::class.java)
         startActivity(intent)
