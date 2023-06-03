@@ -43,7 +43,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val weatherViewModel by viewModels<WeatherViewModel>()
-
     private val viewModel by viewModels<NewsViewModel>()
 
 

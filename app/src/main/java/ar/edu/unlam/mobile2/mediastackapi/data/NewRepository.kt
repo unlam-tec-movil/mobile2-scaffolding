@@ -23,17 +23,16 @@ class NewRepository(
             }
             localNews = dao.getNews()
         }
+
         return localNews.map { it.toDomain() }
     }
-
 
     private suspend fun getNewsFromApi(): List<New> {
         return try {
             val response = api.getNews()
-            val responseNews = response.data.map { it.toDomain() }
-            responseNews
+            response.data.map { it.toDomain() }
         } catch (e: Exception) {
-            return emptyList()
+            emptyList()
         }
     }
 }

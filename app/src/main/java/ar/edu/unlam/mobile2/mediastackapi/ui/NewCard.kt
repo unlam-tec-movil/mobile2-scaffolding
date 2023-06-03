@@ -24,9 +24,9 @@ fun CardContainer(new: New) {
     Column(
         modifier = Modifier.padding(horizontal = 8.dp).padding(top = 5.dp)
     ) {
-        Text(text = new.category)
+        Text(text = new.category!!)
         Text(
-            text = new.title,
+            text = new.title!!,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp
         )

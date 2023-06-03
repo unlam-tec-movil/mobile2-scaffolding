@@ -33,8 +33,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewDao(application: Application): NewDao{
-        val database = Room.databaseBuilder(application, NewDatabase::class.java,"news_db").build()
-        return database.dao
+        val db = Room.databaseBuilder(application, NewDatabase::class.java,"news_db").build()
+        return db.dao
     }
 
     @Provides

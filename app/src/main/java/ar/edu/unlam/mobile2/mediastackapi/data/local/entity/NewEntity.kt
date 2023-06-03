@@ -1,6 +1,13 @@
-package ar.edu.unlam.mobile2.mediastackapi
+package ar.edu.unlam.mobile2.mediastackapi.data.local.entity
 
-data class New(
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class NewEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val author: String?,
     val category: String?,
     val country: String?,

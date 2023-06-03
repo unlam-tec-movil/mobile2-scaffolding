@@ -2,7 +2,7 @@ package ar.edu.unlam.mobile2.mediastackapi.data.mapper
 
 import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.data.api.response.Data
-import ar.edu.unlam.mobile2.mediastackapi.data.local.NewEntity
+import ar.edu.unlam.mobile2.mediastackapi.data.local.entity.NewEntity
 
 
 fun Data.toDomain(): New{
@@ -21,7 +21,7 @@ fun Data.toDomain(): New{
 }
 
 
-fun New.toEntity(): NewEntity{
+fun New.toEntity(): NewEntity {
     return NewEntity(
         author = this.author,
         category = this.category,
