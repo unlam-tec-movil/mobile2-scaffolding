@@ -1,7 +1,5 @@
-package ar.edu.unlam.mobile2.mediastackapi.data
+package ar.edu.unlam.mobile2.mediastackapi.data.api.response
 
-
-import com.google.gson.annotations.SerializedName
 import retrofit2.http.Query
 
 data class Data(

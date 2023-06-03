@@ -15,7 +15,6 @@ import ar.edu.unlam.mobile2.ui.CardContainer
 
 @Composable
 fun NewsList(viewModel: NewsViewModel){
-    val state = viewModel.state
 
     val stateLiveData = viewModel.stateLiveData.observeAsState()
 

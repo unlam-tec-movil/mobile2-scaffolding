@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.mediastackapi.data.Data
+import ar.edu.unlam.mobile2.mediastackapi.data.api.response.Data
 
 @Preview(showBackground = true)
 @Composable

@@ -1,7 +1,7 @@
 package ar.edu.unlam.mobile2.mediastackapi.viewmodel
 
-import ar.edu.unlam.mobile2.mediastackapi.data.Data
+import ar.edu.unlam.mobile2.mediastackapi.New
 
 data class NewState(
-    val news: List<Data> = emptyList()
+    val news: List<New> = emptyList()
 )
