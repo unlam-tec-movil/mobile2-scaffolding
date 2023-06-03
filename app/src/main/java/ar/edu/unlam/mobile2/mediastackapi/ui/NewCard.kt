@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.mediastackapi.data.api.response.Data
+import ar.edu.unlam.mobile2.mediastackapi.New
 
 @Preview(showBackground = true)
 @Composable
@@ -20,7 +20,7 @@ fun ArticleCard() {
 }
 
 @Composable
-fun CardContainer(new: Data) {
+fun CardContainer(new: New) {
     Column(
         modifier = Modifier.padding(horizontal = 8.dp).padding(top = 5.dp)
     ) {

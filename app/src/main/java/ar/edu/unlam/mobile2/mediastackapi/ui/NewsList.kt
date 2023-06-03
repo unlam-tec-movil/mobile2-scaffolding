@@ -7,9 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Observer
-import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewState
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.ui.CardContainer
 

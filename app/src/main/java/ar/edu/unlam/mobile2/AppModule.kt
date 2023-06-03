@@ -2,6 +2,7 @@ package ar.edu.unlam.mobile2
 
 import android.app.Application
 import androidx.room.Room
+import ar.edu.unlam.mobile2.mediastackapi.GetNews
 import ar.edu.unlam.mobile2.mediastackapi.data.api.MediastackApi
 import ar.edu.unlam.mobile2.mediastackapi.data.NewRepository
 import ar.edu.unlam.mobile2.mediastackapi.data.local.NewDao
@@ -20,6 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    //Mediastack Api
     @Provides
     @Singleton
     fun provideMediaStackApi(): MediastackApi {
@@ -40,6 +42,14 @@ object AppModule {
     fun provideMediastackRepository(api: MediastackApi, dao: NewDao): NewRepository {
         return NewRepository(api, dao)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetCharacters(repository: NewRepository): GetNews{
+        return GetNews(repository)
+    }
+
+    //Weather Api
 
     @Provides
     @Singleton

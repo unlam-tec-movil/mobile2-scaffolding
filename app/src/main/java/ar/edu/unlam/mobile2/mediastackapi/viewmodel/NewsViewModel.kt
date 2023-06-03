@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.unlam.mobile2.mediastackapi.GetNews
 import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.data.NewRepository
 import ar.edu.unlam.mobile2.mediastackapi.data.api.response.Data
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val repository: NewRepository
+    private val getNews: GetNews
 ) : ViewModel() {
 
     val stateLiveData: MutableLiveData<List<New>> by lazy {
@@ -25,12 +26,8 @@ class NewsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.getNewsFromApi().onSuccess {
-                stateLiveData.value = it
-                Log.i("SUCCESS API", "Se recibieron datos de la api")
-            }.onFailure {
-                Log.e("FAILURE API", "NO se recibieron datos de la api")
-            }
+            val news = getNews.getNews()
+            stateLiveData.value = news
         }
     }
 }

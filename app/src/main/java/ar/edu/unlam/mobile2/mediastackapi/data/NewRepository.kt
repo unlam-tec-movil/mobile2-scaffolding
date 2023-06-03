@@ -27,7 +27,7 @@ class NewRepository(
     }
 
 
-    suspend fun getNewsFromApi(): List<New> {
+    private suspend fun getNewsFromApi(): List<New> {
         return try {
             val response = api.getNews()
             val responseNews = response.data.map { it.toDomain() }
