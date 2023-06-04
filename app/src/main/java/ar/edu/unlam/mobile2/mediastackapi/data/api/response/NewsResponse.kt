@@ -1,5 +1,4 @@
-package ar.edu.unlam.mobile2.mediastackapi.data
-
+package ar.edu.unlam.mobile2.mediastackapi.data.api.response
 
 import retrofit2.http.Query
 

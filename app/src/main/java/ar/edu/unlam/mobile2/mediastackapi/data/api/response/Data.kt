@@ -1,7 +1,5 @@
-package ar.edu.unlam.mobile2.mediastackapi.data
+package ar.edu.unlam.mobile2.mediastackapi.data.api.response
 
-
-import com.google.gson.annotations.SerializedName
 import retrofit2.http.Query
 
 data class Data(
@@ -18,7 +16,7 @@ data class Data(
     @Query("language")
     val language: String,
     @Query("published_at")
-    val publishedAt: String = "01/01/0001",
+    val publishedAt: String,
     @Query("source")
     val source: String,
     @Query("title")
