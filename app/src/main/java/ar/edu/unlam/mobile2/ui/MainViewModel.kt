@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile2.HttpClientModule
+import ar.edu.unlam.mobile2.domain.Game
 import ar.edu.unlam.mobile2.domain.GetNewKitty
 import coil.ImageLoader
 import coil.request.ImageRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import java.security.cert.X509Certificate
@@ -18,20 +20,36 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
+data class GameViewModel(
+    var question: String,
+    var correctAnswer: Int,
+    var firstOption: String,
+    var secondOption: String,
+)
+
 @HiltViewModel
 class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() {
 
-    final var DEFAULT: String = "https://icons.iconarchive.com/icons/iconsmind/outline/512/Cat-icon.png"
+    val DEFAULT: String = "https://icons.iconarchive.com/icons/iconsmind/outline/512/Cat-icon.png"
 
     // Create a LiveData with a String
     val kittyUrl: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
+    val game: MutableLiveData<GameViewModel> by lazy {
+        MutableLiveData<GameViewModel>()
+    }
+
     init {
         Log.i("MainViewModel", "init")
         kittyUrl.value = DEFAULT
         updateKittyUrl()
+        viewModelScope.launch {
+            service.getGame().collect {
+                game.value = it.toViewModel()
+            }
+        }
     }
 
     fun updateKittyUrl() {
@@ -83,7 +101,7 @@ class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() 
             .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
             .hostnameVerifier { _, _ -> true }.build()
 
-        var module = HttpClientModule()
+        val module = HttpClientModule()
 
         /*return ImageLoader.Builder(context)
             .okHttpClient(client)
@@ -91,3 +109,10 @@ class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() 
         return module.imageLoader(context)
     }
 }
+
+private fun Game.toViewModel() = GameViewModel(
+    question = question,
+    correctAnswer = correctAnswer,
+    secondOption = secondOption,
+    firstOption = firstOption,
+)

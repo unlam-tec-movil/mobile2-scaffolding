@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -21,11 +22,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Observer
-import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
 import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,9 +35,6 @@ import kotlinx.coroutines.launch
 class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +47,10 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     CoroutineScope(Dispatchers.Main).launch {
                         Log.i("MainActivity", "Observer")
                         setContent {
-                            content(name = "Mundo")
+                            content(
+                                name = "Mundo",
+                                mainViewModel.getImageRequest(applicationContext),
+                            )
                         }
                     }
                 }
@@ -64,7 +64,8 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
     }
 
     @Composable
-    fun content(name: String) {
+    fun content(name: String, imageRequest: ImageRequest) {
+        val context = LocalContext.current
         Log.i("MainActivity", "start content")
         Column() {
             Log.i("MainActivity", "button row")
@@ -85,7 +86,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
             Log.i("MainActivity", "second row")
             Row() {
                 SubcomposeAsyncImage(
-                    model = mainViewModel.getImageRequest(LocalContext.current),
+                    model = imageRequest,
                     // placeholder = painterResource(R.drawable.placeholder),
                     contentDescription = stringResource(R.string.cat_image),
                     contentScale = ContentScale.FillBounds,
@@ -115,11 +116,20 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                         }
                     },
 
-                    )
+                )
             }
             Log.i("MainActivity", "third row")
             Row() {
                 Text(text = "Pie de imagen")
+            }
+            Row() {
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(context, KittyDetailsActivity::class.java))
+                    },
+                ) {
+                    Text(text = "Kitty Details")
+                }
             }
         }
     }

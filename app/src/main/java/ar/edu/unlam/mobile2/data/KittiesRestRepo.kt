@@ -1,5 +1,7 @@
 package ar.edu.unlam.mobile2.data
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import javax.inject.Inject
@@ -9,7 +11,7 @@ class KittiesRestRepo @Inject constructor(builder: Builder) : KittiesRepo {
         .baseUrl("https://api.thecatapi.com")
         .build()
 
-    override suspend fun getNewKitty(): String {
+    override suspend fun getNewKittyUrl(): String {
         var kittyApi = retrofit.create(KittyApi::class.java)
 
         var call = kittyApi.getKitties()
@@ -20,5 +22,16 @@ class KittiesRestRepo @Inject constructor(builder: Builder) : KittiesRepo {
         }
 
         return "error on call"
+    }
+
+    override suspend fun getNewKitty(): Flow<KittyApiModel> {
+        val kittyApi = retrofit.create(KittyApi::class.java)
+
+        val call = kittyApi.getKitties()
+        val kitties = call.body()
+
+        return flow {
+            emit(kitties!![0])
+        }
     }
 }
