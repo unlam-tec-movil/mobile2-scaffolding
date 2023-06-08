@@ -20,12 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.mediastackapi.New
 
+
 @Preview(showBackground = true)
 @Composable
 fun ArticleCard() {
 }
-
 @Composable
+
 fun CardContainer(new: New) {
     Card(modifier = Modifier
         .padding(1.dp)
