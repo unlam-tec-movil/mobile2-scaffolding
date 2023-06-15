@@ -5,14 +5,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LeadingIconTab
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,29 +25,31 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile2.NavegationBottom.ItemsMenu
 import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
-import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.inicio
+import ar.edu.unlam.mobile2.Tabs.repository.Tabs_item
+import ar.edu.unlam.mobile2.Tabs.ui.Tabs
+import ar.edu.unlam.mobile2.Tabs.ui.Tabs_content
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
-import ar.edu.unlam.mobile2.mediastackapi.ui.NewsList
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.rememberPagerState
 
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val weatherViewModel by viewModels<WeatherViewModel>()
-    private val viewModel by viewModels<NewsViewModel>()
+     private val weatherViewModel by viewModels<WeatherViewModel>()
+     private val viewModel by viewModels<NewsViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +75,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -118,5 +127,20 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
 
             }
         }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
+@Composable
+fun Tabs_Principal(viewModel:NewsViewModel) {
+    val tabs = listOf(
+        Tabs_item.item_general(viewModel),
+        Tabs_item.item_politica,
+        Tabs_item.item_muscia
+    )
+    val pagerState = rememberPagerState()
+    Column() {
+        Tabs(tabs, pagerState)
+        Tabs_content(tabs, pagerState)
     }
 }

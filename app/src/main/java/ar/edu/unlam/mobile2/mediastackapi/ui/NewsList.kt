@@ -19,7 +19,9 @@ fun NewsList(viewModel: NewsViewModel){
     if (state.news.isNotEmpty()){
         LazyColumn(modifier = Modifier.fillMaxWidth()){
             items(state.news){
-                CardContainer(it)
+                //if(it.category.equals("musica")) {
+                    CardContainer(it)
+                //}
             }
         }
     }else{
