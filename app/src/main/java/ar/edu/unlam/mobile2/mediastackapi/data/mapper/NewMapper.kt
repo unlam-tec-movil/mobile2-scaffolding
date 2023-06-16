@@ -7,6 +7,7 @@ import ar.edu.unlam.mobile2.mediastackapi.data.local.entity.NewEntity
 
 fun Data.toDomain(): New{
     return New(
+        id = null,
         author = this.author,
         category = this.category,
         country = this.country,
@@ -16,13 +17,14 @@ fun Data.toDomain(): New{
         publishedAt = this.publishedAt,
         source = this.source,
         title = this.title,
-        url = this.url
+        url = this.url,
     )
 }
 
 
 fun New.toEntity(): NewEntity {
     return NewEntity(
+        id = this.id,
         author = this.author,
         category = this.category,
         country = this.country,
@@ -32,12 +34,14 @@ fun New.toEntity(): NewEntity {
         publishedAt = this.publishedAt,
         source = this.source,
         title = this.title,
-        url = this.url
+        url = this.url,
+        saved = this.saved
     )
 }
 
 fun NewEntity.toDomain(): New{
     return New(
+        id = this.id,
         author = this.author,
         category = this.category,
         country = this.country,
@@ -47,6 +51,7 @@ fun NewEntity.toDomain(): New{
         publishedAt = this.publishedAt,
         source = this.source,
         title = this.title,
-        url = this.url
+        url = this.url,
+        saved = this.saved
     )
 }

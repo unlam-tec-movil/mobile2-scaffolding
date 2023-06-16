@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.asFlow
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.ui.CardContainer
+import ar.edu.unlam.mobile2.ui.NewDesign
 import com.google.android.filament.Box
 
 @Composable
@@ -21,10 +23,29 @@ fun NewsList(viewModel: NewsViewModel) {
 
     val state = viewModel.state
 
-    if (state.news.isNotEmpty()) {
+    val newList = viewModel.newViewModel.observeAsState()
+
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+        items(newList.){
+            NewDesign(new, viewModel)
+        }
+    }
+
+    if (newList.isInitialized){
+
+    } else {
+        Box(modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+
+            Log.d("Error en lista", "No hay datos para mostrar")
+        }
+    }
+
+    /*if (state.news.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(state.news) {
-                CardContainer(it)
+                NewDesign(it)
             }
         }
 
@@ -35,5 +56,5 @@ fun NewsList(viewModel: NewsViewModel) {
 
             Log.d("Error en lista", "No hay datos para mostrar")
         }
-    }
+    }*/
 }

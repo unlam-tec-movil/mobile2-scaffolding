@@ -17,5 +17,6 @@ data class NewEntity(
     val publishedAt: String?,
     val source: String?,
     val title: String?,
-    val url: String?
+    val url: String?,
+    val saved: Boolean
 )

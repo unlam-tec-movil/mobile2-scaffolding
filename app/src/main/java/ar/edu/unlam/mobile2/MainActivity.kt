@@ -22,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -29,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile2.NavegationBottom.ItemsMenu
 import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
 import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.inicio
+import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
@@ -44,6 +46,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val weatherViewModel by viewModels<WeatherViewModel>()
+
+    private lateinit var newViewModel:NewsViewModel
+
     private val viewModel by viewModels<NewsViewModel>()
 
 
@@ -53,6 +58,8 @@ class MainActivity : ComponentActivity() {
             application, "719d2c40-5de1-44d8-980d-aded581ac26d",
             Analytics::class.java, Crashes::class.java
         )
+        newViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
+
         setContent {
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme
@@ -62,7 +69,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Column() {
 
-                        PantallaPrincipal(weatherViewModel,viewModel)
+                        PantallaPrincipal(weatherViewModel,newViewModel)
                     }
 
                 }
