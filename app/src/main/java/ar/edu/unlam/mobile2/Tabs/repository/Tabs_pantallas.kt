@@ -11,15 +11,13 @@ import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 
 @Composable
 fun General(viewModel: NewsViewModel){
-    NewsList(viewModel)
+    NewsList(viewModel,2)
 }
 
 
 @Composable
 fun Politica() {
-    Column() {
-        Text(text = "POLITICA")
-    }
+
 }
 
 @Composable

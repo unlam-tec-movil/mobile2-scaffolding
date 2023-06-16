@@ -11,6 +11,6 @@ import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 fun inicio (weatherViewModel: WeatherViewModel, viewModel: NewsViewModel){
     Column() {
         WeatherScreen(weatherViewModel)
-        NewsList(viewModel)
+        NewsList(viewModel,0)
     }
 }
