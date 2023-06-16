@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.mediastackapi.viewmodel
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
@@ -16,24 +17,30 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val getNews: GetNews) : ViewModel() {
+    private val getNews: GetNews
+) : ViewModel() {
 
-    private val _newViewModel: MutableLiveData<List<New>> = MutableLiveData()
-    val newViewModel: LiveData<List<New>> get() = _newViewModel
+    //var newList by mutableStateOf(emptyList<New>())
 
-    var state by mutableStateOf(NewState())
-        private set
+    private val _newList = MutableLiveData<List<New>>(emptyList())
+
+    val newList: LiveData<List<New>>
+        get() = _newList
+
+    private var state by mutableStateOf(NewState())
 
     init {
         viewModelScope.launch {
             state = state.copy(
-               isLoading = true
+                isLoading = true
             )
             delay(2000)
-            _newViewModel.value = getNews.getNews()
+            _newList.value = getNews.getNews()
             state = state.copy(
                 isLoading = false
             )
         }
     }
+
+
 }

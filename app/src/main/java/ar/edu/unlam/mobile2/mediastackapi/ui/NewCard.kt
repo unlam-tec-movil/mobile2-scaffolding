@@ -44,14 +44,12 @@ fun ArticleCard() {
 
 @Composable
 fun NewDesign(
-    new: New,
-    viewModel: NewsViewModel,
+    new: Int,
+    newList: List<New>,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
     shape: CornerBasedShape = MaterialTheme.shapes.medium
 ) {
-    var favorito by remember { mutableStateOf(false) }
-
     Card(
         modifier = modifier.padding(10.dp),
         border = border,
@@ -60,15 +58,15 @@ fun NewDesign(
         //Contenedor
         Column(modifier = modifier.padding(10.dp)) {
             //Source
-            Text(text = new.source!!, style = MaterialTheme.typography.bodyMedium)
+            Text(text = newList[new].source!!, style = MaterialTheme.typography.bodyMedium)
             //Titulo
             Text(
-                text = new.title!!, style = MaterialTheme.typography.titleLarge,
+                text = newList[new].title!!, style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
             )
             //Descripción
             Text(
-                text = new.description!!,
+                text = newList[new].description!!,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.bodyMedium,
@@ -78,16 +76,12 @@ fun NewDesign(
                 IconButton(onClick = {
                     Log.d("Click marcador", "Se clickeó el boton de marcadores")
 
-                    new.saved = !new.saved
-                    favorito = !favorito
-
-                    // TODO: Arreglar
-
-                    viewModel
+                    //Actualiza el valor Saved mediante Observer
+                    newList[new].saved = !newList[new].saved
 
                 }) {
                     Icon(
-                        painter = if (!favorito) {
+                        painter = if (!newList[new].saved) {
                             painterResource(id = R.drawable.baseline_bookmark_border_24)
                         } else {
                             painterResource(id = R.drawable.baseline_bookmark_24)
@@ -96,7 +90,7 @@ fun NewDesign(
                 }
 
                 Text(
-                    text = if (!favorito) {
+                    text = if (!newList[new].saved) {
                         "Agregar a marcadores"
                     } else {
                         "Quitar de marcadores"
@@ -105,35 +99,6 @@ fun NewDesign(
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
             }
-        }
-    }
-}
-
-
-@Composable
-fun CardContainer(new: New) {
-    Card(modifier = Modifier
-        .padding(1.dp)
-        .clickable { }
-        .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp)) {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .padding(top = 5.dp)
-        ) {
-           Row() {
-               Text(text = "Categoria: ")
-               Text(text = new.category!!)
-           } 
-            Text(
-                text = new.title!!,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                fontSize = 18.sp
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Divider()
         }
     }
 }

@@ -47,9 +47,9 @@ class MainActivity : ComponentActivity() {
 
     private val weatherViewModel by viewModels<WeatherViewModel>()
 
-    private lateinit var newViewModel:NewsViewModel
+    //private lateinit var newViewModel:NewsViewModel
 
-    private val viewModel by viewModels<NewsViewModel>()
+    private val newViewModel by viewModels<NewsViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
             application, "719d2c40-5de1-44d8-980d-aded581ac26d",
             Analytics::class.java, Crashes::class.java
         )
-        newViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
+        //newViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
 
         setContent {
             Mobile2_ScaffoldingTheme {
