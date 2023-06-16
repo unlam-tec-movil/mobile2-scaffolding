@@ -26,19 +26,8 @@ fun NewsList(viewModel: NewsViewModel) {
     val newList = viewModel.newViewModel.observeAsState()
 
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(newList.){
-            NewDesign(new, viewModel)
-        }
-    }
-
-    if (newList.isInitialized){
-
-    } else {
-        Box(modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
-
-            Log.d("Error en lista", "No hay datos para mostrar")
+        items(newList){
+            NewDesign(it, viewModel)
         }
     }
 
@@ -58,3 +47,4 @@ fun NewsList(viewModel: NewsViewModel) {
         }
     }*/
 }
+
