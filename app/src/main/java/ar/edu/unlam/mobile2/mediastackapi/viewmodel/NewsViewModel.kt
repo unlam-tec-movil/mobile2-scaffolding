@@ -20,10 +20,18 @@ class NewsViewModel @Inject constructor(
     private val getNews: GetNews
 ) : ViewModel() {
 
-    val newList = MutableLiveData<List<New>>(emptyList())
+    private val _listaNoticias = MutableLiveData<List<New>>()
+    val listaNoticias: LiveData<List<New>> = _listaNoticias
 
-    /*val newList: LiveData<List<New>>
-        get() = _newList*/
+    fun actualizarItem(item: New){
+        val currentList = _listaNoticias.value.orEmpty().toMutableList()
+
+        val index = currentList.indexOfFirst { it.id == item.id }
+
+        currentList[index] = item
+        _listaNoticias.value = currentList
+    }
+
 
     private var state by mutableStateOf(NewState())
 
@@ -32,7 +40,7 @@ class NewsViewModel @Inject constructor(
             state = state.copy(
                 isLoading = true
             )
-            newList.value = getNews.getNews()
+            _listaNoticias.value = getNews.getNews()
             state = state.copy(
                 isLoading = false
             )
