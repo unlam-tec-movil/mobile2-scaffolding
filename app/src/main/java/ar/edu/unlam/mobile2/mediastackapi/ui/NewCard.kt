@@ -46,6 +46,7 @@ fun ArticleCard() {
 fun NewDesign(
     new: Int,
     newList: List<New>,
+    viewModel: NewsViewModel,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
     shape: CornerBasedShape = MaterialTheme.shapes.medium
@@ -78,6 +79,7 @@ fun NewDesign(
 
                     //Actualiza el valor Saved mediante Observer
                     newList[new].saved = !newList[new].saved
+                    viewModel.newList.value = newList.toList()
 
                 }) {
                     Icon(

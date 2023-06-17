@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Observer
@@ -25,11 +26,12 @@ fun NewsList(viewModel: NewsViewModel) {
     //val newList = viewModel.newList
 
     val newList by viewModel.newList.observeAsState(emptyList())
+    val mutableNewList = rememberSaveable { newList.toMutableList() }
 
     if (newList.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(newList) {
-                NewDesign(it.id!!, newList)
+                NewDesign(it.id!!, mutableNewList, viewModel)
             }
         }
 

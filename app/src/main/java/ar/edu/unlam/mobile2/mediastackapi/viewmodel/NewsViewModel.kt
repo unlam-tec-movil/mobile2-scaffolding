@@ -20,12 +20,10 @@ class NewsViewModel @Inject constructor(
     private val getNews: GetNews
 ) : ViewModel() {
 
-    //var newList by mutableStateOf(emptyList<New>())
+    val newList = MutableLiveData<List<New>>(emptyList())
 
-    private val _newList = MutableLiveData<List<New>>(emptyList())
-
-    val newList: LiveData<List<New>>
-        get() = _newList
+    /*val newList: LiveData<List<New>>
+        get() = _newList*/
 
     private var state by mutableStateOf(NewState())
 
@@ -34,8 +32,7 @@ class NewsViewModel @Inject constructor(
             state = state.copy(
                 isLoading = true
             )
-            delay(2000)
-            _newList.value = getNews.getNews()
+            newList.value = getNews.getNews()
             state = state.copy(
                 isLoading = false
             )
