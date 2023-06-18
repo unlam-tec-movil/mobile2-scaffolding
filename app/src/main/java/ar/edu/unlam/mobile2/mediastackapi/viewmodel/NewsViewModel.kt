@@ -23,6 +23,8 @@ class NewsViewModel @Inject constructor(
     private val _listaNoticias = MutableLiveData<List<New>>()
     val listaNoticias: LiveData<List<New>> = _listaNoticias
 
+    private var state by mutableStateOf(NewState())
+
     fun actualizarItem(item: New){
         val currentList = _listaNoticias.value.orEmpty().toMutableList()
 
@@ -30,9 +32,15 @@ class NewsViewModel @Inject constructor(
 
         currentList[index] = item
         _listaNoticias.value = currentList
+        actualizarItemEnBase(item)
     }
 
-    private var state by mutableStateOf(NewState())
+    fun actualizarItemEnBase(item: New){
+        viewModelScope.launch {
+            getNews.updateNew(item)
+        }
+    }
+
 
     init {
         viewModelScope.launch {

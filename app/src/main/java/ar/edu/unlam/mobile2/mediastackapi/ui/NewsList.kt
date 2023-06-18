@@ -24,6 +24,7 @@ fun NewsList(viewModel: NewsViewModel) {
             items(listaNoticias) { item ->
                 NewDesign(noticia = item, onItemClick = { nuevoItem ->
                     viewModel.actualizarItem(nuevoItem)
+                    viewModel.actualizarItemEnBase(nuevoItem)
                 })
             }
         }

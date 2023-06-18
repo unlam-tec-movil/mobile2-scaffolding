@@ -68,7 +68,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column() {
-
                         PantallaPrincipal(weatherViewModel,newViewModel)
                     }
 

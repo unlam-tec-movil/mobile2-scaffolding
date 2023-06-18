@@ -9,5 +9,8 @@ class GetNews(
         return repository.getNews()
     }
 
+    suspend fun updateNew(new: New){
+        repository.updateNewInDatabase(new)
+    }
 
 }

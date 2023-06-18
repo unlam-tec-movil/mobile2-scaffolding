@@ -12,6 +12,10 @@ class NewRepository(
     private val dao: NewDao
 ) {
 
+    suspend fun updateNewInDatabase(new: New){
+        dao.insertNew(new.toEntity())
+    }
+
     suspend fun getNews(): List<New> {
         var localNews = dao.getNews()
 
