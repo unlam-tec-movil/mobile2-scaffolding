@@ -32,7 +32,6 @@ class NewsViewModel @Inject constructor(
         _listaNoticias.value = currentList
     }
 
-
     private var state by mutableStateOf(NewState())
 
     init {

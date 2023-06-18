@@ -29,7 +29,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile2.NavegationBottom.ItemsMenu
 import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
-import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.inicio
+import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.Inicio
 import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
