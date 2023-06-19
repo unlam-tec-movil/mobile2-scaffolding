@@ -16,7 +16,23 @@ sealed class Tabs_item(
     class item_general(viewModel:NewsViewModel) :
         Tabs_item(R.drawable.ic_launcher_foreground, "General", { General(viewModel) })
 
-    object item_politica : Tabs_item(R.drawable.ic_launcher_foreground, "Politica", { Politica () })
-    object item_muscia : Tabs_item(R.drawable.ic_launcher_foreground, "Musica", { Musica () })
+    class item_business(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Business", { Business(viewModel) })
+
+    class item_entertainment(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Entertainment", { Entertainment(viewModel) })
+    class item_health(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Health", { Health(viewModel) })
+
+    class item_science(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Science", { Science(viewModel) })
+
+    class item_sports(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Sports", { Sports(viewModel) })
+
+    class item_technology(viewModel: NewsViewModel) :
+        Tabs_item(R.drawable.ic_launcher_foreground, "Technology", { Technology(viewModel) })
+
+
 
 }

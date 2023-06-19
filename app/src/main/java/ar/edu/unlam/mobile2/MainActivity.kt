@@ -135,8 +135,14 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
 fun Tabs_Principal(viewModel:NewsViewModel) {
     val tabs = listOf(
         Tabs_item.item_general(viewModel),
-        Tabs_item.item_politica,
-        Tabs_item.item_muscia
+        Tabs_item.item_business(viewModel),
+        Tabs_item.item_entertainment(viewModel),
+        Tabs_item.item_health(viewModel),
+        Tabs_item.item_science(viewModel),
+        Tabs_item.item_sports(viewModel),
+        Tabs_item.item_technology(viewModel)
+
+
     )
     val pagerState = rememberPagerState()
     Column() {

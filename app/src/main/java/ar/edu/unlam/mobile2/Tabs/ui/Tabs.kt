@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.Tabs.ui
 
 import androidx.compose.material.Icon
+import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material3.LeadingIconTab
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun Tabs(tabs: List<Tabs_item>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
-    TabRow(
+    ScrollableTabRow(
         selectedTabIndex = pagerState.currentPage,
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
