@@ -12,12 +12,16 @@ class NewRepository(
     private val dao: NewDao
 ) {
 
+    suspend fun updateNewInDatabase(new: New){
+        dao.insertNew(new.toEntity())
+    }
+
     suspend fun getNews(): List<New> {
         var localNews = dao.getNews()
 
-        if(localNews.isEmpty()){
-            val newsFromApi = getNewsFromApi()
+        val newsFromApi = getNewsFromApi()
 
+        if(localNews != newsFromApi){
             newsFromApi.forEach {
                 dao.insertNew(it.toEntity())
             }

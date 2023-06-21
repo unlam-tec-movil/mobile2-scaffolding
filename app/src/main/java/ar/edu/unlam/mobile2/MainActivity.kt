@@ -24,15 +24,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ar.edu.unlam.mobile2.NavegationBottom.ItemsMenu
 import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
+
 import ar.edu.unlam.mobile2.Tabs.repository.Tabs_item
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs_content
+
+import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.Inicio
+import ar.edu.unlam.mobile2.mediastackapi.New
+
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
@@ -48,8 +57,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+
      private val weatherViewModel by viewModels<WeatherViewModel>()
      private val viewModel by viewModels<NewsViewModel>()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +70,8 @@ class MainActivity : ComponentActivity() {
             application, "719d2c40-5de1-44d8-980d-aded581ac26d",
             Analytics::class.java, Crashes::class.java
         )
+        //newViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
+
         setContent {
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme
@@ -66,8 +80,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column() {
-
-                        PantallaPrincipal(weatherViewModel,viewModel)
+                        PantallaPrincipal(weatherViewModel,newViewModel)
                     }
 
                 }
@@ -109,7 +122,7 @@ fun currentRoute(navController: NavHostController): String? {
 @Composable
 fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>) {
     BottomAppBar() {
-        BottomNavigation() {
+        BottomNavigation(backgroundColor = Color.Black) {
             val currentRoute = currentRoute(navController = navController)
             menuItem.forEach { item ->
                 BottomNavigationItem(

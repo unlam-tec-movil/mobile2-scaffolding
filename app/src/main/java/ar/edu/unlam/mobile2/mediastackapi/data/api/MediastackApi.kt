@@ -5,8 +5,7 @@ import retrofit2.http.GET
 
 interface MediastackApi {
 
-    @GET("v1/news?access_key=33597a00a28ca90e3e5ac791b76b3e6e&" +
-            "categories=health,business,entertainment,health,science,sports,technology")
+    @GET("v1/news?access_key=33597a00a28ca90e3e5ac791b76b3e6e&categories=health,-sports")
     suspend fun getNews(
     ): NewsResponse
 }
