@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -100,7 +101,7 @@ fun currentRoute(navController: NavHostController): String? {
 @Composable
 fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>) {
     BottomAppBar() {
-        BottomNavigation() {
+        BottomNavigation(backgroundColor = Color.Black) {
             val currentRoute = currentRoute(navController = navController)
             menuItem.forEach { item ->
                 BottomNavigationItem(
