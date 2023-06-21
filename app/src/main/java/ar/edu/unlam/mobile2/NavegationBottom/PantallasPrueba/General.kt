@@ -8,7 +8,8 @@ import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 
 @Composable
-fun inicio (weatherViewModel: WeatherViewModel, viewModel: NewsViewModel){
+fun Inicio (weatherViewModel: WeatherViewModel, viewModel: NewsViewModel){
+
     Column() {
         WeatherScreen(weatherViewModel)
         NewsList(viewModel)
