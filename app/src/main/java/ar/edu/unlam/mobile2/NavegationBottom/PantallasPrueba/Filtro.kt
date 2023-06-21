@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba
 
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 
