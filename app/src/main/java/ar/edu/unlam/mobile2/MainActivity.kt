@@ -26,7 +26,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -38,9 +37,6 @@ import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
 import ar.edu.unlam.mobile2.Tabs.repository.Tabs_item
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs_content
-
-import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.Inicio
-import ar.edu.unlam.mobile2.mediastackapi.New
 
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
@@ -57,11 +53,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
-     private val weatherViewModel by viewModels<WeatherViewModel>()
-     private val viewModel by viewModels<NewsViewModel>()
-
-
+    private val weatherViewModel by viewModels<WeatherViewModel>()
+    private val newViewModel by viewModels<NewsViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,7 +73,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column() {
-                        PantallaPrincipal(weatherViewModel,newViewModel)
+                        PantallaPrincipal(weatherViewModel, newViewModel)
                     }
 
                 }
@@ -90,11 +83,9 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel:NewsViewModel ) {
+fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewModel) {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -109,7 +100,7 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel:NewsViewMode
         scaffoldState = scaffoldState,
         bottomBar = { NavegacionInferior(navController, navegationItem) })
     {
-    NavegationHost(navController,weatherViewModel,viewModel)
+        NavegationHost(navController, weatherViewModel, viewModel)
     }
 }
 
@@ -145,7 +136,7 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
-fun Tabs_Principal(viewModel:NewsViewModel) {
+fun Tabs_Principal(viewModel: NewsViewModel) {
     val tabs = listOf(
         Tabs_item.item_general(viewModel),
         Tabs_item.item_business(viewModel),

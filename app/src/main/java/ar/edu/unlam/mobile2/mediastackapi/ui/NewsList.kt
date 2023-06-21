@@ -16,57 +16,76 @@ import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 
 @Composable
-fun NewsList(viewModel: NewsViewModel, numero:Int){
-
-    val state = viewModel.state
-
-    if (state.news.isNotEmpty()){
-        LazyColumn(modifier = Modifier.fillMaxWidth()){
-            items(state.news){
-                when(numero){
-                    0->
-                        CardContainer(it)
-                    1->
-                        if(it.category.equals("general")){
-                            CardContainer(it)
-                        }
-                    2->
-                        if(it.category.equals("business")){
-                            CardContainer(it)
-                        }
-                    3->
-                        if(it.category.equals("entertainment")){
-                            CardContainer(it)
-                        }
-                    4->
-                        if(it.category.equals("health")){
-                            CardContainer(it)
-                        }
-                    5->
-                        if(it.category.equals("science")){
-                            CardContainer(it)
-                        }
-                    6->
-                        if(it.category.equals("sports")){
-                            CardContainer(it)
-                        }
-                    7->
-                        if(it.category.equals("technology")){
-                            CardContainer(it)
-                        }
-                }
-                }
-fun NewsList(viewModel: NewsViewModel) {
-    //val newList = viewModel.newList
+fun NewsList(viewModel: NewsViewModel, numero: Int) {
     val listaNoticias by viewModel.listaNoticias.observeAsState(emptyList())
 
     if (listaNoticias.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(listaNoticias) { item ->
-                NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                    viewModel.actualizarItem(nuevoItem)
-                    viewModel.actualizarItemEnBase(nuevoItem)
-                })
+                when (numero) {
+                    0 ->
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        })
+
+                    1 ->
+                        if (item.category.equals("general")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    2 ->
+                        if (item.category.equals("business")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    3 ->
+                        if (item.category.equals("entertainment")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    4 ->
+                        if (item.category.equals("health")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    5 ->
+                        if (item.category.equals("science")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    6 ->
+                        if (item.category.equals("sports")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+
+                    7 ->
+                        if (item.category.equals("technology")) {
+                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                                viewModel.actualizarItem(nuevoItem)
+                                viewModel.actualizarItemEnBase(nuevoItem)
+                            })
+                        }
+                }
+
             }
         }
     } else {
@@ -79,7 +98,6 @@ fun NewsList(viewModel: NewsViewModel) {
             Log.d("Error en lista", "No hay datos para mostrar")
         }
     }
-
 
 }
 
