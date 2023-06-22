@@ -121,6 +121,10 @@ dependencies {
     kapt("androidx.room:room-compiler:${roomVersion}")
 
 
+    //Tabs
+    implementation("com.google.accompanist:accompanist-pager:0.20.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.20.0")
+
 //App center
 
 

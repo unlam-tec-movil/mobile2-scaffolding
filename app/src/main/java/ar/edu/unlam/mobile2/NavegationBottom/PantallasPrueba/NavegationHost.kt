@@ -21,10 +21,10 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
             Inicio(weatherViewModel, viewModel)
         }
         composable(ItemsMenu.Pantalla2.ruta){
-            filtro()
+            Favorito(viewModel = viewModel)
         }
         composable(ItemsMenu.Pantalla3.ruta){
-            Favorito(viewModel = viewModel)
+            filtro(viewModel)
         }
     }
 }

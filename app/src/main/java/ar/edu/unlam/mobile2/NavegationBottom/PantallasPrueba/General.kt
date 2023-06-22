@@ -12,6 +12,6 @@ fun Inicio (weatherViewModel: WeatherViewModel, viewModel: NewsViewModel){
 
     Column() {
         WeatherScreen(weatherViewModel)
-        NewsList(viewModel)
+        NewsList(viewModel,0)
     }
 }
