@@ -12,4 +12,7 @@
 
     <string name="cat_image">Imagen Gatito</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="lorem">
+        With the online text generator you can process your personal Lorem Ipsum enriching it with html elements that define its structure, with the possibility to insert external links, but not only.
+    </string>
 </resources>
