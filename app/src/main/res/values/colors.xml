@@ -8,10 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="dark_green">#FF001506</color>
-    <color name="green">#FF119876</color>
-    <color name="green_200">#1fb286</color>
-    <color name="green_300">#0b9e72</color>
+    <color name="dark_green">#FF0fa276</color>
+    <color name="green">#FF1fb286</color>
+
+    <color name="dark_gray">#FF393939</color>
+    <color name="gray">#FFc9c9c9</color>
 
 
 </resources>

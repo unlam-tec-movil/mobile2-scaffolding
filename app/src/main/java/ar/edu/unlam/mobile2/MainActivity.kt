@@ -6,13 +6,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -26,6 +29,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -57,6 +62,7 @@ class MainActivity : ComponentActivity() {
     private val newViewModel by viewModels<NewsViewModel>()
 
 
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCenter.start(
@@ -67,18 +73,67 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Mobile2_ScaffoldingTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column() {
-                        PantallaPrincipal(weatherViewModel, newViewModel)
-                    }
+                    Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                title = { Text(text = "My App") },
+                                backgroundColor = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        content = {
+                            // Contenido de tu actividad
+                            Column() {
+                                PantallaPrincipal(weatherViewModel, newViewModel)
+                            }
+                        }
+                    )
+
 
                 }
             }
         }
+    }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Preview(showSystemUi = false)
+@Composable
+fun MyPreview() {
+
+    Mobile2_ScaffoldingTheme {
+
+        // A surface container using the 'background' color from the theme
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "My App", color = Color.White, textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                    },
+                    backgroundColor = MaterialTheme.colorScheme.primary,
+                )
+            },
+            content = {
+                // Contenido de tu actividad
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Column() {
+                    }
+                }
+
+            }
+        )
     }
 }
 

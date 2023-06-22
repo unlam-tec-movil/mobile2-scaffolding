@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.material3.Card
+import androidx.compose.material.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,13 +26,14 @@ import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.mediastackapi.New
 
 @Preview(showSystemUi = true)
-@Preview(showSystemUi = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun ArticleCard() {
     val modifier: Modifier = Modifier
     Card(
-        modifier = modifier.padding(10.dp).background(Color.White)
+        modifier = modifier.padding(10.dp),
+        backgroundColor = MaterialTheme.colorScheme.tertiary
+
     ) {
         //Contenedor
         Column(modifier = modifier.padding(10.dp)) {
