@@ -102,8 +102,7 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
     val navegationItem = listOf(
         ItemsMenu.Pantalla1,
         ItemsMenu.Pantalla2,
-        ItemsMenu.Pantalla3,
-        ItemsMenu.Pantalla4
+        ItemsMenu.Pantalla3
     )
 
     Scaffold(

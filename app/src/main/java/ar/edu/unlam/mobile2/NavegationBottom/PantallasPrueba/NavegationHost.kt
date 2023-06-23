@@ -28,9 +28,6 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
         composable(ItemsMenu.Pantalla3.ruta){
             filtro(viewModel)
         }
-        composable(ItemsMenu.Pantalla4.ruta){
-            DetalleDeNoticias(viewModel)
-        }
         }
 
     }
