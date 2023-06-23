@@ -37,6 +37,7 @@ import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
 import ar.edu.unlam.mobile2.Tabs.repository.Tabs_item
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs_content
+import ar.edu.unlam.mobile2.mediastackapi.New
 
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
@@ -93,7 +94,8 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
     val navegationItem = listOf(
         ItemsMenu.Pantalla1,
         ItemsMenu.Pantalla2,
-        ItemsMenu.Pantalla3
+        ItemsMenu.Pantalla3,
+        ItemsMenu.Pantalla4
     )
 
     Scaffold(

@@ -14,5 +14,6 @@ data class New(
     val source: String?,
     val title: String?,
     val url: String?,
-    var saved: Boolean = false
+    var saved: Boolean = false,
+    var detail: Boolean = false
 )

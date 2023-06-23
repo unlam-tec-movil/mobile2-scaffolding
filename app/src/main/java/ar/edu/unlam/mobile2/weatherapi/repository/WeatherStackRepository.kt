@@ -6,7 +6,7 @@ import javax.inject.Inject
 class WeatherStackRepository(private val api: WeatherApiService) {
 
     suspend fun getWeatherData(location: String): WeatherResponse {
-        val apiKey = "36fcb212c1835907f14f5c1a39beb7eb"
+        val apiKey = "585c4078dae4811f59247810dca2bad6"
         return api.getCurrentWeather(apiKey, location)
     }
 }

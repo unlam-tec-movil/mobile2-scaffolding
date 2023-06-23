@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.mediastackapi.ui
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +16,15 @@ import androidx.compose.ui.Modifier
 import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 
+
 @Composable
 fun NewsList(viewModel: NewsViewModel, numero: Int) {
     val listaNoticias by viewModel.listaNoticias.observeAsState(emptyList())
 
+
     if (listaNoticias.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
+
             items(listaNoticias) { item ->
                 when (numero) {
                     0 ->
