@@ -2,6 +2,7 @@ package ar.edu.unlam.mobile2.mediastackapi.ui
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -36,7 +37,7 @@ fun NewDesign(
     shape: CornerBasedShape = MaterialTheme.shapes.medium
 ) {
     Card(
-        modifier = modifier.padding(10.dp),
+        modifier = modifier.padding(10.dp).clickable { onItemClick(noticia) },
         border = border,
         shape = shape
     ) {
