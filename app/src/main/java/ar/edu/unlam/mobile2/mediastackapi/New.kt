@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.mediastackapi
 
 import androidx.compose.runtime.MutableState
+import java.io.Serializable
 
 data class New(
     val id: Int?,
@@ -14,6 +15,5 @@ data class New(
     val source: String?,
     val title: String?,
     val url: String?,
-    var saved: Boolean = false,
-    var detail: Boolean = false
-)
+    var saved: Boolean = false
+):Serializable
