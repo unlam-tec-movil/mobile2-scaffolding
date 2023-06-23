@@ -32,12 +32,13 @@ fun ArticleCard() {
 fun NewDesign(
     noticia: New,
     onItemClick: (New) -> Unit,
+    onItemClick2: (New) -> Unit,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
     shape: CornerBasedShape = MaterialTheme.shapes.medium
 ) {
     Card(
-        modifier = modifier.padding(10.dp).clickable { onItemClick(noticia) },
+        modifier = modifier.padding(10.dp).clickable { onItemClick2(noticia) },
         border = border,
         shape = shape
     ) {
