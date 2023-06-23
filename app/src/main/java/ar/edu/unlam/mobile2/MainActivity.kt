@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -73,29 +75,33 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Mobile2_ScaffoldingTheme {
-
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Scaffold(
-                        topBar = {
-                            TopAppBar(
-                                title = { Text(text = "My App") },
-                                backgroundColor = MaterialTheme.colorScheme.primary
-                            )
-                        },
-                        content = {
-                            // Contenido de tu actividad
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(
+                                    text = "My App", color = Color.White, textAlign = TextAlign.Center,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                )
+                            },
+                            backgroundColor = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    content = {
+                        // Contenido de tu actividad
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = MaterialTheme.colorScheme.background
+                        ) {
                             Column() {
                                 PantallaPrincipal(weatherViewModel, newViewModel)
                             }
                         }
-                    )
 
-
-                }
+                    }
+                )
             }
         }
     }
@@ -119,7 +125,7 @@ fun MyPreview() {
                                 .fillMaxWidth()
                         )
                     },
-                    backgroundColor = MaterialTheme.colorScheme.primary,
+                    backgroundColor = MaterialTheme.colorScheme.primary
                 )
             },
             content = {
