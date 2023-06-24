@@ -12,13 +12,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import ar.edu.unlam.mobile2.mediastackapi.New
+import androidx.compose.ui.platform.LocalContext
+import ar.edu.unlam.mobile2.detalle.NewDetailActivity
+
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 
 @Composable
 fun NewsList(viewModel: NewsViewModel, numero: Int) {
     val listaNoticias by viewModel.listaNoticias.observeAsState(emptyList())
-
+    val context = LocalContext.current
     if (listaNoticias.isNotEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(listaNoticias) { item ->
@@ -27,14 +29,21 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                         NewDesign(noticia = item, onItemClick = { nuevoItem ->
                             viewModel.actualizarItem(nuevoItem)
                             viewModel.actualizarItemEnBase(nuevoItem)
-                        })
+
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
 
                     1 ->
                         if (item.category.equals("general")) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     2 ->
@@ -42,7 +51,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     3 ->
@@ -50,7 +62,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     4 ->
@@ -58,7 +73,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     5 ->
@@ -66,7 +84,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     6 ->
@@ -74,7 +95,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
 
                     7 ->
@@ -82,7 +106,10 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
                             NewDesign(noticia = item, onItemClick = { nuevoItem ->
                                 viewModel.actualizarItem(nuevoItem)
                                 viewModel.actualizarItemEnBase(nuevoItem)
-                            })
+                            },
+                                onItemClick2 = {
+                                    NewDetailActivity.start(context, item)
+                                })
                         }
                 }
 
@@ -100,5 +127,3 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
     }
 
 }
-
-

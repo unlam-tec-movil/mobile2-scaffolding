@@ -8,6 +8,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
@@ -22,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +41,9 @@ import ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba.NavegationHost
 import ar.edu.unlam.mobile2.Tabs.repository.Tabs_item
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs
 import ar.edu.unlam.mobile2.Tabs.ui.Tabs_content
+import ar.edu.unlam.mobile2.mediastackapi.New
+
+import ar.edu.unlam.mobile2.mediastackapi.ui.NewDesign
 
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
@@ -74,12 +81,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Column() {
                         PantallaPrincipal(weatherViewModel, newViewModel)
+
                     }
 
                 }
             }
         }
     }
+
 }
 
 

@@ -1,10 +1,12 @@
 package ar.edu.unlam.mobile2.NavegationBottom.PantallasPrueba
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ar.edu.unlam.mobile2.NavegationBottom.ItemsMenu
+import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 
@@ -26,5 +28,6 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
         composable(ItemsMenu.Pantalla3.ruta){
             filtro(viewModel)
         }
+        }
+
     }
-}
