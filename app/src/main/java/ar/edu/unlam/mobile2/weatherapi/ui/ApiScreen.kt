@@ -3,16 +3,20 @@ package ar.edu.unlam.mobile2.weatherapi.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,67 +29,104 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
+import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.data.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+@Preview(showSystemUi = true)
 @Composable
+fun MyWeatherPreview() {
+    val weatherData by remember { mutableStateOf<WeatherResponse?>(null) }
 
+    Mobile2_ScaffoldingTheme {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            androidx.compose.material.Card(
+                modifier = Modifier
+                    .padding()
+                    .align(Alignment.TopEnd),
+                backgroundColor = MaterialTheme.colorScheme.onBackground,
+                shape = CutCornerShape(1.dp)
+            ) {
+                Row(
+                    modifier = Modifier.padding(1.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    if (weatherData == null) {
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "${10}°c",
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "Nublado",
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                    } else {
+                        Text("Loading weather data...", color = Color.White)
+                    }
+                }
+
+            }
+        }
+    }
+
+
+}
+
+@Composable
 fun WeatherScreen(weatherViewModel: WeatherViewModel) {
     var weatherData by remember { mutableStateOf<WeatherResponse?>(null) }
 
-   LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) {
         val data = withContext(Dispatchers.IO) {
             weatherViewModel.getWeatherData("Buenos Aires")
         }
         weatherData = data
     }
-    
-   Card(modifier = Modifier
-       .padding(1.dp)
-       .clickable { }
-       .fillMaxWidth(),
-   shape = RoundedCornerShape(8.dp)) {
 
-    Row (
-        verticalAlignment =  Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.End
-            ){
-        Image(painter = painterResource(
-            id = R.drawable.clima),
-            contentDescription = "Clima ",
-            modifier = Modifier
-                .size(100.dp),
-            contentScale = ContentScale.Crop)
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ){
-        if (weatherData != null) {
-            Text(
-                text = "Temperatura: ${weatherData!!.current.temperature}",
-                color = Color.White,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+    Mobile2_ScaffoldingTheme {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            androidx.compose.material.Card(
+                modifier = Modifier
+                    .padding()
+                    .align(Alignment.TopEnd),
+                backgroundColor = MaterialTheme.colorScheme.onBackground,
+                shape = CutCornerShape(1.dp)
+            ) {
+                Row(
+                    modifier = Modifier.padding(1.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    if (weatherData != null) {
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "${weatherData!!.current.temperature}°c",
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "${weatherData!!.current.weatherDescriptions}",
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                    } else {
+                        Text("Loading weather data...", color = Color.White)
+                    }
+                }
 
-            Text(
-                text = "Pais: ${weatherData!!.location.country}",
-                color = Color.White,
-                modifier = Modifier.padding(bottom = 8.dp))
-
-            Text(
-                text = "Tiempo: ${weatherData!!.current.weatherDescriptions.first()}",
-                color = Color.White,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-        } else {
-            Text("Loading weather data...")
+            }
         }
     }
-    }
-
-   }
-
 
 }
+
+//${weatherData!!.current.temperature}°c
+//${weatherData!!.current.weatherDescriptions}

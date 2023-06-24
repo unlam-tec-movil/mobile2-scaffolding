@@ -41,12 +41,12 @@ fun ArticleCard() {
     Mobile2_ScaffoldingTheme {
         Box(modifier = modifier.fillMaxWidth()) {
             Card(
-                modifier = modifier.padding(10.dp),
+                modifier = modifier.padding(5.dp),
                 backgroundColor = Color.White,
                 shape = CutCornerShape(1.dp)
             ) {
                 //Contenedor
-                Column(modifier = modifier.padding(10.dp)) {
+                Column(modifier = modifier.padding(5.dp)) {
                     //Source
                     Text(text = "Source", style = MaterialTheme.typography.bodyMedium)
                     //Titulo
@@ -54,15 +54,8 @@ fun ArticleCard() {
                         text = "Titulo", style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier
                     )
-                    //Descripción
-                    Text(
-                        text = stringResource(id = R.string.lorem),
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
                     //Boton Favoritos
-                    Row(modifier = Modifier.align(Alignment.End)) {
+                    Row() {
                         IconButton(onClick = {
                             Log.d("Click marcador", "Se clickeó el boton de marcadores")
                         }) {
@@ -80,6 +73,7 @@ fun ArticleCard() {
                         )
                     }
                 }
+                //Borde de arriba
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -94,6 +88,9 @@ fun ArticleCard() {
     }
 }
 
+//noticia.source!!
+//noticia.title!!
+
 @Composable
 fun NewDesign(
     noticia: New,
@@ -102,12 +99,12 @@ fun NewDesign(
 ){
     Box(modifier = modifier.fillMaxWidth()) {
         Card(
-            modifier = modifier.padding(10.dp),
+            modifier = modifier.padding(5.dp),
             backgroundColor = Color.White,
             shape = CutCornerShape(1.dp)
         ) {
             //Contenedor
-            Column(modifier = modifier.padding(10.dp)) {
+            Column(modifier = modifier.padding(5.dp)) {
                 //Source
                 Text(text = noticia.source!!, style = MaterialTheme.typography.bodyMedium)
                 //Titulo
@@ -116,12 +113,12 @@ fun NewDesign(
                     modifier = Modifier
                 )
                 //Descripción
-                Text(
+                /*Text(
                     text = noticia.description!!,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium,
-                )
+                )*/
                 //Boton Favoritos
                 Row(modifier = Modifier.align(Alignment.End)) {
                     IconButton(onClick = {

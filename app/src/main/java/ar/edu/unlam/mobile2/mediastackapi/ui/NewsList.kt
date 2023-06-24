@@ -20,6 +20,7 @@ fun NewsList(viewModel: NewsViewModel, numero: Int) {
     val listaNoticias by viewModel.listaNoticias.observeAsState(emptyList())
 
     if (listaNoticias.isNotEmpty()) {
+
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(listaNoticias) { item ->
                 when (numero) {

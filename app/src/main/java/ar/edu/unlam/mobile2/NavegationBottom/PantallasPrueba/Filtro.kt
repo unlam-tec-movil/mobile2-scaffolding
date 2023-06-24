@@ -11,7 +11,7 @@ import ar.edu.unlam.mobile2.weatherapi.ui.WeatherScreen
 import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 
 @Composable
-fun filtro (viewModel:NewsViewModel){
+fun Filtro (viewModel:NewsViewModel){
     Tabs_Principal(viewModel)
 }
 
