@@ -11,4 +11,5 @@ sealed class ItemsMenu(
     object Pantalla1 : ItemsMenu(R.drawable.baseline_language_24, "General", "pantalla1")
     object Pantalla2 : ItemsMenu(R.drawable.baseline_bookmarks_24, "Favoritos", "pantalla2")
     object Pantalla3 : ItemsMenu(R.drawable.baseline_filter_alt_24, "Filtrar", "pantalla3")
+
 }
