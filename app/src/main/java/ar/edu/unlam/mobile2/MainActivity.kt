@@ -7,8 +7,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -22,11 +27,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -70,7 +77,7 @@ class MainActivity : ComponentActivity() {
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Preview(showSystemUi = false)
+@Preview(showSystemUi = true)
 @Composable
 fun MyPreview() {
 
@@ -145,15 +152,23 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                 /*.verticalScroll(rememberScrollState())*/
             ) {
                 TopAppBar(
-                    title = {
-                        Text(
-                            text = "My App", color = Color.White, textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        )
-                    },
                     backgroundColor = MaterialTheme.colorScheme.background
-                )
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(5.dp).padding(start = 5.dp),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.unlam_blanco),
+                            tint = Color.White,
+                            contentDescription = "Logo-Unlam-Blanco",
+                            modifier = Modifier.size(25.dp)
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(text = "UNLaM News", color = MaterialTheme.colorScheme.tertiary, modifier = Modifier.align(CenterVertically))
+                    }
+                }
                 NavegationHost(
                     navHostController = navController,
                     weatherViewModel = weatherViewModel,
@@ -173,7 +188,10 @@ fun currentRoute(navController: NavHostController): String? {
 
 @Composable
 fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>) {
-    BottomAppBar(modifier = Modifier.fillMaxWidth(), containerColor = MaterialTheme.colorScheme.onBackground) {
+    BottomAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        containerColor = MaterialTheme.colorScheme.onBackground
+    ) {
         BottomNavigation(backgroundColor = MaterialTheme.colorScheme.onBackground) {
             val currentRoute = currentRoute(navController = navController)
             menuItem.forEach { item ->

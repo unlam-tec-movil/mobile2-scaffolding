@@ -7,25 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
-import androidx.compose.ui.tooling.preview.Preview
-
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import ar.edu.unlam.mobile2.detalle.NewDetailActivity
-
 import ar.edu.unlam.mobile2.mediastackapi.New
 import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
@@ -33,12 +24,15 @@ import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 @Preview(showSystemUi = true)
 @Composable
 fun MySavedNewsPreview() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "No hay noticias marcadas.")
+    Mobile2_ScaffoldingTheme() {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "No hay noticias marcadas.", style = MaterialTheme.typography.titleLarge ,color = MaterialTheme.colorScheme.onBackground)
+        }
     }
+
 }
 
 
@@ -64,7 +58,7 @@ fun SavedNewsList(viewModel: NewsViewModel) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "No hay noticias marcadas.")
+            Text(text = "No hay noticias marcadas.", style = MaterialTheme.typography.titleLarge ,color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }

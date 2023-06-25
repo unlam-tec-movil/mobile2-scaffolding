@@ -14,5 +14,6 @@
     <color name="dark_gray">#FF393939</color>
     <color name="gray">#FFc9c9c9</color>
 
+    <color name="status_bar_color">#FF101010</color>
 
 </resources>

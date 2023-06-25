@@ -1,21 +1,13 @@
 package ar.edu.unlam.mobile2.weatherapi.ui
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,11 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.weatherapi.data.WeatherResponse
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +37,7 @@ fun MyWeatherPreview() {
                 modifier = Modifier
                     .padding()
                     .align(Alignment.TopEnd),
-                backgroundColor = MaterialTheme.colorScheme.onBackground,
+                backgroundColor = MaterialTheme.colorScheme.background.copy(alpha = 0.8f),
                 shape = CutCornerShape(1.dp)
             ) {
                 Row(
@@ -97,7 +86,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
                 modifier = Modifier
                     .padding()
                     .align(Alignment.TopEnd),
-                backgroundColor = MaterialTheme.colorScheme.onBackground,
+                backgroundColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9f),
                 shape = CutCornerShape(1.dp)
             ) {
                 Row(
