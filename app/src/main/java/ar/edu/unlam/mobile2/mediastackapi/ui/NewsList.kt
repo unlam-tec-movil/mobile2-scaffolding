@@ -21,102 +21,142 @@ import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 fun NewsList(viewModel: NewsViewModel, numero: Int) {
     val listaNoticias by viewModel.listaNoticias.observeAsState(emptyList())
     val context = LocalContext.current
+
+    val category = when (numero) {
+        1 -> "general"
+        2 -> "business"
+        3 -> "entertainment"
+        4 -> "health"
+        5 -> "science"
+        6 -> "sports"
+        7 -> "technology"
+        else -> {
+            null
+        }
+    }
+
     if (listaNoticias.isNotEmpty()) {
-
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            items(listaNoticias) { item ->
-                when (numero) {
-                    0 ->
-                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                            viewModel.actualizarItem(nuevoItem)
-                            viewModel.actualizarItemEnBase(nuevoItem)
+            if (category == null) {
+                items(listaNoticias) { item ->
+                    NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                        viewModel.actualizarItem(nuevoItem)
+                        viewModel.actualizarItemEnBase(nuevoItem)
 
-                        },
-                            onItemClick2 = {
-                                NewDetailActivity.start(context, item)
-                            })
-
-                    1 ->
-                        if (item.category.equals("general")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    2 ->
-                        if (item.category.equals("business")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    3 ->
-                        if (item.category.equals("entertainment")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    4 ->
-                        if (item.category.equals("health")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    5 ->
-                        if (item.category.equals("science")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    6 ->
-                        if (item.category.equals("sports")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
-
-                    7 ->
-                        if (item.category.equals("technology")) {
-                            NewDesign(noticia = item, onItemClick = { nuevoItem ->
-                                viewModel.actualizarItem(nuevoItem)
-                                viewModel.actualizarItemEnBase(nuevoItem)
-                            },
-                                onItemClick2 = {
-                                    NewDetailActivity.start(context, item)
-                                })
-                        }
+                    },
+                        onItemClick2 = {
+                            NewDetailActivity.start(context, item)
+                        })
+                }
+            } else {
+                items(listaNoticias.filter { it.category == category }) { item ->
+                    NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                        viewModel.actualizarItem(nuevoItem)
+                        viewModel.actualizarItemEnBase(nuevoItem)
+                    },
+                        onItemClick2 = {
+                            NewDetailActivity.start(context, item)
+                        })
                 }
 
             }
         }
-    } else {
+    }
+
+    /*LazyColumn(modifier = Modifier.fillMaxWidth()) {
+        items(listaNoticias) { item ->
+            when (numero) {
+                0 ->
+                    NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                        viewModel.actualizarItem(nuevoItem)
+                        viewModel.actualizarItemEnBase(nuevoItem)
+
+                    },
+                        onItemClick2 = {
+                            NewDetailActivity.start(context, item)
+                        })
+
+                1 ->
+                    if (item.category.equals("general")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                2 ->
+                    if (item.category.equals("business")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                3 ->
+                    if (item.category.equals("entertainment")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                4 ->
+                    if (item.category.equals("health")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                5 ->
+                    if (item.category.equals("science")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                6 ->
+                    if (item.category.equals("sports")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+
+                7 ->
+                    if (item.category.equals("technology")) {
+                        NewDesign(noticia = item, onItemClick = { nuevoItem ->
+                            viewModel.actualizarItem(nuevoItem)
+                            viewModel.actualizarItemEnBase(nuevoItem)
+                        },
+                            onItemClick2 = {
+                                NewDetailActivity.start(context, item)
+                            })
+                    }
+            }
+
+        }
+    }*/
+    else {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
