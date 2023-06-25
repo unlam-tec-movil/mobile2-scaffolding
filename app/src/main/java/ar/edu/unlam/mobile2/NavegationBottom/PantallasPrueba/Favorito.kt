@@ -10,6 +10,5 @@ import ar.edu.unlam.mobile2.mediastackapi.viewmodel.NewsViewModel
 @Composable
 fun Favorito(viewModel: NewsViewModel) {
     SavedNewsList(viewModel)
-
 }
 

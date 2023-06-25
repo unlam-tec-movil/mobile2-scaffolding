@@ -6,16 +6,29 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -28,8 +41,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.view.ViewCompat.NestedScrollType
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -63,32 +85,67 @@ class MainActivity : ComponentActivity() {
     private val weatherViewModel by viewModels<WeatherViewModel>()
     private val newViewModel by viewModels<NewsViewModel>()
 
-
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCenter.start(
             application, "719d2c40-5de1-44d8-980d-aded581ac26d",
             Analytics::class.java, Crashes::class.java
         )
-        //newViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
-
         setContent {
             Mobile2_ScaffoldingTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column() {
-                        PantallaPrincipal(weatherViewModel, newViewModel)
-
-                    }
-
-                }
             }
         }
     }
 
+}
+
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Preview(showSystemUi = false)
+@Composable
+fun MyPreview() {
+
+    val navController = rememberNavController()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+
+    val navegationItem = listOf(
+        ItemsMenu.Pantalla1,
+        ItemsMenu.Pantalla2,
+        ItemsMenu.Pantalla3
+    )
+
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        backgroundColor = MaterialTheme.colorScheme.background,
+        scaffoldState = scaffoldState,
+        content = {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    /*.verticalScroll(rememberScrollState())*/) {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "My App", color = Color.White, textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                    },
+                    backgroundColor = MaterialTheme.colorScheme.primary
+                )
+                LazyColumn(){
+                    items(100){
+                        Text(it.toString())
+                    }
+                }
+            }
+
+        },
+        bottomBar = { NavegacionInferior(navController, navegationItem) },
+    )
 }
 
 
@@ -106,11 +163,29 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
     )
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        backgroundColor = MaterialTheme.colorScheme.background,
         scaffoldState = scaffoldState,
-        bottomBar = { NavegacionInferior(navController, navegationItem) })
-    {
-        NavegationHost(navController, weatherViewModel, viewModel)
-    }
+        content = {
+            Column(
+                Modifier
+                    .fillMaxSize(),
+                /*.verticalScroll(rememberScrollState())*/) {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "My App", color = Color.White, textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                    },
+                    backgroundColor = MaterialTheme.colorScheme.primary
+                )
+                NavegationHost(navHostController = navController, weatherViewModel = weatherViewModel, viewModel = viewModel)
+            }
+        },
+        bottomBar = { NavegacionInferior(navController, navegationItem) },
+    )
 }
 
 @Composable
@@ -121,8 +196,8 @@ fun currentRoute(navController: NavHostController): String? {
 
 @Composable
 fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>) {
-    BottomAppBar() {
-        BottomNavigation(backgroundColor = Color.Black) {
+    BottomAppBar(modifier = Modifier.fillMaxWidth()) {
+        BottomNavigation(backgroundColor = MaterialTheme.colorScheme.primary) {
             val currentRoute = currentRoute(navController = navController)
             menuItem.forEach { item ->
                 BottomNavigationItem(
@@ -131,10 +206,11 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
                     icon = {
                         Icon(
                             painter = painterResource(id = item.icono),
-                            contentDescription = item.titulo
+                            contentDescription = item.titulo,
+                            tint = Color.White
                         )
                     },
-                    label = { Text(item.titulo) }
+                    label = { Text(item.titulo, color = Color.White) }
                 )
 
 

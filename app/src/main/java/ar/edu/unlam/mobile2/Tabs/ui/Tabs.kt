@@ -5,6 +5,7 @@ import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material3.LeadingIconTab
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -26,7 +27,8 @@ fun Tabs(tabs: List<Tabs_item>, pagerState: PagerState) {
             TabRowDefaults.Indicator(
                 Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
             )
-        }
+        },
+        backgroundColor = MaterialTheme.colorScheme.primary
     ) {
         tabs.forEachIndexed { index, tabsItem ->
             LeadingIconTab(
