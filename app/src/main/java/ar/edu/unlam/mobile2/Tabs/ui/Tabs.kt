@@ -6,6 +6,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material3.LeadingIconTab
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,22 +26,28 @@ fun Tabs(tabs: List<Tabs_item>, pagerState: PagerState) {
         selectedTabIndex = pagerState.currentPage,
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
-                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions), color = MaterialTheme.colorScheme.primary
             )
         },
-        backgroundColor = MaterialTheme.colorScheme.primary
+        backgroundColor = MaterialTheme.colorScheme.background
     ) {
         tabs.forEachIndexed { index, tabsItem ->
+            Tab(selected = pagerState.currentPage == index,
+                onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
+                text = { Text(tabsItem.title, color = MaterialTheme.colorScheme.tertiary)})
+
+            /*
             LeadingIconTab(
                 selected = pagerState.currentPage == index,
                 onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
                 icon = {
                     Icon(
                         painter = painterResource(id = tabsItem.icon),
-                        contentDescription = ""
-                    )
+                        contentDescription = "",
+
+                        )
                 },
-                text = { Text(tabsItem.title) })
+                text = { Text(tabsItem.title) })*/
 
         }
     }
