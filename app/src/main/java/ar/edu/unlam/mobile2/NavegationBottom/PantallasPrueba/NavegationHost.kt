@@ -28,6 +28,9 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
         composable(ItemsMenu.Pantalla3.ruta){
             Filtro(viewModel)
         }
+        composable(ItemsMenu.Pantalla4.ruta){
+            Anadir()
+        }
         }
 
     }

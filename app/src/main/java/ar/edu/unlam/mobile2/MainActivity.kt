@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,12 +16,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.BackdropScaffoldState
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -51,6 +58,8 @@ import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -157,7 +166,8 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(5.dp).padding(start = 5.dp),
+                            .padding(5.dp)
+                            .padding(start = 5.dp),
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.unlam_blanco),
@@ -166,7 +176,11 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                             modifier = Modifier.size(25.dp)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
-                        Text(text = "UNLaM News", color = MaterialTheme.colorScheme.tertiary, modifier = Modifier.align(CenterVertically))
+                        Text(
+                            text = "UNLaM News",
+                            color = MaterialTheme.colorScheme.tertiary,
+                            modifier = Modifier.align(CenterVertically)
+                        )
                     }
                 }
                 NavegationHost(
@@ -177,7 +191,26 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
             }
         },
         bottomBar = { NavegacionInferior(navController, navegationItem) },
+        floatingActionButton = { BotonFlotante(navController) }
     )
+}
+
+@Composable
+fun BotonFlotante(navController: NavHostController) {
+    FloatingActionButton(
+        modifier = Modifier.size(55.dp,55.dp),
+        containerColor = MaterialTheme.colorScheme.primary,
+        onClick = {
+            navController.navigate("pantalla4")
+        }
+        ) {
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = "Anadir",
+            tint = Color.Black
+        )
+
+    }
 }
 
 @Composable
