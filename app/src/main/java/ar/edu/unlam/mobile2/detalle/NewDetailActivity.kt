@@ -155,7 +155,7 @@ private fun abrirLink(context: Context, link: String){
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview(showSystemUi = false)
 @Composable
-fun PlantDetailScreen() {
+fun PlantDetailScreen(new: New) {
     val mockItem = New(
         1, "Author",
         "Sports",

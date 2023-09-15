@@ -12,7 +12,7 @@ import ar.edu.unlam.mobile2.weatherapi.ui.WeatherViewModel
 
 
 @Composable
-fun NavegationHost(navHostController: NavHostController, weatherViewModel: WeatherViewModel, viewModel: NewsViewModel) {
+fun NavegationHost(navHostController: NavHostController, weatherViewModel: WeatherViewModel, viewModel: NewsViewModel,new: New) {
 
     NavHost(
         navController = navHostController,
@@ -20,16 +20,19 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
 
         ){
         composable(ItemsMenu.Pantalla1.ruta){
-            Inicio(weatherViewModel, viewModel)
+            Inicio(weatherViewModel, viewModel,navHostController)
         }
         composable(ItemsMenu.Pantalla2.ruta){
             Favorito(viewModel = viewModel)
         }
         composable(ItemsMenu.Pantalla3.ruta){
-            Filtro(viewModel)
+            Filtro(viewModel,navHostController)
         }
         composable(ItemsMenu.Pantalla4.ruta){
             Anadir()
+        }
+        composable(ItemsMenu.Pantalla5.ruta){
+            NoticaScreen(new)
         }
         }
 

@@ -20,6 +20,8 @@ class NewsViewModel @Inject constructor(
     private val getNews: GetNews
 ) : ViewModel() {
 
+    var notica: New = TODO()
+
     private val _listaNoticias = MutableLiveData<List<New>>()
     val listaNoticias: LiveData<List<New>> = _listaNoticias
 
@@ -39,6 +41,14 @@ class NewsViewModel @Inject constructor(
         viewModelScope.launch {
             getNews.updateNew(item)
         }
+    }
+
+    fun resivirNoticia():New {
+        return this.notica
+    }
+
+    fun enviarNotica(item: New){
+        this.notica = item
     }
 
 

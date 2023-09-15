@@ -186,7 +186,8 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                 NavegationHost(
                     navHostController = navController,
                     weatherViewModel = weatherViewModel,
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    new = viewModel.resivirNoticia()
                 )
             }
         },
@@ -253,15 +254,15 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
-fun Tabs_Principal(viewModel: NewsViewModel) {
+fun Tabs_Principal(viewModel: NewsViewModel,navController: NavHostController) {
     val tabs = listOf(
-        Tabs_item.item_general(viewModel),
-        Tabs_item.item_business(viewModel),
-        Tabs_item.item_entertainment(viewModel),
-        Tabs_item.item_health(viewModel),
-        Tabs_item.item_science(viewModel),
-        Tabs_item.item_sports(viewModel),
-        Tabs_item.item_technology(viewModel)
+        Tabs_item.item_general(viewModel,navController),
+        Tabs_item.item_business(viewModel,navController),
+        Tabs_item.item_entertainment(viewModel,navController),
+        Tabs_item.item_health(viewModel,navController),
+        Tabs_item.item_science(viewModel,navController),
+        Tabs_item.item_sports(viewModel,navController),
+        Tabs_item.item_technology(viewModel,navController)
 
 
     )
