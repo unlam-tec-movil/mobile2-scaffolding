@@ -183,6 +183,7 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                         )
                     }
                 }
+
                 NavegationHost(
                     navHostController = navController,
                     weatherViewModel = weatherViewModel,

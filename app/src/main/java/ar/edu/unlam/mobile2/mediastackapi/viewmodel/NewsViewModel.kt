@@ -17,10 +17,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val getNews: GetNews
+    private val getNews: GetNews,
+
 ) : ViewModel() {
 
-    var notica: New = TODO()
+
+
 
     private val _listaNoticias = MutableLiveData<List<New>>()
     val listaNoticias: LiveData<List<New>> = _listaNoticias
@@ -42,6 +44,7 @@ class NewsViewModel @Inject constructor(
             getNews.updateNew(item)
         }
     }
+     var notica:New = New(1,"null","null","null","null","null","null","null","null","null","null",)
 
     fun resivirNoticia():New {
         return this.notica
