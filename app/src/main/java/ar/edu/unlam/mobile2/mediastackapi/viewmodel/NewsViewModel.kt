@@ -56,6 +56,9 @@ class NewsViewModel @Inject constructor(
     }
 
 
+
+
+
     private val _isFloatingButtonVisible = mutableStateOf(true)
     val isFloatingButtonVisible: State<Boolean> = _isFloatingButtonVisible
 

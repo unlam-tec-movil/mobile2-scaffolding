@@ -34,7 +34,7 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
         }
         composable(ItemsMenu.Pantalla4.ruta){
             viewModel.hideFloatingButton()
-            Anadir()
+            Anadir(navHostController)
         }
         composable(ItemsMenu.Pantalla5.ruta){
             viewModel.showFloatingButton()

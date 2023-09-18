@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+/*@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview(showSystemUi = true)
 @Composable
 fun MyPreview() {
@@ -139,12 +139,14 @@ fun MyPreview() {
                 }
 
             },
-            bottomBar = { NavegacionInferior(navController, navegationItem) },
+            bottomBar = { NavegacionInferior(navController, navegationItem,viewModel) },
         )
     }
 
 
 }
+
+ */
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -203,7 +205,7 @@ fun PantallaPrincipal(weatherViewModel: WeatherViewModel, viewModel: NewsViewMod
                 )
             }
         },
-        bottomBar = { NavegacionInferior(navController, navegationItem) },
+        bottomBar = { NavegacionInferior(navController, navegationItem,viewModel) },
         floatingActionButton = { BotonFlotante(navController,viewModel) }
     )
 }
@@ -238,7 +240,10 @@ fun currentRoute(navController: NavHostController): String? {
 }
 
 @Composable
-fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>) {
+fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMenu>,viewModel: NewsViewModel) {
+
+    val isFloatingButtonVisible = viewModel.isFloatingButtonVisible.value
+    if (isFloatingButtonVisible) {
     BottomAppBar(
         modifier = Modifier.fillMaxWidth(),
         containerColor = MaterialTheme.colorScheme.onBackground
@@ -266,7 +271,7 @@ fun NavegacionInferior(navController: NavHostController, menuItem: List<ItemsMen
 
             }
         }
-    }
+    }}
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
