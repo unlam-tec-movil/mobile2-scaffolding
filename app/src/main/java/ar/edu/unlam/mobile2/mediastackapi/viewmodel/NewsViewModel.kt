@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.mediastackapi.viewmodel
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +55,17 @@ class NewsViewModel @Inject constructor(
         this.notica = item
     }
 
+
+    private val _isFloatingButtonVisible = mutableStateOf(true)
+    val isFloatingButtonVisible: State<Boolean> = _isFloatingButtonVisible
+
+    fun hideFloatingButton() {
+        _isFloatingButtonVisible.value = false
+    }
+
+    fun showFloatingButton() {
+        _isFloatingButtonVisible.value = true
+    }
 
     init {
         viewModelScope.launch {

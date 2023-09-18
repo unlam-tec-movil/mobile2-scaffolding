@@ -21,18 +21,23 @@ fun NavegationHost(navHostController: NavHostController, weatherViewModel: Weath
 
         ){
         composable(ItemsMenu.Pantalla1.ruta){
+            viewModel.showFloatingButton()
             Inicio(weatherViewModel, viewModel,navHostController)
         }
         composable(ItemsMenu.Pantalla2.ruta){
+            viewModel.showFloatingButton()
             Favorito(viewModel = viewModel,navHostController)
         }
         composable(ItemsMenu.Pantalla3.ruta){
+            viewModel.showFloatingButton()
             Filtro(viewModel,navHostController)
         }
         composable(ItemsMenu.Pantalla4.ruta){
+            viewModel.hideFloatingButton()
             Anadir()
         }
         composable(ItemsMenu.Pantalla5.ruta){
+            viewModel.showFloatingButton()
             var new2 = viewModel.resivirNoticia()
             NoticaScreen(new2,navHostController)
         }
